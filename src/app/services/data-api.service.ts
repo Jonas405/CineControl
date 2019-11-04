@@ -95,6 +95,15 @@ export class DataApiService {
    this.managedTheatersRef.update(keyTheater, managedTheaters)
   }
 
+  theatery: AngularFireObject<TheaterInterface>;
+    getTheaterById(key: string): AngularFireObject<TheaterInterface> {
+
+      this.theatery = this.db.object('/managedTheaters/' + key) as AngularFireObject<TheaterInterface>;
+      return this.theatery;
+
+    }
+  
+
     // ========================== Checkers Service ==========================
 
     public selectedChecker: CheckerInterface = {
@@ -176,6 +185,13 @@ export class DataApiService {
     this.titlesSonyRef.update(keyChecker, title)
     }
 
+    sonyTi: AngularFireObject<MovieInterface>;
+    getSonyTitleByID(key: string): AngularFireObject<MovieInterface> {
+
+      this.sonyTi = this.db.object('/TITLES/Sony Pictures Releasing/' + key) as AngularFireObject<MovieInterface>;
+      return this.sonyTi;
+
+    }
 
        // ========================== Titles Disney Service ==========================
 
@@ -202,12 +218,20 @@ export class DataApiService {
   this.titlesDisneyRef.update(keyChecker, title)
   }
 
+  disneyTi: AngularFireObject<MovieInterface>;
+  getDisneyTitleByID(key: string): AngularFireObject<MovieInterface> {
+
+    this.disneyTi = this.db.object('/TITLES/Walt Disney Studios/' + key) as AngularFireObject<MovieInterface>;
+    return this.disneyTi;
+
+  }
+
        // ========================== Upload File Logistic Service ==========================
 
        
      
 
-      pushUpload(upload: Upload){
+ /*      pushUpload(upload: Upload){
         let storageRef = firebase.storage().ref();
         this.uploadTask = storageRef.child(`${this.basePath}/${upload.file.name}`).put(upload.file);
         
@@ -227,7 +251,7 @@ export class DataApiService {
            // Writes the file details to the realtime db
         private saveFileData(upload: Upload) {
           this.db.list(`${this.basePath}/`).push(upload);
-        }
+        } */
 
  //-------------------------------
 
@@ -269,7 +293,7 @@ export class DataApiService {
         return this.commentsRef;
       }  
     
-      addComments( comment : CommentsInterface, upload: Upload){
+    /*   addComments( comment : CommentsInterface, upload: Upload){
         //
         let storageRef = firebase.storage().ref();
         this.uploadTask = storageRef.child(`${this.basePath}/${upload.file.name}`).put(upload.file);
@@ -291,7 +315,7 @@ export class DataApiService {
           })
         //
         this.commentsRef.push(comment);
-      }
+      } */
     
       deleteComment(key: string): Promise<void> {
         return this.commentsRef.remove(key);
@@ -378,6 +402,13 @@ export class DataApiService {
         console.log("UPDATE", incidencia);
       this.incidenciasPorAprobarRef.update(keyIncidencia, incidencia)
       }
+
+      incidencesTi: AngularFireObject<IncidenciaInterface>;
+      getIncidenceById(key: string): AngularFireObject<IncidenciaInterface> {
+        this.incidencesTi = this.db.object('WebRef/Incidences/incidenceForApproval/' + key) as AngularFireObject<IncidenciaInterface>;
+        return this.incidencesTi;
+
+  }
 
         // ========================== Aprobadas Service ==========================
 
