@@ -1,0 +1,96 @@
+<style>
+
+        div {font-family: Verdana, Geneva, Tahoma, sans-serif; color:rgba(7, 42, 61, 0.829)}
+        h4 {font-family: Verdana, Geneva, Tahoma, sans-serif; font-weight: bold; color:rgba(7, 42, 61, 0.829)}
+        a {font-family: Verdana, Geneva, Tahoma, sans-serif; color:rgba(7, 42, 61, 0.829)}
+        h5 {font-family: Verdana, Geneva, Tahoma, sans-serif; color:rgba(7, 42, 61, 0.829)}
+        </style>
+    
+    <section class="row mt-5">
+        <div class="col">
+          <button class="btn btn-primary float-right mb-3" data-toggle="modal" data-target="#modalAddIncidencia">Add Incidencia</button>
+     
+      <section id="incidencias" class="mt-5">
+          <div class="container">
+            <div class="row">
+              <div class="col-xs-12 col-sm-6 col-md-4" *ngFor="let incidencia of incidencias">
+                <div class="card_book">
+                  <div class="card">
+                    <div class="card-body text-center">
+                      <p>
+                        <img class="img-fluid" src="{{incidencia.imageURL}}" alt="{{incidencia.Encabezado}}">
+                      </p>
+                      <!-- <h4 routerLink="/checkersdetail/{{checker.key}}" class="card-title">{{checker.checkerName}}</h4> -->
+                      <p class="card-text">
+                        {{incidencia.Descripcion }}
+                      </p>
+                     
+                        <footer>
+                          <button class="btn btn-primary" style="background:rgb(10,137,241)" data-toggle="modal" data-target="#modalAddIncidencia" (click)="onPreUpdateIncidencia(incidencia)">Update</button>
+                          &#160;&#160;&#160; 
+                          <button class="btn btn-danger" (click)="deleteIncidencia(incidencia.key)">Delete</button>
+                        </footer>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      <app-add-incidencia></app-add-incidencia>
+
+      
+<style>
+  a {position: relative; top: auto;}
+  thead {color: #168a8a;}
+  </style>
+  
+      <table>
+          <tr>
+            <thead>Reportes</thead>
+              <td><i class="fas fa-file-excel" style="color: green"></i>
+                <i class="fas fa-file-pdf" style="color: red"></i></td>
+            </tr>
+      </table>
+  
+  <table>
+      <tr>
+        <tbody>Incidencias</tbody>
+        <td> <div class="dropdown-menu" aria-labelledby="btnGroupDrop1"></div></td>
+            <a class="dropdown-item" href="#"><i class="fas fa-sort-down"></i></a>
+          <td>Semana 38</td>
+          <td> <div class="dropdown-menu" aria-labelledby="btnGroupDrop1"></div></td>
+          <a class="dropdown-item" href="#"><i class="fas fa-sort-down"></i></a>
+        </tr>
+  </table>
+ 
+
+  <div class="card-deck" style="max-width: 65rem; max-height: 65rem;">
+      <div class="card">
+        <img src="..." class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">En todas las peliculas B Y b15 se exhibe el trailer de "fiestadel cine mexicano"...</h5>
+          <p class="card-text" style="color: #4f91e7;"> Cinepolis Pabellón</p>
+          <p class="card-text"> Guadalajara</p>
+          <p class="card-text"><small class="text">Agosto 17, 2018</small></p>
+      </div>
+    </div>
+          <div class="card">
+        <img src="..." class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">"El techo sufrió daños causados por la lluvia"</h5>
+          <p class="card-text" style="color: #4f91e7;">Cinepolis The Shoppes La Paz</p>
+          <p class="card-text">La Paz</p>
+          <p class="card-text"><small class="text">Agosto 17, 2018</small></p>
+        </div>
+      </div>
+          <div class="card">
+        <img src="..." class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Se presentará el ciclo de marvel Studios los primeros 10 años</h5>
+          <p class="card-text" style="color: red;">Cinemex Metepec</p>
+          <p class="card-text"> Toluca</p>
+          <p class="card-text"><small class="text">Agosto 17, 2018</small></p>
+        </div>
+      </div>
+  </div>

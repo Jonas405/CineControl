@@ -1,0 +1,88 @@
+<!-- Image and text -->
+<!-- <nav class="navbar navbar-light bg-light">
+    <a class="navbar-brand" href="#">
+      <img src="assets/images/users/2.jpg" width="30" height="30" class="d-inline-block align-top" alt="">
+      <h4 class="card-title">{{checker.name}}</h4>
+      <p class="card-text">
+        {{checker.email}}
+      </p>
+    </a>
+  </nav> -->
+
+<!--   <div class="card-deck col-lg-3 col-md-6" style="width: 16rem; height: 16rem;" >
+        <div class="card-body">
+          <h5 class="card-title">Cinemex Galeria</h5>
+          <p class="card-text">Ultimo CheckIn</p>
+          <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+              <div>
+                <div style="display: block">
+                  <canvas baseChart
+                    [datasets]="barChartData"
+                    [options]="barChartOptions"
+                    [plugins]="barChartPlugins"
+                    [legend]="barChartLegend"
+                    [chartType]="barChartType">
+                  </canvas>
+                </div>
+                <div class="card text-center"> 
+                    <button type="button" class="btn btn-primary btn-sx" (click)="randomize()">Update</button>
+                </div>
+              </div>
+          </div>
+      </div>
+
+       -->
+       <!-- <div class="container">
+          <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-4 mx-auto">
+              <div class="card_book">
+                <div class="card">
+                  <div class="card-body text-center">
+                    <p>
+                      <img class="img-fluid" src="{{checker.name}}" alt="{{checker.name}}">
+                    </p>
+                    <h4 class="card-title">{{checker.name}}</h4>
+                    <p class="card-text">
+                      {{checker.email}}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div> -->
+
+        <style>
+  
+            h5 span {font-family: Verdana, Geneva, Tahoma, sans-serif; color:rgba(7, 42, 61, 0.829)}
+            p span {font-family: Verdana, Geneva, Tahoma, sans-serif; color:rgba(7, 42, 61, 0.829)}
+            </style>
+      
+      <div class="card w-100">
+      
+              <div class="card-body">
+               <!--  <img src="assets/images/users/2.jpg" width="30" height="30" class="d-inline-block align-top" alt="">
+                 --><h5 class="card-title"><i class="fas fa-user-tie"></i> &#160;&#160;Checker: {{checker.checkerName}}</h5>
+                <p class="card-text"><i class="fas fa-map-marker-alt"></i>&#160;&#160;Encargado: Av. Constituyentes 851, Industrias Militares de Sedena, CP 01219</p>
+              </div>
+      
+            </div>
+      
+      <div class="card-deck">
+          <div class="card" *ngFor="let theater of toArray(checker.asignedTheaters); let i=index">
+            <div class="card-body">
+              <h5 class="card-title">{{theater.Cine}}</h5>
+              <p class="card-text">{{theater.Ciudad}}</p>
+              <p class="card-text">{{theater.Circuito}}</p>
+            </div>
+          </div>
+        </div>
+        
+       
+    <h2>Checker Ubication</h2>
+    <!-- this creates a google map on the page with the given lat/lng from -->
+    <!-- the component as the initial center of the map: -->
+    <agm-map [latitude]="lat" [longitude]="lng">
+      <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+    </agm-map>
+    

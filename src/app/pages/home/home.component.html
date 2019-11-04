@@ -1,0 +1,86 @@
+<head>
+
+    <style> 
+    h5 {font-family: Verdana, Geneva, Tahoma, sans-serif;
+      color:hsla(202, 77%, 17%, 0.829)}
+    p{font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color:hsla(202, 77%, 17%, 0.829)}
+    small {font-weight: bold;
+    color:hsla(202, 77%, 17%, 0.829);
+    font-family: Verdana, Geneva, Tahoma, sans-serif}
+    table {padding: 20px;}
+    table td {border: 20px;
+              padding: 8px;
+            text-align: center}
+    td strong {
+      font-weight: bold;
+       color: rgba(7, 42, 61, 0.829)}
+    i {font-size: 22px;
+    color: rgb(186, 189, 53);}
+    tbody {font-family: Verdana, Geneva, Tahoma, sans-serif;
+      font-weight: bold;
+    color: rgba(7, 42, 61, 0.829)}
+    thead {font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color:rgba(7, 42, 61, 0.829)}
+    td {font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color:rgba(7, 42, 61, 0.829)}
+    a {font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: rgba(7, 42, 61, 0.829)}
+
+    </style>
+  </head>
+  
+
+<div class="card-group">
+  <div class="card">
+    <img src="..." class="card-img-top" alt="...">
+  </div>
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title"><strong> {{checkers[0].asignedTheaters["Centro Magno"].Cine}}</strong></h5>
+      <p class="card-text">Ultima Visita</p>
+      <p class="card-text"><small class="text-muted">Septiembre 30, 2019 a las 8:00 am</small></p>
+      <table>
+      <tr>
+        <tbody>Información General</tbody>
+        <td><i class="far fa-file-alt"></i></td>
+      </tr>
+      <tr>
+          <thead>Número de Salas</thead>
+          <td>15</td>
+      </tr>
+      <tr>
+          <thead>Banners</thead>
+          <td>3 Espacios</td>
+      </tr>
+      <tr>
+          <thead>Materiales Especiales</thead>
+          <td>Si</td>
+      </tr>
+      <tr>
+          <thead>Espacios para tematizar</thead>
+          <td>Si</td>
+      </tr>
+</table>
+</div>
+</div>
+
+  <div class="card">
+    <img src="..." class="card-img-top" alt="FOTO Supervisor">
+    <div class="card-body">
+      <h5 class="card-title"><strong>Supervisor</strong></h5>
+      <p class="card-text">{{checkers[0].checkerName}}</p>
+      <p class="card-text">{{checkers[0].checkerMail}}</p>
+      <img src="..." class="card-img-top" alt="FOTO CINE">
+    </div>
+  </div>
+</div>
+
+<div class="list-group">
+  <a href="#" class="list-group-item list-group-item-action active">
+  <h4 style="color:blanchedalmond; font-weight:bold">Cines</h4>
+  </a>
+  <a href="#" class="list-group-item list-group-item-action" *ngFor="let theater of managedTheaters" >{{theater.Cine}}</a>
+</div>
+<script src="http://code.jquery-latest.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>

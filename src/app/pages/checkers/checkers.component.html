@@ -1,0 +1,40 @@
+<style>
+
+    div {font-family: Verdana, Geneva, Tahoma, sans-serif; color:rgba(7, 42, 61, 0.829)}
+    h4 {font-family: Verdana, Geneva, Tahoma, sans-serif; font-weight: bold; color:rgba(7, 42, 61, 0.829)}
+    a {font-family: Verdana, Geneva, Tahoma, sans-serif; color:rgba(7, 42, 61, 0.829)}
+    h5 {font-family: Verdana, Geneva, Tahoma, sans-serif; color:rgba(7, 42, 61, 0.829)}
+    </style>
+
+<section class="row mt-5">
+    <div class="col">
+      <button class="btn btn-primary float-right mb-3" data-toggle="modal" data-target="#modalAddChecker">Add Checker</button>
+ 
+  <section id="checkers" class="mt-5">
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-12 col-sm-6 col-md-4" *ngFor="let checker of checkers">
+            <div class="card_book">
+              <div class="card">
+                <div class="card-body text-center">
+                  <p>
+                    <img class="img-fluid" src="{{checker.checkerName}}" alt="{{checker.checkerName}}">
+                  </p>
+                  <h4 routerLink="/checkersdetail/{{checker.key}}" class="card-title">{{checker.checkerName}}</h4>
+                  <p class="card-text">
+                    {{checker.checkerMail }}
+                  </p>
+                 
+                    <footer>
+                      <button class="btn btn-primary" style="background:rgb(10,137,241)" data-toggle="modal" data-target="#modalAddChecker" (click)="onPreUpdateChecker(checker)">Update</button>
+                      &#160;&#160;&#160; 
+                      <button class="btn btn-danger" (click)="deleteChecker(checker.key)">Delete</button>
+                    </footer>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  <app-add-checker></app-add-checker>
