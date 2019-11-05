@@ -30,6 +30,7 @@ export class CinemaComponent implements OnInit {
   private managedTheaters : ManagedTheatersInterface[];
   public isAdmin: any = null;
   public userUid: string = null;
+  pageActual = 1;
 
   ngOnInit() {
    // this.getListTheaters();

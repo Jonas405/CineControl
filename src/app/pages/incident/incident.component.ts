@@ -19,6 +19,7 @@ export class IncidentComponent implements OnInit {
   public isAdmin: any = null;
   public userUid: string = null;
   private user: UserInterface;
+  pageActual = 1;
 
   ngOnInit() {
     this.getAllIncidenciasPorAprobar();

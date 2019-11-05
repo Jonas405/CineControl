@@ -1,66 +1,25 @@
 
-<button type="button" class="btn btn-primary btn-lg btn-block">Cinepolis</button>
-<button type="button" class="btn btn-secondary btn-lg btn-block">Cinemex</button>
+<button type="button" class="btn btn-primary btn-lg btn-block">{{theater.Cine}}</button> 
 <pre></pre>
-
-
+ 
 <div class="card w-75">
 
         <div class="card-body">
           <h5 class="card-title"><span class="icon-user"></span>&#160;&#160;Gerente: Miguel Sanchez</h5>
-          <p class="card-text"><span class="icon-location-pin"></span>&#160;Av. Constituyentes 851, Industrias Militares de Sedena, CP 01219</p>
+          <p class="card-text"><span class="icon-location-pin"></span>&#160;{{theater.direccion}}</p>
         </div>
       </div>
-
 <div class="card-deck">
-    <div class="card">
+    <div class="card col-4 col-sm-4 col-md-4 col-lg-4"  *ngFor="let theater of toArray(theater.Salas); let i=index">
       <div class="card-body">
-        <h5 class="card-title">Sala 1</h5>
-        <p class="card-text">200 Butacas.</p>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title">Sala 2</h5>
-        <p class="card-text">200 Butacas.</p>
- 
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title">Sala 3</h5>
-        <p class="card-text">200 Butacas.</p>
-
+        <h5 class="card-title">Sala {{theater.RoomNumber}}</h5>
+        <p class="card-text">  {{theater.RoomCapacity}}  Butacas.</p>
       </div>
     </div>
   </div>
   
-    <div class="card-deck">
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title">Sala 4</h5>
-        <p class="card-text">200 Butacas.</p>
-    
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title">Sala 5</h5>
-        <p class="card-text">200 Butacas.</p>
- 
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title">Sala 6</h5>
-        <p class="card-text">200 Butacas.</p>
-        <p class="card-text"></p>
-        <a href="#" class="btn btn-primary">Ver más</a>
-      </div>
-    </div>
-  </div>
 
-<h2>Mapish</h2>
+<h2>Ubication</h2>
 
 <!-- this creates a google map on the page with the given lat/lng from -->
 <!-- the component as the initial center of the map: -->

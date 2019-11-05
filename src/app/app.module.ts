@@ -14,6 +14,8 @@ import { ChartsModule } from 'ng2-charts';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';  
 import {  NO_ERRORS_SCHEMA } from '@angular/core';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
+//Angular Paginator
+import {NgxPaginationModule} from 'ngx-pagination';
 //Firebase config
 import { environment } from '../environments/environment';
 import { AngularFireStorage } from '@angular/fire/storage';
@@ -104,6 +106,7 @@ import { from } from 'rxjs';
     ChartsModule,
     NgbModule,
     FormsModule,
+    NgxPaginationModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireDatabaseModule,
     AngularFireStorageModule,

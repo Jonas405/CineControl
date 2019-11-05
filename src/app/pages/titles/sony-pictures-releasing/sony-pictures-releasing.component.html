@@ -5,21 +5,42 @@
     a {font-family: Verdana, Geneva, Tahoma, sans-serif; color:rgba(7, 42, 61, 0.829)}
     h5 {font-family: Verdana, Geneva, Tahoma, sans-serif; color:rgba(7, 42, 61, 0.829)}
     </style>
-
+    <style>
+        h6 {text-align: center;}
+        </style>
+        
+        <div class="card-deck">
+        <div class="col-md-6">
+            <div class="card-body">
+                <div class="card-text-right">
+                  <h5>2019</h5>
+                  </div>
+                </div>
+              </div>
+                  <div class="col-md-6">
+                      <div class="card-body">
+                          <div class="input-group">
+                              <input type="text" class="form-control" placeholder="Search" style="max-width: 25rem;">
+                              <div class="input-group-append">
+                                  <button class="btn btn-primary float-right mb-3" data-toggle="modal" data-target="#modalAddSonyTitle">Add Title</button>
+                                </div>
+                            </div>
+                        </div>
+                      </div>
+                    </div>
 <section class="row mt-5">
     <div class="col">
-      <button class="btn btn-primary float-right mb-3" data-toggle="modal" data-target="#modalAddSonyTitle">Add Title</button>
-  <section id="sonyTitle" class="mt-5">
+       <section id="sonyTitle" class="mt-5">
       <div class="container">
         <div class="row">
-          <div class="col-xs-12 col-sm-6 col-md-4" *ngFor="let sonyTitle of sonyTitles">
+          <div class="col-xs-12 col-sm-6 col-md-4" *ngFor="let sonyTitle of sonyTitles | paginate: {itemsPerPage:3, currentPage: pageActual}; let i = index">
             <div class="card_book">
               <div class="card">
                 <div class="card-body text-center">
                   <p>
                     <img class="img-fluid" src="{{sonyTitle.movieName}}" alt="{{sonyTitle.movieName}}">
                   </p>
-                   <h4 routerLink="/sonyTitle/{{sonyTitle.key}}" class="card-title">{{sonyTitle.key}}</h4>
+                   <h5 routerLink="/sonyTitle/{{sonyTitle.key}}" class="card-title">{{sonyTitle.key}}</h5>
                   <p class="card-text">
                     {{sonyTitle.movieName}}
                   </p>
@@ -41,218 +62,7 @@
         </div>
       </div>
     </section>
+    <pagination-controls (pageChange)="pageActual = $event"></pagination-controls>
     <app-add-sony-title></app-add-sony-title>
 
-    <style>
-      h6 {text-align: center;}
-      </style>
-      
-      <div class="card-deck">
-      <div class="col-md-6">
-          <div class="card-body">
-              <div class="card-text-right">
-                <h5>2019</h5>
-                </div>
-              </div>
-            </div>
-                <div class="col-md-6">
-                    <div class="card-body">
-                        <div class="card-text" style="text-align: right;">
-                            <form class="example" action="action_page.php">
-                                <input type="text" placeholder="Search.." name="search">
-                                <button type="submit"><i class="fa fa-search"></i></button>
-                              </form>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-      
-      
-      <div class="card-deck">
-      <div class="card mb-3" style="max-width: 35rem;">
-          <div class="row no-gutters">
-            <div class="col-md-1">
-              <img src="..." class="card-img" alt="...">
-            </div>
-            <div class="col-md-4">
-              <div class="card-body">
-                  <div class="card-text">
-                    <P>Miss Bala</P>
-                    </div>
-                  </div>
-                </div>
-                    <div class="col-md-7">
-                        <div class="card-body">
-                            <div class="card-text" style="text-align: right;">
-                              <P>Viernes 29 de marzo, 2019</P>
-                            </div>
-                          </div>
-                        </div>
-      </div>
-      </div>
-      
-          <div class="card mb-3" style="max-width: 35rem;">
-              <div class="row no-gutters">
-                <div class="col-md-1">
-                  <img src="..." class="card-img" alt="...">
-                </div>
-                <div class="col-md-4">
-                  <div class="card-body">
-                      <div class="card-text">
-                        <P>Miss Bala</P>
-                        </div>
-                      </div>
-                    </div>
-                        <div class="col-md-7">
-                            <div class="card-body">
-                                <div class="card-text" style="text-align: right;">
-                                  <P>Viernes 29 de marzo, 2019</P>
-                                </div>
-                              </div>
-                            </div>
-          </div>
-          </div>
-        </div>
-        
-      <div class="card-deck">
-          <div class="card mb-3" style="max-width: 35rem;">
-              <div class="row no-gutters">
-                <div class="col-md-1">
-                  <img src="..." class="card-img" alt="...">
-                </div>
-                <div class="col-md-4">
-                  <div class="card-body">
-                      <div class="card-text">
-                        <P>Miss Bala</P>
-                        </div>
-                      </div>
-                    </div>
-                        <div class="col-md-7">
-                            <div class="card-body">
-                                <div class="card-text" style="text-align: right;">
-                                  <P>Viernes 29 de marzo, 2019</P>
-                                </div>
-                              </div>
-                            </div>
-          </div>
-          </div>
-          
-              <div class="card mb-3" style="max-width: 35rem;">
-                  <div class="row no-gutters">
-                    <div class="col-md-1">
-                      <img src="..." class="card-img" alt="...">
-                    </div>
-                    <div class="col-md-4">
-                      <div class="card-body">
-                          <div class="card-text">
-                            <P>Miss Bala</P>
-                            </div>
-                          </div>
-                        </div>
-                            <div class="col-md-7">
-                                <div class="card-body">
-                                    <div class="card-text" style="text-align: right;">
-                                      <P>Viernes 29 de marzo, 2019</P>
-                                    </div>
-                                  </div>
-                                </div>
-              </div>
-              </div>
-            </div>
-      
-            <div class="card-deck">
-                <div class="card mb-3" style="max-width: 32rem;">
-                    <div class="row no-gutters">
-                      <div class="col-md-1">
-                        <img src="..." class="card-img" alt="...">
-                      </div>
-                      <div class="col-md-4">
-                        <div class="card-body">
-                            <div class="card-text">
-                              <P>Miss Bala</P>
-                              </div>
-                            </div>
-                          </div>
-                              <div class="col-md-7">
-                                  <div class="card-body">
-                                      <div class="card-text" style="text-align: right;">
-                                        <P>Viernes 29 de marzo, 2019</P>
-      
-                                      </div>
-                                    </div>
-                                  </div>
-                </div>
-                </div>
-                </div>
-      
-      <h6>2020</h6>
-      
-      <div class="card-deck">
-          <div class="card mb-3" style="max-width: 35rem;">
-              <div class="row no-gutters">
-                <div class="col-md-1">
-                  <img src="..." class="card-img" alt="...">
-                </div>
-                <div class="col-md-4">
-                  <div class="card-body">
-                      <div class="card-text">
-                        <P>Miss Bala</P>
-                        </div>
-                      </div>
-                    </div>
-                        <div class="col-md-7">
-                            <div class="card-body">
-                                <div class="card-text" style="text-align: right;">
-                                  <P>Viernes 29 de marzo, 2019</P>
-                                </div>
-                              </div>
-                            </div>
-          </div>
-          </div>
-          
-              <div class="card mb-3" style="max-width: 35rem;">
-                  <div class="row no-gutters">
-                    <div class="col-md-1">
-                      <img src="..." class="card-img" alt="...">
-                    </div>
-                    <div class="col-md-4">
-                      <div class="card-body">
-                          <div class="card-text">
-                            <P>Miss Bala</P>
-                            </div>
-                          </div>
-                        </div>
-                            <div class="col-md-7">
-                                <div class="card-body">
-                                    <div class="card-text" style="text-align: right;">
-                                      <P>Viernes 29 de marzo, 2019</P>
-                                    </div>
-                                  </div>
-                                </div>
-              </div>
-              </div>
-            </div>
-      
-            <div class="card-deck">
-                <div class="card mb-3" style="max-width: 32rem;">
-                    <div class="row no-gutters">
-                      <div class="col-md-1">
-                        <img src="..." class="card-img" alt="...">
-                      </div>
-                      <div class="col-md-4">
-                        <div class="card-body">
-                            <div class="card-text">
-                              <P>Miss Bala</P>
-                              </div>
-                            </div>
-                          </div>
-                              <div class="col-md-7">
-                                  <div class="card-body">
-                                      <div class="card-text" style="text-align: right;">
-                                        <P>Viernes 29 de marzo, 2019</P>
-                                      </div>
-                                    </div>
-                                  </div>
-                </div>
-                </div>
-          </div>
+    

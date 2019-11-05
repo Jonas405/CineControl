@@ -16,7 +16,7 @@ import { ManagedTheatersInterface } from 'src/app/models/managedTheaters';
 export class HomeComponent implements OnInit {
 
   myDate = new Date();
-
+  pageActual = 1;
   constructor( private dataApi: DataApiService, private authService: AuthService ) { }
 
   private checkers: CheckersInterface[];
@@ -25,10 +25,13 @@ export class HomeComponent implements OnInit {
   public userUid: string = null;
   private user: UserInterface;
 
+  
+
   ngOnInit() {
     this.getAllCheckers();
     this.getCurrentUser();
     this.getManagedTheatersList();
+  
   }
 
  
@@ -42,6 +45,7 @@ export class HomeComponent implements OnInit {
     })
   }
 
+  
   //------- Get First elements -------
  
   
@@ -88,6 +92,15 @@ export class HomeComponent implements OnInit {
       this.managedTheaters = managedTheaters;
       console.log("ManagedTheaters", this.managedTheaters)
     });
+  }
+
+  toArray(asignedTheaters: object) {
+    return Object.keys(asignedTheaters).map(key => ({
+      key,
+      ...asignedTheaters[key]
+     
+    }))
+   
   }
 
 

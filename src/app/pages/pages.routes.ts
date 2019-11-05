@@ -37,7 +37,7 @@ const pagesRoutes: Routes = [
             { path: 'materialesSony', component: SonyMaterialesComponent, data: { tittle: 'materialesSony' }},
             { path: 'comments', component: CommentsComponent, data: { tittle: 'Comments' }},
             { path: 'home', component: HomeComponent, data: { tittle: 'Home' }},
-            { path: 'assignTheaters', component: AssignComponent, data: { tittle: 'AssignTheaters' }},
+           // { path: 'assignTheaters', component: AssignComponent, data: { tittle: 'AssignTheaters' }},
             { path: 'profile', component: ProfileComponent, data: { tittle: 'ProfileComponent' }},
             { path: '', redirectTo: '/home', pathMatch: 'full'}
         ]

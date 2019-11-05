@@ -231,7 +231,7 @@ export class DataApiService {
        
      
 
- /*      pushUpload(upload: Upload){
+       pushUpload(upload: Upload){
         let storageRef = firebase.storage().ref();
         this.uploadTask = storageRef.child(`${this.basePath}/${upload.file.name}`).put(upload.file);
         
@@ -251,7 +251,7 @@ export class DataApiService {
            // Writes the file details to the realtime db
         private saveFileData(upload: Upload) {
           this.db.list(`${this.basePath}/`).push(upload);
-        } */
+        } 
 
  //-------------------------------
 
@@ -293,7 +293,7 @@ export class DataApiService {
         return this.commentsRef;
       }  
     
-    /*   addComments( comment : CommentsInterface, upload: Upload){
+       addComments( comment : CommentsInterface, upload: Upload){
         //
         let storageRef = firebase.storage().ref();
         this.uploadTask = storageRef.child(`${this.basePath}/${upload.file.name}`).put(upload.file);
@@ -315,7 +315,7 @@ export class DataApiService {
           })
         //
         this.commentsRef.push(comment);
-      } */
+      } 
     
       deleteComment(key: string): Promise<void> {
         return this.commentsRef.remove(key);

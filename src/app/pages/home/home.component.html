@@ -75,12 +75,13 @@
     </div>
   </div>
 </div>
-
+ 
 <div class="list-group">
   <a href="#" class="list-group-item list-group-item-action active">
   <h4 style="color:blanchedalmond; font-weight:bold">Cines</h4>
   </a>
-  <a href="#" class="list-group-item list-group-item-action" *ngFor="let theater of managedTheaters" >{{theater.Cine}}</a>
+  <a routerLink="/cinedetail/{{theater.key}}" class="list-group-item list-group-item-action" *ngFor="let theater of managedTheaters| paginate: {itemsPerPage:7, currentPage: pageActual}; let i = index" >{{theater.Cine}}</a>
 </div>
+<pagination-controls (pageChange)="pageActual = $event"></pagination-controls>
 <script src="http://code.jquery-latest.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>

@@ -30,131 +30,13 @@
 </head>
 
 
-<div class="card-group">
-<div class="card">
-  <img src="..." class="card-img-top" alt="...">
-</div>
-<div class="card">
-  <div class="card-body">
-    <h5 class="card-title"><strong>Cinemex Galerias Tuxtla</strong></h5>
-    <p class="card-text">Ultima Visita</p>
-    <p class="card-text"><small class="text-muted">Septiembre 30, 2019 a las 8:00 am</small></p>
-    <table>
-    <tr>
-      <tbody>Información General</tbody>
-      <td><i class="far fa-file-alt"></i></td>
-    </tr>
-    <tr>
-        <thead>Número de Salas</thead>
-        <td>15</td>
-    </tr>
-    <tr>
-        <thead>Banners</thead>
-        <td>3 Espacios</td>
-    </tr>
-    <tr>
-        <thead>Materiales Especiales</thead>
-        <td>Si</td>
-    </tr>
-    <tr>
-        <thead>Espacios para tematizar</thead>
-        <td>Si</td>
-    </tr>
-</table>
-</div>
-</div>
-
-<div class="card">
-  <img src="..." class="card-img-top" alt="FOTO Supervisor">
-  <div class="card-body">
-    <h5 class="card-title"><strong>Supervisor</strong></h5>
-    <p class="card-text">María Elena Carballo</p>
-    <p class="card-text">5 Cines</p>
-    <img src="..." class="card-img-top" alt="FOTO CINE">
-  </div>
-</div>
-</div>
-
 <!-- Esta es la parte de lista de cines -->
-
-  
 <div class="input-group">
   <input type="text" class="form-control" placeholder="Search" style="max-width: 25rem;">
   <div class="input-group-append">
-    <button class="btn btn-secondary" type="button">
-      <i class="fa fa-search"></i>
-    </button>
-    <button class="btn btn-primary float-right mb-3" data-toggle="modal" data-target="#modalAddTheater">Add Theater</button>
-
+  <button class="btn btn-primary float-right" data-toggle="modal" data-target="#modalAddTheater">Add Theater</button>
   </div>
 </div>
-&#160;
-&#160;
-
-<div class="card-deck">
-    <div class="card mb-3" style="max-width: 40rem;">
-    <div class="row no-gutters">
-    <div class="col-md-1">
-      <img src="..." class="card-img" alt="...">
-    </div>
-    <div class="col-md-4">
-      <div class="card-body">
-          <div class="card-text">
-            <P>Cinemex</P>
-            </div>
-          </div>
-        </div>
-    </div>
-    </div>
-    
-<div class="card mb-3" style="max-width: 40rem;">
-<div class="row no-gutters">
-<div class="col-md-1">
-<img src="..." class="card-img" alt="...">
-</div>
-<div class="col-md-4">
-<div class="card-body">
-<div class="card-text">
-  <P>Cinemex</P>
-  </div>
-</div>
-</div>
-</div>
-</div>
-</div>
-
-<div class="card-deck">
-<div class="card mb-3" style="max-width: 40rem;">
-<div class="row no-gutters">
-<div class="col-md-1">
-<img src="..." class="card-img" alt="...">
-</div>
-<div class="col-md-4">
-<div class="card-body">
-    <div class="card-text">
-      <P>Cinemex</P>
-      </div>
-    </div>
-  </div>
-</div>
-</div>
-
-<div class="card mb-3" style="max-width: 40rem;">
-  <div class="row no-gutters">
-    <div class="col-md-1">
-      <img src="..." class="card-img" alt="...">
-    </div>
-    <div class="col-md-4">
-      <div class="card-body">
-          <div class="card-text">
-            <P>Cinemex</P>
-            </div>
-          </div>
-        </div>
-</div>
-</div>
-</div>
-
 
 <style>
 
@@ -169,14 +51,14 @@
         <section id="managedTheaters" class="mt-5">
       <div class="container">
         <div class="row">
-          <div class="col-xs-12 col-sm-6 col-md-4" *ngFor="let theater of managedTheaters">
+          <div class="col-xs-12 col-sm-6 col-md-4" *ngFor="let theater of managedTheaters| paginate: {itemsPerPage:3, currentPage: pageActual}; let i = index">
             <div class="card_book">
               <div class="card">
                 <div class="card-body text-center">
                   <p>
                     <img class="img-fluid" src="{{theater.Cine}}" alt="{{theater.Cine}}">
                   </p>
-                  <h4 routerLink="/cinedetail/{{theater.key}}" class="card-title">{{theater.cine}}</h4>
+                  <h5 routerLink="/cinedetail/{{theater.key}}" class="card-title">{{theater.Cine}}</h5>
                   <p class="card-text">
                     {{theater.Circuito }}
                   </p>
@@ -200,6 +82,7 @@
           </div>
         </div>
       </div>
+      <pagination-controls (pageChange)="pageActual = $event"></pagination-controls>
     </section>
     <app-add-theaters></app-add-theaters>
   

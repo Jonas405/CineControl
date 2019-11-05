@@ -12,8 +12,8 @@ import { TheaterInterface } from 'src/app/models/theaters';
 export class CineDetailComponent implements OnInit {
 
   title = 'Cine Location';
-  lat = 51.678418;
-  lng = 7.809007;
+  lat = 19.3581748;
+  lng = -99.3861982;
 
   constructor(private dataApi: DataApiService, private route: ActivatedRoute,
     private db: AngularFireDatabase, private router: Router) { }
@@ -42,6 +42,15 @@ export class CineDetailComponent implements OnInit {
           });
       }
     });
+  }
+
+  toArray(asignedTheaters: object) {
+    return Object.keys(asignedTheaters).map(key => ({
+      key,
+      ...asignedTheaters[key]
+     
+    }))
+   
   }
 
 }

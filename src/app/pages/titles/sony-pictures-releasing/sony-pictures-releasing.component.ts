@@ -13,6 +13,7 @@ import { map } from 'rxjs/operators';
 })
 export class SonyPicturesReleasingComponent implements OnInit {
   @Input() title: MovieInterface;
+  pageActual = 1;
 
   constructor(private authService: AuthService, private dataApi: DataApiService) {}
 

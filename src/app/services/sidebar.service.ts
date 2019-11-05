@@ -18,7 +18,7 @@ export class SidebarService {
         { titulo: 'Incident', url: '/incident' },
         { titulo: 'Sony Materials', url: '/materialesSony' },
         { titulo: 'Walt Disney Materials', url: '/materialesDisney' },
-        { titulo: 'AssignTheaters', url: '/assignTheaters' },
+      //  { titulo: 'AssignTheaters', url: '/assignTheaters' },
         { titulo: 'Comments', url: '/comments' }
       ]
     }

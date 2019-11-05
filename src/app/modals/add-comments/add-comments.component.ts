@@ -16,6 +16,7 @@ export class AddCommentsComponent implements OnInit {
   
   selectedFiles: FileList;
   currentUpload: Upload;
+
   
   constructor(private dataApi: DataApiService) { }
   @ViewChild('btnClose', {static: false} ) btnClose: ElementRef;
@@ -32,11 +33,13 @@ export class AddCommentsComponent implements OnInit {
 
       //
       // New 
+    //  let logisticReference = DatabaseService.shared.logisticRef.childByAutoId()
+     // let childAutoID = logisticReference.key;
       let uniqueId = uuid();
       console.log("UNIQUE ID", uniqueId);
       commentForm.value.logisticID = uniqueId;
       commentForm.value.name = Upload.name;
-
+      commentForm.value.childByAutoId = uniqueId;
       console.log("URL???", this.currentUpload);
       console.log("Upload Class", Upload);
       this.dataApi.addComments(commentForm.value, this.currentUpload);
