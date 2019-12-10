@@ -20,9 +20,10 @@
                   <div class="col-md-6">
                       <div class="card-body">
                           <div class="input-group">
-                              <input type="text" class="form-control" placeholder="Search" style="max-width: 25rem;">
+                              <input type="text" class="form-control" placeholder="Buscar por Titulo"
+                              [(ngModel)]="searchTerm" style="max-width: 25rem;">
                               <div class="input-group-append">
-                                  <button class="btn btn-primary float-right mb-3" data-toggle="modal" data-target="#modalAddSonyTitle">Add Title</button>
+                                  <button class="btn btn-primary float-right mb-3" data-toggle="modal" data-target="#modalAddSonyTitle">Agregar Titulo</button>
                                 </div>
                             </div>
                         </div>
@@ -33,17 +34,15 @@
        <section id="sonyTitle" class="mt-5">
       <div class="container">
         <div class="row">
-          <div class="col-xs-12 col-sm-6 col-md-4" *ngFor="let sonyTitle of sonyTitles | paginate: {itemsPerPage:3, currentPage: pageActual}; let i = index">
+          <div class="col-xs-12 col-sm-6 col-md-4" *ngFor="let sonyTitle of sonyTitles | titleSonyFilter:searchTerm | paginate: {itemsPerPage:3, currentPage: pageActual}; let i = index">
             <div class="card_book">
               <div class="card">
                 <div class="card-body text-center">
                   <p>
-                    <img class="img-fluid" src="{{sonyTitle.movieName}}" alt="{{sonyTitle.movieName}}">
+                    <img class="img-fluid" src="{{sonyTitle.imageURL}}">
                   </p>
-                   <h5 routerLink="/sonyTitle/{{sonyTitle.key}}" class="card-title">{{sonyTitle.key}}</h5>
-                  <p class="card-text">
-                    {{sonyTitle.movieName}}
-                  </p>
+                   <h5 routerLink="/sonyTitle/{{sonyTitle.key}}" class="card-title">{{sonyTitle.movieName}}</h5>
+               
                     <p class="card-text">
                       {{sonyTitle.releaseDate}}
                     </p>
@@ -51,9 +50,9 @@
                       {{sonyTitle.studio}}
                     </p>
                     <footer>
-                        <button class="btn btn-primary" data-toggle="modal" data-target="#modalAddSonyTitle" (click)="onPreUpdateSonyTitle(sonyTitle)">Update</button>
+                        <button class="btn btn-primary" data-toggle="modal" data-target="#modalAddSonyTitle" (click)="onPreUpdateSonyTitle(sonyTitle)">Actualizar</button>
                         &#160;&#160;&#160; 
-                        <button class="btn btn-danger" (click)="deleteSonyTitle(sonyTitle.key)">Delete</button>
+                        <button class="btn btn-danger" (click)="deleteSonyTitle(sonyTitle.key)">Eliminar</button>
                     </footer>
                 </div>
               </div>

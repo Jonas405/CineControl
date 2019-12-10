@@ -5,26 +5,29 @@
 <div class="card w-75">
 
         <div class="card-body">
-          <h5 class="card-title"><span class="icon-user"></span>&#160;&#160;Gerente: Miguel Sanchez</h5>
-          <p class="card-text"><span class="icon-location-pin"></span>&#160;{{theater.direccion}}</p>
+          <h5 class="card-title"><i class='fas fa-map-marker-alt' style='font-size:24px'></i>&#160;&#160; Estado: {{theater.Estado}}</h5>
+          <p class="card-text"><i class='fas fa-search-location' style='font-size:24px'></i>&#160; Direccion exacta del cine</p>
         </div>
       </div>
+
 <div class="card-deck">
-    <div class="card col-4 col-sm-4 col-md-4 col-lg-4"  *ngFor="let theater of toArray(theater.Salas); let i=index">
-      <div class="card-body">
-        <h5 class="card-title">Sala {{theater.RoomNumber}}</h5>
-        <p class="card-text">  {{theater.RoomCapacity}}  Butacas.</p>
-      </div>
+    <div class="card col-4 col-sm-4 col-md-4 col-lg-4"  *ngFor="let theater of toArray(theater.Salas)| paginate: {itemsPerPage:4, currentPage: pageActual}; let i = index" >
+        <div class="card-body">
+            <h5 class="card-title">Sala {{theater.RoomNumber}}</h5>
+            <p class="card-text">  {{theater.RoomCapacity}}  Butacas.</p>
+          </div>
     </div>
   </div>
+  <pagination-controls (pageChange)="pageActual = $event"></pagination-controls>
   
 
-<h2>Ubication</h2>
+<h2>Ubicacion del Cine {{theater.Cine}}</h2>
 
 <!-- this creates a google map on the page with the given lat/lng from -->
 <!-- the component as the initial center of the map: -->
 <agm-map [latitude]="lat" [longitude]="lng">
   <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
 </agm-map>
+
 
 

@@ -31,12 +31,13 @@
 
 
 <!-- Esta es la parte de lista de cines -->
-<div class="input-group">
-  <input type="text" class="form-control" placeholder="Search" style="max-width: 25rem;">
+
+  <input type="text" class="form-control" placeholder="Buscar por Cine"
+         [(ngModel)]="searchTerm">
   <div class="input-group-append">
-  <button class="btn btn-primary float-right" data-toggle="modal" data-target="#modalAddTheater">Add Theater</button>
+  <button class="btn btn-primary float-right" data-toggle="modal" data-target="#modalAddTheater">Agregar Cine</button>
   </div>
-</div>
+
 
 <style>
 
@@ -47,17 +48,29 @@
     </style>
 
 <section class="row mt-5">
+
     <div class="col">
         <section id="managedTheaters" class="mt-5">
       <div class="container">
         <div class="row">
-          <div class="col-xs-12 col-sm-6 col-md-4" *ngFor="let theater of managedTheaters| paginate: {itemsPerPage:3, currentPage: pageActual}; let i = index">
+          <div class="col-xs-12 col-sm-6 col-md-4" *ngFor="let theater of managedTheaters | managedFilter:searchTerm |  paginate: {itemsPerPage:3, currentPage: pageActual}; let i = index">
             <div class="card_book">
               <div class="card">
                 <div class="card-body text-center">
-                  <p>
-                    <img class="img-fluid" src="{{theater.Cine}}" alt="{{theater.Cine}}">
-                  </p>
+
+             
+                  <div *ngIf="theater.Circuito == 'CNPL'">
+                    <img src ="assets/images/CinepolisLogo.ico">
+                  </div>
+                  <div *ngIf="theater.Circuito == 'CNMX'">
+                      <img src ="assets/images/Cinemex.ico">
+                  </div>
+
+                  <div *ngIf="theater.Circuito != 'CNPL' && theater.Circuito != 'CNMX'">
+                      <img src ="assets/images/Others.png">
+                  </div>
+
+              
                   <h5 routerLink="/cinedetail/{{theater.key}}" class="card-title">{{theater.Cine}}</h5>
                   <p class="card-text">
                     {{theater.Circuito }}
@@ -72,9 +85,9 @@
                         {{theater.RtkXrefNo}}
                       </p>
                     <footer>
-                        <button class="btn btn-primary" data-toggle="modal" data-target="#modalAddTheater" (click)="onPreUpdateTheater(theater)">Update</button>
+                        <button class="btn btn-primary" data-toggle="modal" data-target="#modalAddTheater" (click)="onPreUpdateTheater(theater)">Actualizar</button>
                         &#160;&#160;&#160; 
-                        <button class="btn btn-danger" (click)="deleteManagedTheater(theater.key)">Delete</button>
+                        <button class="btn btn-danger" (click)="deleteManagedTheater(theater.key)">Eliminar</button>
                     </footer>
                 </div>
               </div>

@@ -30,7 +30,7 @@ export class SonyPicturesReleasingDetailComponent implements OnInit {
               console.log("Movie Res", this.movie);
             } else {
             //  this.notificationService.dispatchErrorMessage('Todo does not exist');
-              this.router.navigate(['/home']);
+              this.router.navigate(['/cinema']);
             }
           }, err => {
             //this.notificationService.dispatchErrorMessage(err.toString());

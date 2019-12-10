@@ -8,7 +8,7 @@
 
 <section class="row mt-5">
   <div class="col">
-    <button class="btn btn-primary float-right mb-3" data-toggle="modal" data-target="#modalAddComments">Add Comments</button>
+    <button class="btn btn-primary float-right mb-3" data-toggle="modal" data-target="#modalAddComments">Enviar Logistica</button>
 
     <section >
         <div class="card w-100" style="border-color: rgb(9, 181, 211);" *ngFor="let comment of comments">
@@ -18,11 +18,13 @@
               <p class="card-text"> {{comment.cuerpo }}</p>
               <p class="card-text"> {{comment.fecha }}</p>
               <p class="card-text"> {{comment.timeStamp }}</p>
-              
+              <i class="fas fa-file" src="{{comment.url}}" (click)="openFile(comment.url)" width="500" height="500"></i>
+              <span class="oi oi-data-transfer-download"></span>
+
               <footer>
-                  <button class="btn btn-primary float-right" style="background:rgb(10,137,241)" data-toggle="modal" data-target="#modalAddComments" (click)="onPreUpdateComment(comment)">Update</button>
+                  <button class="btn btn-primary float-right" style="background:rgb(10,137,241)" data-toggle="modal" data-target="#modalAddComments" (click)="onPreUpdateComment(comment)">Actualizar</button>
                   &#160;&#160;&#160; 
-                  <button class="btn btn-danger float-right" (click)="deleteComment(comment.key)">Delete</button>
+                  <button class="btn btn-danger float-right" (click)="deleteComment(comment.key)">Eliminar</button>
                 </footer>
             </div>
           </div>

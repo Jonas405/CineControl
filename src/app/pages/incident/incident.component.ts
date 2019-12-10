@@ -15,7 +15,7 @@ import { map } from 'rxjs/operators';
 export class IncidentComponent implements OnInit {
   constructor( private dataApi: DataApiService, private authService: AuthService ) { }
 
-  private incidencias: IncidenciasInterface[];
+  public incidencias: IncidenciasInterface[];
   public isAdmin: any = null;
   public userUid: string = null;
   private user: UserInterface;

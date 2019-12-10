@@ -7,6 +7,11 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { UserInterface } from '../../models/users';
 import { map } from 'rxjs/operators';
 import { Upload } from 'src/app/models/Upload';
+import {database} from 'firebase';
+import * as firebase from 'firebase';
+import { AngularFireStorage } from '@angular/fire/storage';
+import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-comments',
@@ -15,13 +20,17 @@ import { Upload } from 'src/app/models/Upload';
 })
 export class CommentsComponent implements OnInit {
 
-  constructor( private dataApi: DataApiService, private authService: AuthService ) { }
 
-  private comments: CommentsInterface[];
+  
+
+  constructor( private dataApi: DataApiService, private authService: AuthService,
+    private storage: AngularFireStorage, private router: Router) { }
+
+  public comments: CommentsInterface[];
   public isAdmin: any = null;
   public userUid: string = null;
   private user: UserInterface;
-
+  
 
   ngOnInit() {
     this.getCommentsList();
@@ -66,5 +75,7 @@ export class CommentsComponent implements OnInit {
     this.dataApi.selectedComments = Object.assign({}, comment);
   }
 
+  openFile(url: string){
+    window.open(url)
+    }
 }
-

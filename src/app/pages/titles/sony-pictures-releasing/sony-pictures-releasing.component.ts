@@ -23,12 +23,12 @@ export class SonyPicturesReleasingComponent implements OnInit {
     photoUrl: '',
     roles: {}
   };
-
   
   //private theaters: TheatersInterface[];
-  private sonyTitles : MoviesInterface[];
+  public sonyTitles : MoviesInterface[];
   public isAdmin: any = null;
   public userUid: string = null;
+  searchTerm : string;
 
   ngOnInit() {
    // this.getListTheaters();

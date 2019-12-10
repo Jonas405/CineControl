@@ -4,45 +4,80 @@ import { CommentsInterface } from '../../models/comments';
 import { NgForm } from '@angular/forms';
 import { Upload } from 'src/app/models/Upload';
 import { v4 as uuid } from 'uuid';
+import * as firebase from 'firebase';
+import {NgbDateStruct, NgbCalendar} from '@ng-bootstrap/ng-bootstrap';
+import {NgbDateAdapter, NgbDateNativeAdapter} from '@ng-bootstrap/ng-bootstrap';
 
 
 
 @Component({
   selector: 'app-add-comments',
   templateUrl: './add-comments.component.html',
-  styleUrls: ['./add-comments.component.css']
+  styleUrls: ['./add-comments.component.css'],
+  providers: [{provide: NgbDateAdapter, useClass: NgbDateNativeAdapter}]
 })
 export class AddCommentsComponent implements OnInit {
-  
-  selectedFiles: FileList;
-  currentUpload: Upload;
 
   
-  constructor(private dataApi: DataApiService) { }
+  model3: Date;
+  get today() {
+    return new Date();
+  }
+
+  constructor(public dataApi: DataApiService, public calendar: NgbCalendar) { }
   @ViewChild('btnClose', {static: false} ) btnClose: ElementRef;
   @Input() userUid: string;
 
   ngOnInit() {
   }
 
+     //upload file
+    
+     private uploadTask: firebase.storage.UploadTask;
+     fileToUpload: File = null;
+  
   onSaveComment(commentForm: NgForm): void {
     if (commentForm.value.key == null) {
       //
-      let file = this.selectedFiles.item(0)
-      this.currentUpload = new Upload(file);
+      let uniqueId = uuid();
+      commentForm.value.logisticID = uniqueId;
+      let storageRef = firebase.storage().ref('Logistica/' + this.fileToUpload.name);
+     // this.uploadTask = storageRef.child(`${this.basePath}/${uniqueId}`).put(this.fileToUpload);
+      this.uploadTask = storageRef.put(this.fileToUpload);
+      this.uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
+        (snapshot) => {
+     //   upload.progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+        },
+        (error) => {
+          console.log(error)
+        },
+        () => {
 
+       //   this.saveFileData(upload)
+        })
+
+        this.uploadTask.snapshot.ref.getDownloadURL().then(downloadURL => {
+          const imageUrl = downloadURL;
+          console.log('URL TESTING:' + imageUrl);
+         // comment.url = imageUrl
+         console.log("UNIQUE ID", uniqueId);
+         
+        commentForm.value.logisticID = uniqueId;
+        commentForm.value.url = imageUrl;
+        console.log("FORM", commentForm.value);
+       
+        });
+
+      
+        const b = this.model3.toLocaleString();
+        commentForm.value.timeStamp = b;
+        this.dataApi.addComments(commentForm.value);
+    
       //
       // New 
     //  let logisticReference = DatabaseService.shared.logisticRef.childByAutoId()
      // let childAutoID = logisticReference.key;
-      let uniqueId = uuid();
-      console.log("UNIQUE ID", uniqueId);
-      commentForm.value.logisticID = uniqueId;
-      commentForm.value.name = Upload.name;
-      commentForm.value.childByAutoId = uniqueId;
-      console.log("URL???", this.currentUpload);
-      console.log("Upload Class", Upload);
-      this.dataApi.addComments(commentForm.value, this.currentUpload);
+    
     } else {
       // Update
       this.dataApi.updateComment(commentForm.value);
@@ -52,14 +87,8 @@ export class AddCommentsComponent implements OnInit {
   }
 
    //Upload a file 
-    detectFiles(event: { target: { files: FileList; }; }) {
-      this.selectedFiles = event.target.files;
-    }
-
-  /*   uploadSingle() {
-      let file = this.selectedFiles.item(0)
-      this.currentUpload = new Upload(file);
-      this.dataApi.pushUpload(this.currentUpload)
-      } */
-
+ 
+   handleFileInput(files: FileList) {
+    this.fileToUpload = files.item(0);
+}
 }

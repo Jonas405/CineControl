@@ -8,14 +8,28 @@
     
      
   <section id="materialesSony" class="mt-5">
+      <input type="text" class="form-control" placeholder="Buscar por Nombre"
+      [(ngModel)]="searchTerm">
       <div class="container">
         <div class="row">
-          <div class="col-xs-12 col-sm-6 col-md-4" *ngFor="let materialSony of materialesSony | paginate: {itemsPerPage:3, currentPage: pageActual}; let i = index">
+          <div class="col-xs-12 col-sm-6 col-md-4" *ngFor="let materialSony of materialesSony | materialSonyFilter:searchTerm | paginate: {itemsPerPage:3, currentPage: pageActual}; let i = index">
             <div class="card_book">
               <div class="card">
                 <div class="card-body text-center">
                   <p>
                     <img class="img-fluid" src="{{materialSony.imageURL}}" alt="{{materialSony.Encabezado}}">
+                  </p>
+                  <h5 class="card-text; font-weight:bold">
+                      {{materialSony.Theater}}
+                  </h5>
+                  <p class="card-text">
+                      {{materialSony.Title}}
+                  </p>
+                  <p class="card-text">
+                      {{materialSony.Fecha}}
+                  </p>
+                  <p class="card-text">
+                      {{materialSony.MaterialType}}
                   </p>
                   <!-- <h4 routerLink="/checkersdetail/{{checker.key}}" class="card-title">{{checker.checkerName}}</h4> -->
           <!--         <h4 routerLink="/incidencedetail/{{incidencia.key}}" class="card-title">{{incidencia.Cine}}</h4> -->
@@ -23,7 +37,7 @@
           <footer>
               <!--   <button class="btn btn-primary" style="background:rgb(10,137,241)" data-toggle="modal" data-target="#modalAddChecker" (click)="onPreUpdateChecker(checker)">Update</button>
                 &#160;&#160;&#160;  -->
-                <button class="btn btn-danger" (click)="deleteMaterialSony(materialSony.key)">Delete</button>
+                <button class="btn btn-danger" (click)="deleteMaterialSony(materialSony.key)">Eliminar</button>
               </footer>
                 </div>
               </div>
@@ -33,6 +47,8 @@
       </div>
     </section>
     <pagination-controls (pageChange)="pageActual = $event"></pagination-controls>
+
+ <!--    
 <section class="row mt-5">
     <div class="col">
 
@@ -86,7 +102,7 @@
               <ng-template ngbSlide *ngFor="let materialSony of materialesSony; let i=index">  
                   <img class="img-fluid" src="{{materialSony.imageURL}}" alt="{{materialSony.Encabezado}}">
                   <div class="carousel-caption">  
-                      <h3 style="color: bisque">{{materialSony.Title}}</h3>  
+                    
                   </div>  
               </ng-template>    
           </ngb-carousel> 
@@ -96,3 +112,4 @@
               </div>
             </div>
 
+ -->

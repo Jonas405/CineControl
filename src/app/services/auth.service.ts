@@ -3,6 +3,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { auth } from 'firebase/app';
 import { map } from 'rxjs/operators';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { UserInterface } from '../models/users'
 
 
 @Injectable({
@@ -10,7 +11,7 @@ import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firest
 })
 export class AuthService {
 
-  constructor( private afsAuth: AngularFireAuth) { }
+  constructor( private afsAuth: AngularFireAuth, private afs: AngularFirestore) { }
 
   registerUser(email: string, pass: string) {
     return new Promise((resolve, reject) => {
@@ -36,5 +37,7 @@ export class AuthService {
   logoutUser() {
     return this.afsAuth.auth.signOut();
   }
+
+
 
 }

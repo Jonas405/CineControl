@@ -5,11 +5,14 @@ export interface Roles {
 
 export interface TheatersInterface {
     cine?: string;
+    Cine?: string;
     circuito?: string;
     ciudad?: string;
     direccion?: string;
     estado?: string;
+    Estado?: string;
     gerente?: string;
+    Salas?:object;
     email?: string;
     rtkXref?: number;
     telefono?: number;
@@ -19,11 +22,14 @@ export interface TheatersInterface {
 
   export interface TheaterInterface {
     cine?: string;
+    Cine?: string;
     circuito?: string;
     ciudad?: string;
     direccion?: string;
     estado?: string;
+    Estado?: string;
     gerente?: string;
+    Salas?:object;
     email?: string;
     rtkXref?: number;
     telefono?: number;

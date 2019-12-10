@@ -13,13 +13,14 @@ import { IncidenciasInterface, IncidenciaInterface } from '../models/incidencias
 import { MaterialesSonyInterface, MaterialSonyInterface } from '../models/materialesSony';
 import { MaterialesDisneyInterface, MaterialDisneyInterface } from '../models/materialesDisney';
 import * as firebase from 'firebase'
-import { Upload } from '../models/Upload';
+
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataApiService {
+
 
   private dbPathManagedTheaters = '/managedTheaters';
   managedTheatersRef: AngularFireList<ManagedTheatersInterface> = null;
@@ -50,7 +51,7 @@ export class DataApiService {
 
   private dbPathDisneyMateriales = 'WebRef/MaterialsWalt Disney Studios';
   materialesDisneyRef: AngularFireList<MaterialesDisneyInterface> = null;
-
+  
 
   constructor(private afs: AngularFirestore,
               private db: AngularFireDatabase) {
@@ -65,7 +66,7 @@ export class DataApiService {
                 this.materialesDisneyRef = db.list(this.dbPathDisneyMateriales);
                 this.incidenciasPorAprobarRef = db.list(this.dbPathIncidenciasPorAprobar);
                 this.incidenciasAprobadasRef = db.list(this.dbPathIncidenciasAprobadas);
-                
+               
               }
               
 
@@ -136,30 +137,20 @@ export class DataApiService {
       return this.checky;
 
     }
-    
-    
-/*   getOneChecker(idChecker: string) {
 
-    this.checkerDoc = this.afs.doc<CheckerInterface>(`checkers/${idChecker}`);
-    console.log("API", this.checkerDoc);
-    return this.checker = this.checkerDoc.snapshotChanges().pipe(map(action => {
-      console.log("API Checker", this.checker);
-      if (action.payload.exists === false) {
-        console.log("API", "sigue nulo");
-        return null;
-      } else {
-        const data = action.payload.data() as CheckerInterface;
-        data.id = action.payload.id;
-        console.log("API DATA", data)
-        return data;
-      }
-    }));
+    //Asignar cine a checker
+    public selectedAssigTheaterChecker: ManagedTheaterInterface = {
+      key: null
+    };
 
-  } */
-
-
-
-
+    managedy: AngularFireObject<ManagedTheaterInterface>;
+    getAssigTheaterChecker(key: string): AngularFireObject<ManagedTheaterInterface> {
+      console.log("Entro al Assig", key);
+      this.managedy = this.db.object('/USER/' + key + '/asignedTheaters') as AngularFireObject<ManagedTheaterInterface>;
+      return this.managedy;
+    }
+     
+ 
    // ========================== Titles Sony Service ==========================
 
    public selectedSonyTitle: MovieInterface = {
@@ -226,94 +217,18 @@ export class DataApiService {
 
   }
 
-       // ========================== Upload File Logistic Service ==========================
-
-       
-     
-
-       pushUpload(upload: Upload){
-        let storageRef = firebase.storage().ref();
-        this.uploadTask = storageRef.child(`${this.basePath}/${upload.file.name}`).put(upload.file);
-        
-        this.uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
-          (snapshot) => {
-            upload.progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-          },
-          (error) => {
-            console.log(error)
-          },
-          () => {
-            upload.url = this.uploadTask.snapshot.downloadURL
-            upload.name = upload.file.name
-            this.saveFileData(upload)
-          })}
-
-           // Writes the file details to the realtime db
-        private saveFileData(upload: Upload) {
-          this.db.list(`${this.basePath}/`).push(upload);
-        } 
-
- //-------------------------------
-
-
-
-    //-------------------------------
-                
-      deleteUpload(upload: Upload){
-        this.deleteFileData(upload.$key)
-        .then(() => {
-          this.deleteFileStorage(upload.name)
-        })
-        .catch(error => console.log(error))
-      }
-
-      private deleteFileData(key: string){
-        return this.db.list(`${this.basePath}/`).remove(key);
-      }
-
-      private deleteFileStorage(name:string){
-        let storageRef = firebase.storage().ref();
-        storageRef.child(`${this.basePath}/${name}`).delete()
-      }
-
-
       ///======================= Comments Service =============================///
 
        public selectedComments: CommentsInterface = {
         key: null
       };
-    
-       //upload file
-       private basePath:string = '/Logistica';
-       private uploadTask: firebase.storage.UploadTask;
-
 
       getAllCommentsList(): AngularFireList<CommentsInterface> {
         console.log("COMMENTS", this.commentsRef);
         return this.commentsRef;
       }  
     
-       addComments( comment : CommentsInterface, upload: Upload){
-        //
-        let storageRef = firebase.storage().ref();
-        this.uploadTask = storageRef.child(`${this.basePath}/${upload.file.name}`).put(upload.file);
-        
-        this.uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
-          (snapshot) => {
-            upload.progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-          },
-          (error) => {
-            console.log(error)
-          },
-          () => {
-            comment.file = upload.url = this.uploadTask.snapshot.downloadURL;
-            comment.name = upload.name = upload.file.name
-            console.log("file url", comment.file)
-            console.log("file name", comment.name)
-            console.log("StorageReference", storageRef);
-         //   this.saveFileData(upload)
-          })
-        //
+       addComments( comment : CommentsInterface){
         this.commentsRef.push(comment);
       } 
     
@@ -347,12 +262,12 @@ export class DataApiService {
           return this.materialesSonyRef.remove(key);
         }
     
-        updateMaterialSony(sonyMaterial: MaterialSonyInterface): void {
+      /*   updateMaterialSony(sonyMaterial: MaterialSonyInterface): void {
           let keyChecker = sonyMaterial.key;
           console.log("UPDATE", sonyMaterial);
         this.titlesSonyRef.update(keyChecker, sonyMaterial)
         }
-
+ */
         // ========================== Disney Materiales Service ==========================
 
         public selectedDisneyMaterial: MaterialDisneyInterface = {
@@ -372,11 +287,11 @@ export class DataApiService {
         return this.materialesDisneyRef.remove(key);
       }
   
-      updateMaterialDisney(disneyMaterial: MaterialDisneyInterface): void {
+    /*   updateMaterialDisney(disneyMaterial: MaterialDisneyInterface): void {
         let keyChecker = disneyMaterial.key;
         console.log("UPDATE", disneyMaterial);
       this.titlesSonyRef.update(keyChecker, disneyMaterial)
-      }
+      } */
 
      // ========================== IncidenciasPorAprobar Service ==========================
 
@@ -410,7 +325,7 @@ export class DataApiService {
 
   }
 
-        // ========================== Aprobadas Service ==========================
+        // ========================== Incidencias Aprobadas Service ==========================
 
         public selectedIncidenciaAprobadas: IncidenciaInterface = {
           key: null
@@ -435,15 +350,20 @@ export class DataApiService {
         this.incidenciasAprobadasRef.update(keyIncidencia, incidencia)
         }
 
+        incidencesTiApproved: AngularFireObject<IncidenciaInterface>;
+        getIncidenceByIdApproved(key: string): AngularFireObject<IncidenciaInterface> {
+          this.incidencesTi = this.db.object('WebRef/Incidences/incidenceApproved/' + key) as AngularFireObject<IncidenciaInterface>;
+          return this.incidencesTi;
+  
+    }
+
 
 
   //---------- Services Using Database CloudFireStore ------------------------
 
 /*
-
   Also for this requerimients I was used id for idetification and then for the other
   database I´ll used key relation 
-
   private checkersCollection: AngularFirestoreCollection<CheckersInterface>;
   private checkers: Observable<CheckersInterface[]>;
   private checkerDoc: AngularFirestoreDocument<CheckerInterface>;
@@ -451,7 +371,6 @@ export class DataApiService {
   public selectedChecker: CheckerInterface = {
     id: null
   };
-
   private theatersCollection: AngularFirestoreCollection<CheckersInterface>;
   private theaters: Observable<TheatersInterface[]>;
   private theaterDoc: AngularFirestoreDocument<TheatersInterface>;
@@ -459,10 +378,8 @@ export class DataApiService {
   public selectedTheater: TheaterInterface = {
     id: null
   };
-
  
   
-
   getAllCheckers() {
     this.checkersCollection = this.afs.collection<CheckersInterface>('checkers');
     return this.checkers = this.checkersCollection.snapshotChanges()
@@ -474,7 +391,6 @@ export class DataApiService {
         });
       }));
   }
-
   getAllTheaters(){ 
      this.theatersCollection = this.afs.collection<TheatersInterface>('theaters');
   return this.theaters = this.theatersCollection.snapshotChanges()
@@ -486,11 +402,7 @@ export class DataApiService {
         return data;
       });
     }));}
-
-
-
   getOneChecker(idChecker: string) {
-
     this.checkerDoc = this.afs.doc<CheckerInterface>(`checkers/${idChecker}`);
     console.log("API", this.checkerDoc);
     return this.checker = this.checkerDoc.snapshotChanges().pipe(map(action => {
@@ -505,9 +417,7 @@ export class DataApiService {
         return data;
       }
     }));
-
   }
-
   getOneTheater(idTheater: string) {
     this.theaterDoc = this.afs.doc<TheaterInterface>(`theaters/${idTheater}`);
     return this.theater = this.theaterDoc.snapshotChanges().pipe(map(action => {
@@ -520,17 +430,14 @@ export class DataApiService {
       }
     }));
   }
-
   addChecker(checker: CheckerInterface): void {
     this.checkersCollection.add(checker);
    
   }
-
   addTheater(theater: TheaterInterface): void {
     this.theatersCollection.add(theater);
     console.log("API add Checker", theater);
   }
-
   updateChecker(checker: CheckerInterface): void {
     let idChecker = checker.id;
     console.log("API Update Checker", idChecker);
@@ -538,20 +445,16 @@ export class DataApiService {
     console.log("API Update Checker", this.checkerDoc);
     this.checkerDoc.update(checker);
   }
-
   updateTheater(theater: TheaterInterface): void {
     let idTheater = theater.id;
     this.theaterDoc = this.afs.doc<TheaterInterface>(`theaters/${idTheater}`);
     console.log("API Update Checker", theater);
     this.theaterDoc.update(theater);
   }
-
-
   deleteChecker(idChecker: string): void {
     this.checkerDoc = this.afs.doc<CheckerInterface>(`checkers/${idChecker}`);
     this.checkerDoc.delete();
   }
-
   deleteTheater(idTheater: string): void {
     this.theaterDoc = this.afs.doc<TheaterInterface>(`theaters/${idTheater}`);
     console.log("API Update Checker", idTheater);

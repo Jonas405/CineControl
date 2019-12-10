@@ -21,12 +21,14 @@ export class WaltDisneyStudiosComponent implements OnInit {
     photoUrl: '',
     roles: {}
   };
-
+  pageActual = 1;
+  searchTerm : string;
   
   //private theaters: TheatersInterface[];
-  private disneyTitles : MoviesInterface[];
+  public disneyTitles : MoviesInterface[];
   public isAdmin: any = null;
   public userUid: string = null;
+  
 
   ngOnInit() {
    // this.getListTheaters();

@@ -2,10 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
 import { Label } from 'ng2-charts';
 import { DataApiService } from '../../services/data-api.service';
-import { CheckerInterface } from '../../models/checkers';
+import { CheckerInterface, CheckersInterface } from '../../models/checkers';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { AngularFireList, AngularFireDatabase } from '@angular/fire/database';
 import { Observable } from 'rxjs';
+import { ManagedTheaterInterface } from 'src/app/models/managedTheaters';
 
 @Component({
   selector: 'app-checkers-detail',
@@ -17,12 +18,19 @@ export class CheckersDetailComponent implements OnInit {
   title = 'Checker Location';
   lat = 19.3581748;
   lng = -99.3861982;
+  idChecker;
 
+    //Asignar cine a checker
+
+    manager : ManagedTheaterInterface;
+   
+    assigTheaterCheckerRef: AngularFireList<ManagedTheaterInterface> = null;
+
+ 
   pageActual = 1;
   constructor(private dataApi: DataApiService, private route: ActivatedRoute,
-              private db: AngularFireDatabase, private router: Router) { }
+              private db: AngularFireDatabase, private router: Router) {}
   
-  //public checker: CheckerInterface = {};
   checker: CheckerInterface; 
 
   ngOnInit() {
@@ -31,6 +39,10 @@ export class CheckersDetailComponent implements OnInit {
      this.route.params.subscribe(params => {
       const id = params.id;
       console.log("ID Checker", id);
+      this.idChecker = id;
+      console.log("This Id Checker", id)
+      this.dbPathAssigTheaterChecker = '/USER/'+ this.idChecker +'/asignedTheaters';
+      console.log(this.idChecker);
       if (id) {
         this.dataApi.getCheckerById(id).snapshotChanges()
           .subscribe(res => {
@@ -38,9 +50,10 @@ export class CheckersDetailComponent implements OnInit {
               this.checker = res.payload.toJSON() as CheckerInterface;
               this.checker.key = res.key;
               console.log("Checker Res", this.checker);
+              return this.idChecker;
             } else {
             //  this.notificationService.dispatchErrorMessage('Todo does not exist');
-              this.router.navigate(['/home']);
+              this.router.navigate(['/cinema']);
             }
           }, err => {
             //this.notificationService.dispatchErrorMessage(err.toString());
@@ -50,6 +63,22 @@ export class CheckersDetailComponent implements OnInit {
     });
   }
 
+  private dbPathAssigTheaterChecker = '/USER/'+ this.idChecker +'/asignedTheaters';
+
+  deleteAssigTheater(key: string): Promise<void> {
+    const confirmacion = confirm('Are you sure?');
+    console.log("Dentro del delete", key)
+    if (confirmacion){
+    this.assigTheaterCheckerRef = this.db.list(this.dbPathAssigTheaterChecker);
+    return this.assigTheaterCheckerRef.remove(key);
+
+    }
+  }
+
+  onPreUpdateAssigTheater(theater: ManagedTheaterInterface){
+    console.log("ON PRE UPGRADE", theater)
+    this.dataApi.selectedAssigTheaterChecker = Object.assign({}, theater);
+  }
    
   toArray(asignedTheaters: object) {
     return Object.keys(asignedTheaters).map(key => ({
@@ -57,7 +86,6 @@ export class CheckersDetailComponent implements OnInit {
       ...asignedTheaters[key]
      
     }))
-   
   }
  }
 

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { auth } from 'firebase/app';
 import { Router } from '@angular/router';
@@ -11,6 +11,7 @@ import { AuthService } from '../services/auth.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
+
 export class LoginComponent implements OnInit {
 
   rememberMe: boolean = false;
@@ -21,7 +22,7 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
 
-  onLogIn(): void {
+  onLogIn(f: NgForm): void {
     console.log('email',this.email);
     console.log('password',this.password);
     this.authService.loginEmailUser(this.email, this.password)
@@ -32,7 +33,7 @@ export class LoginComponent implements OnInit {
   }
 
   onLoginRedirect(): void {
-    this.router.navigate(['/home']);
+    this.router.navigate(['/cinema']);
   }
 
 }

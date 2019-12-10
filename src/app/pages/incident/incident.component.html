@@ -8,7 +8,7 @@
     
     <section class="row mt-5">
         <div class="col">
-          <button class="btn btn-primary float-right mb-3" data-toggle="modal" data-target="#modalAddIncidencia">Add Incidencia</button>
+          <button class="btn btn-primary float-right mb-3" data-toggle="modal" data-target="#modalAddIncidencia">Agregar Incidencia</button>
      
       <section id="incidencias" class="mt-5">
           <div class="container">
@@ -28,9 +28,9 @@
                       </p>
                      
                         <footer>
-                          <button class="btn btn-primary" style="background:rgb(10,137,241)" data-toggle="modal" data-target="#modalAddIncidencia" (click)="onPreUpdateIncidencia(incidencia)">Update</button>
+                          <button class="btn btn-primary" style="background:rgb(10,137,241)" data-toggle="modal" data-target="#modalAddIncidencia" (click)="onPreUpdateIncidencia(incidencia)">Actualizar</button>
                           &#160;&#160;&#160; 
-                          <button class="btn btn-danger" (click)="deleteIncidencia(incidencia.key)">Delete</button>
+                          <button class="btn btn-danger" (click)="deleteIncidenciaPorAprobar(incidencia.key)">Eliminar</button>
                         </footer>
                     </div>
                   </div>

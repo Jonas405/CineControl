@@ -1,0 +1,67 @@
+<div class="modal fade" id="modalAddTheaterChecker" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">
+                 {{ !this.dataApi.selectedAssigTheaterChecker.key ? 'Asignar Cine' : 'Actualizar Cine'}} 
+                  </h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+               
+                    <form #asingTheaterForm="ngForm" (ngSubmit)="onSaveNewTheater(asingTheaterForm)" novalidate>
+
+                            <input type="hidden" name="key" [(ngModel)]="this.dataApi.selectedAssigTheaterChecker.key">
+                         
+  
+                            <div class="form-group col-md-6">
+                                <label for="cine">Cine</label>
+                                <input name="Cine" [(ngModel)]="this.dataApi.selectedAssigTheaterChecker.Cine" >
+                            </div>
+  
+                            <div class="form-group col-md-6">
+                                <label for="Circuito">Circuito</label>
+                                <input name="Circuito"[(ngModel)]="this.dataApi.selectedAssigTheaterChecker.Circuito">
+                            </div>
+  
+                            <div class="form-group col-md-6">
+                                <label for="Ciudad">Ciudad</label>
+                                <input name="Ciudad"[(ngModel)]="this.dataApi.selectedAssigTheaterChecker.Ciudad">
+                            </div>
+                            
+                            <div class="form-group col-md-6">
+                                <label for="Direccion">Direccion</label>
+                                <input name="Direccion"[(ngModel)]="this.dataApi.selectedAssigTheaterChecker.Direccion">
+                            </div>
+  
+                            <div class="form-group col-md-6">
+                                <label for="Estado">Estado</label> 
+                                <input name="Estado"[(ngModel)]="this.dataApi.selectedAssigTheaterChecker.Estado">
+                            </div>
+  
+                            <div class="form-group col-md-6">
+                                <label for="RtkXref">rtkXref</label> 
+                                <input name="RtkXref"[(ngModel)]="this.dataApi.selectedAssigTheaterChecker.RtkXrefNo">
+                            </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" #btnClose data-dismiss="modal">Cerrar</button>
+                                        <button type="submit" class="btn btn-primary">Asignar Cine</button>
+                                    </div>
+                      </form>
+
+
+<!--                       <div class="list-group">
+                          {{getManagedTheatersList()}}
+                          <a href="#" class="list-group-item list-group-item-action active">
+                          <h4 style="color:blanchedalmond; font-weight:bold">Cines</h4>
+                          </a>
+                          <a routerLink="/cinedetail/{{theater.key}}" class="list-group-item list-group-item-action" *ngFor="let theater of managedTheaters| paginate: {itemsPerPage:7, currentPage: pageActual}; let i = index" >{{theater.Cine}}</a>
+                        </div>
+                        <pagination-controls (pageChange)="pageActual = $event"></pagination-controls> -->
+                        
+            </div>
+          </div>
+        </div>
+      </div>

@@ -2,10 +2,9 @@ import { Component, OnInit, Input } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { UserInterface } from '../../models/users';
 import { DataApiService } from "src/app/services/data-api.service";
-import { TheatersInterface, TheaterInterface } from '../../models/theaters';
 import { ManagedTheatersInterface, ManagedTheaterInterface } from '../../models/managedTheaters';
 import { map } from 'rxjs/operators';
-
+import {database} from 'firebase';
 
 @Component({
   selector: 'app-cinema',
@@ -26,8 +25,9 @@ export class CinemaComponent implements OnInit {
   };
 
   
+  
   //private theaters: TheatersInterface[];
-  private managedTheaters : ManagedTheatersInterface[];
+  public managedTheaters : ManagedTheatersInterface[];
   public isAdmin: any = null;
   public userUid: string = null;
   pageActual = 1;
@@ -61,6 +61,7 @@ export class CinemaComponent implements OnInit {
       )
     ).subscribe(managedTheaters => {
       this.managedTheaters = managedTheaters;
+     // this.applyFilters();
       console.log("ManagedTheaters", this.managedTheaters)
     });
   }
@@ -79,8 +80,50 @@ export class CinemaComponent implements OnInit {
     this.dataApi.selectedManagedTheater = Object.assign({}, theater);
   }
 
- 
+  //---------------------------- Search -------------------------
 
+  searchTerm : string;
+
+
+
+
+  //------------------------ Search Value -----------------------
+  /// unwrapped arrays from firebase
+  /* cinema: any;
+  filteredCinema: any;
+   /// Active filter rules
+   filters = {}
+
+   private applyFilters() {
+    this.filteredCinema = _.filter(this.cinema, _.conforms(this.filters) )
+  }
+
+    /// filter property by equality to rule
+    filterExact(property: string, rule: any) {
+      this.filters[property] = val => val == rule
+      this.applyFilters()
+    }
+     /// filter  numbers greater than rule
+  filterGreaterThan(property: string, rule: Text) {
+    this.filters[property] = val => val > rule
+    this.applyFilters()
+  }
+
+  /// filter properties that resolve to true
+  filterBoolean(property: string, rule: boolean) {
+    if (!rule) this.removeFilter(property)
+    else {
+      this.filters[property] = val => val
+      this.applyFilters()
+    }
+  }
+
+  /// removes filter
+  removeFilter(property: string) {
+    delete this.filters[property]
+    this[property] = null
+    this.applyFilters()
+  } */
   //------------------ Using CloudFireStore database ------------
   /* 
 

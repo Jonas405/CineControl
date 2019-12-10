@@ -1,10 +1,12 @@
 <section id="wrapper">
-    <div class="login-register" style="background-image:url(../assets/images/background/login-register.jpg);">
+    <div class="login-register" style="background-color: whitesmoke">
         <div class="login-box card">
+                <a href="javascript:void(0)" class="text-center db"><img src="assets/images/CineControlL.ico" alt="Home" /><br/></a>
+                
             <div class="card-body">
 
                 <form ngNativeValidate #f="ngForm" class="form-horizontal" (submit)="onLogIn( f )">
-                    <h3 class="box-title m-b-20">Sign In</h3>
+                    <h3 class="box-title m-b-20">Ingresar</h3>
                     <div class="form-group ">
                         <div class="col-xs-12">
                             <input [(ngModel)]="email" class="form-control" type="email" name="email" required placeholder="Email"> </div>
@@ -17,12 +19,12 @@
                         <div class="col-md-12">
                             <div class="checkbox checkbox-info pull-left p-t-0">
                                 <input [(ngModel)]="rememberMe" name="rememberMe" id="checkbox-signup" type="checkbox" class="filled-in chk-col-light-blue">
-                                <label for="checkbox-signup"> Remember me </label>
-                            </div> <a href="javascript:void(0)" id="to-recover" class="text-dark pull-right"><i class="fa fa-lock m-r-5"></i> Forgot pwd?</a> </div>
+                                <label for="checkbox-signup"> Recordar </label>
+                            </div> <a href="javascript:void(0)" id="to-recover" class="text-dark pull-right"><i class="fa fa-lock m-r-5"></i> Olvido su clave?</a> </div>
                     </div>
                     <div class="form-group text-center">
                         <div class="col-xs-12 p-b-20">
-                            <button class="btn btn-block btn-lg btn-info btn-rounded" type="submit">LogIn</button>
+                            <button class="btn btn-block btn-lg btn-info btn-rounded" type="submit">Ingresar</button>
                         </div>
                     </div>
                     <div class="row">
@@ -31,15 +33,15 @@
                     </div>
                     <div class="form-group m-b-0">
                         <div class="col-sm-12 text-center">
-                            Don't have an account? <a routerLink="/register" class="text-info m-l-5"><b>Sign Up</b></a>
+                           No tienes cuenta? <a routerLink="/register" class="text-info m-l-5"><b>Registrate</b></a>
                         </div>
                     </div>
                 </form>
                 <form class="form-horizontal" id="recoverform" action="index.html">
                     <div class="form-group ">
                         <div class="col-xs-12">
-                            <h3>Recover Password</h3>
-                            <p class="text-muted">Enter your Email and instructions will be sent to you! </p>
+                            <h3>Recuperar Contraseña</h3>
+                            <p class="text-muted">Ingrese su email y las instrucciones seran enviadas </p>
                         </div>
                     </div>
                     <div class="form-group ">
@@ -48,7 +50,7 @@
                     </div>
                     <div class="form-group text-center m-t-20">
                         <div class="col-xs-12">
-                            <button class="btn btn-primary btn-lg btn-block text-uppercase waves-effect waves-light" type="submit">Reset</button>
+                            <button class="btn btn-primary btn-lg btn-block text-uppercase waves-effect waves-light" type="submit">Reiniciar</button>
                         </div>
                     </div>
                 </form>

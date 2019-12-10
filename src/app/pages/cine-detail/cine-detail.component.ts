@@ -15,6 +15,8 @@ export class CineDetailComponent implements OnInit {
   lat = 19.3581748;
   lng = -99.3861982;
 
+  pageActual = 1;
+
   constructor(private dataApi: DataApiService, private route: ActivatedRoute,
     private db: AngularFireDatabase, private router: Router) { }
    
@@ -34,7 +36,7 @@ export class CineDetailComponent implements OnInit {
               console.log("Theater Res", this.theater);
             } else {
             //  this.notificationService.dispatchErrorMessage('Todo does not exist');
-              this.router.navigate(['/home']);
+              this.router.navigate(['/cinema']);
             }
           }, err => {
             //this.notificationService.dispatchErrorMessage(err.toString());

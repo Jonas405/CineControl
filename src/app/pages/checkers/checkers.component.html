@@ -8,17 +8,19 @@
 
 <section class="row mt-5">
     <div class="col">
-      <button class="btn btn-primary float-right mb-3" data-toggle="modal" data-target="#modalAddChecker">Add Checker</button>
+        <input type="text" class="form-control" placeholder="Buscar por Nombre"
+         [(ngModel)]="searchTerm">
+      <button class="btn btn-primary float-right mb-3" data-toggle="modal" data-target="#modalAddChecker">Agregar Checker</button>
  
   <section id="checkers" class="mt-5">
       <div class="container">
         <div class="row">
-          <div class="col-xs-12 col-sm-6 col-md-4" *ngFor="let checker of checkers">
+          <div class="col-xs-12 col-sm-6 col-md-4" *ngFor="let checker of checkers | checkerFilter:searchTerm" >
             <div class="card_book">
               <div class="card">
                 <div class="card-body text-center">
                   <p>
-                    <img class="img-fluid" src="{{checker.checkerName}}" alt="{{checker.checkerName}}">
+                    <img class="img-fluid" src="{{checker.imageURL}}" alt="{{checker.imageURL}}">
                   </p>
                   <h4 routerLink="/checkersdetail/{{checker.key}}" class="card-title">{{checker.checkerName}}</h4>
                   <p class="card-text">
@@ -26,9 +28,9 @@
                   </p>
                  
                     <footer>
-                      <button class="btn btn-primary" style="background:rgb(10,137,241)" data-toggle="modal" data-target="#modalAddChecker" (click)="onPreUpdateChecker(checker)">Update</button>
+                      <button class="btn btn-primary" style="background:rgb(10,137,241)" data-toggle="modal" data-target="#modalAddChecker" (click)="onPreUpdateChecker(checker)">Actualizar</button>
                       &#160;&#160;&#160; 
-                      <button class="btn btn-danger" (click)="deleteChecker(checker.key)">Delete</button>
+                      <button class="btn btn-danger" (click)="deleteChecker(checker.key)">Eliminar</button>
                     </footer>
                 </div>
               </div>

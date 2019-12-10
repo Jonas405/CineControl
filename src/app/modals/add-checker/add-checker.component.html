@@ -3,9 +3,9 @@
           <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">
-                    {{ !this.dataApi.selectedChecker.key ? 'New Checker' : 'Update Checker'}}
+                    {{ !this.dataApi.selectedChecker.key ? 'Nuevo Checker' : 'Actualizar Checker'}}
                   </h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
@@ -19,7 +19,7 @@
                         <input type="hidden" name="userUid" [value]="userUid">
                         
                         <div class="form-group col-md-6">
-                            <label for="checkerName">Name</label>
+                            <label for="checkerName">Nombre</label>
                             <input name="checkerName"[(ngModel)]="this.dataApi.selectedChecker.checkerName">
                         </div>
 
@@ -29,8 +29,8 @@
                       </div>
 
                               <div class="modal-footer">
-                              <button type="button" class="btn btn-secondary" #btnClose data-dismiss="modal">Close</button>
-                              <button type="submit" class="btn btn-primary">Save Checker</button>
+                              <button type="button" class="btn btn-secondary" #btnClose data-dismiss="modal">Cerrar</button>
+                              <button type="submit" class="btn btn-primary">Guardar Checker</button>
                             </div>
                       </form>
             </div>

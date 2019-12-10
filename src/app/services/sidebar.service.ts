@@ -10,16 +10,16 @@ export class SidebarService {
       titulo: 'Principal',
       icono: 'mdi mdi-gauge',
       submenu: [
-        { titulo: 'Home', url: '/home' },
-        { titulo : 'Checkers', url: '/checkers' },
         { titulo: 'Cinema', url: '/cinema' },
+        { titulo : 'Checkers', url: '/checkers' },
         { titulo: 'Sony Titles', url: '/sonyTitles' },
         { titulo: 'Walt Disney Titles', url: '/waltDisneyTitles' },
-        { titulo: 'Incident', url: '/incident' },
-        { titulo: 'Sony Materials', url: '/materialesSony' },
-        { titulo: 'Walt Disney Materials', url: '/materialesDisney' },
+        { titulo: 'Incidencias Por Aprobar', url: '/incident' },
+        { titulo: 'Incidencias', url: '/incidentApproved'},
+        { titulo: 'Materiales Sony', url: '/materialesSony' },
+        { titulo: 'Materiales Walt Disney', url: '/materialesDisney' },
       //  { titulo: 'AssignTheaters', url: '/assignTheaters' },
-        { titulo: 'Comments', url: '/comments' }
+        { titulo: 'Logistica', url: '/comments' }
       ]
     }
   ];

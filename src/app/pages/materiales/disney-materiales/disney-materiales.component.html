@@ -6,22 +6,36 @@
     h5 {font-family: Verdana, Geneva, Tahoma, sans-serif; color:rgba(7, 42, 61, 0.829)}
     </style>
   <section id="materialesDisney" class="mt-5">
+      <input type="text" class="form-control" placeholder="Buscar por Nombre"
+         [(ngModel)]="searchTerm">
       <div class="container">
         <div class="row">
-          <div class="col-xs-12 col-sm-6 col-md-4" *ngFor="let materialDisney of materialesDisney | paginate: {itemsPerPage:3, currentPage: pageActual}; let i = index">
+          <div class="col-xs-12 col-sm-6 col-md-4" *ngFor="let materialDisney of materialesDisney | materialDisneyFilter:searchTerm | paginate: {itemsPerPage:3, currentPage: pageActual}; let i = index">
             <div class="card_book">
               <div class="card">
                 <div class="card-body text-center">
                   <p>
                     <img class="img-fluid" src="{{materialDisney.imageURL}}" alt="{{materialDisney.Encabezado}}">
                   </p>
+                  <h5 class="card-text; font-weight:bold">
+                      {{materialDisney.Theater}}
+                  </h5>
+                    <p class="card-text">
+                        {{materialDisney.Title}}
+                    </p>
+                    <p class="card-text">
+                        {{materialDisney.Fecha}}
+                    </p>
+                    <p class="card-text">
+                        {{materialDisney.MaterialType}}
+                    </p>
                   <!-- <h4 routerLink="/checkersdetail/{{checker.key}}" class="card-title">{{checker.checkerName}}</h4> -->
           <!--         <h4 routerLink="/incidencedetail/{{incidencia.key}}" class="card-title">{{incidencia.Cine}}</h4> -->
             
           <footer>
               <!--   <button class="btn btn-primary" style="background:rgb(10,137,241)" data-toggle="modal" data-target="#modalAddChecker" (click)="onPreUpdateChecker(checker)">Update</button>
                 &#160;&#160;&#160;  -->
-                <button class="btn btn-danger" (click)="deleteMaterialDisney(materialDisney.key)">Delete</button>
+                <button class="btn btn-danger" (click)="deleteMaterialDisney(materialDisney.key)">Eliminar</button>
               </footer>
                 </div>
               </div>
@@ -31,7 +45,7 @@
       </div>
     </section>
     <pagination-controls (pageChange)="pageActual = $event"></pagination-controls>
-    
+ <!--    
 <section class="row mt-5">
     <div class="col">
 
@@ -85,7 +99,6 @@
               <ng-template ngbSlide *ngFor="let materialDisney of materialesDisney; let i=index">  
                   <img class="img-fluid" src="{{materialDisney.imageURL}}" alt="{{materialDisney.Encabezado}}">
                   <div class="carousel-caption">  
-                      <h3 style="color: blue">{{materialDisney.Title}}</h3>  
                   </div>  
               </ng-template>    
           </ngb-carousel> 
@@ -101,4 +114,4 @@
         
           
             
-                   
+                    -->

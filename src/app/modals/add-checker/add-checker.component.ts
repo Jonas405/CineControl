@@ -12,7 +12,7 @@ import { v4 as uuid } from 'uuid';
 export class AddCheckerComponent implements OnInit {
 
 
-  constructor(private dataApi: DataApiService) { }
+  constructor(public dataApi: DataApiService) { }
   @ViewChild('btnClose', {static: false} ) btnClose: ElementRef;
   @Input() userUid: string;
 

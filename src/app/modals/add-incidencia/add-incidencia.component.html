@@ -3,9 +3,9 @@
           <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">
-                    {{ !this.dataApi.selectedIncidencia.key ? 'New Incident' : 'Update Incident'}}
+                    {{ !this.dataApi.selectedIncidenciaPorAprobar.key ? 'Nueva Incidencia' : 'Actualizar Incidencia'}}
                   </h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
@@ -13,59 +13,49 @@
                
                     <form #incidenciaForm="ngForm" (ngSubmit)="onSaveIncidencia(incidenciaForm)" novalidate>
 
-                        <input type="hidden" name="key" [(ngModel)]="this.dataApi.selectedIncidencia.key">
+                        <input type="hidden" name="key" [(ngModel)]="this.dataApi.selectedIncidenciaPorAprobar.key">
                         <input type="hidden" name="userUid" [value]="userUid">
 
-                        <div class="form-group col-md-6">
-                            <label for="Aprovacion">Aprovacion</label>
-                            <input name="Aprovacion"[(ngModel)]="this.dataApi.selectedIncidencia.Aprovacion">
-                        </div>
-
-                        <div class="form-group col-md-6">
-                          <label for="Checker">Checker</label>
-                          <input name="Checker"[(ngModel)]="this.dataApi.selectedIncidencia.Checker">
-                      </div>
-
+                    
                       <div class="form-group col-md-6">
                             <label for="Cine">Cine</label>
-                            <input name="Cine"[(ngModel)]="this.dataApi.selectedIncidencia.Cine">
+                            <input name="Cine"[(ngModel)]="this.dataApi.selectedIncidenciaPorAprobar.Cine">
                         </div>
 
                         <div class="form-group col-md-6">
                                 <label for="Descripcion">Descripcion</label>
-                                <input name="Descripcion"[(ngModel)]="this.dataApi.selectedIncidencia.Descripcion">
+                                <input name="Descripcion"[(ngModel)]="this.dataApi.selectedIncidenciaPorAprobar.Descripcion">
                             </div>
 
                             <div class="form-group col-md-6">
-                                    <label for="Encabezado">Encabezado</label>
-                                    <input name="Encabezado"[(ngModel)]="this.dataApi.selectedIncidencia.Encabezado">
+                                    <label for="Encabezado">Titulo</label>
+                                    <input name="Encabezado"[(ngModel)]="this.dataApi.selectedIncidenciaPorAprobar.Encabezado">
                                 </div>
         
-                                <div class="form-group col-md-6">
-                                        <label for="Encabezado">Encabezado</label>
-                                        <input name="Encabezado"[(ngModel)]="this.dataApi.selectedIncidencia.Encabezado">
-                                    </div>
+                              
 
                                     <div class="form-group col-md-6">
                                             <label for="Fecha">Fecha</label>
-                                            <input name="Fecha"[(ngModel)]="this.dataApi.selectedIncidencia.Fecha">
+                                            <input name="Fecha"[(ngModel)]="this.dataApi.selectedIncidenciaPorAprobar.Fecha">
                                         </div>
 
                                         
-                                        <img src="{{this.dataApi.selectedIncidencia.imageURL}}" class="rounded-circle img-thumbnail" alt="Incident">
+                                        <img src="{{this.dataApi.selectedIncidenciaPorAprobar.imageURL}}" class="rounded-circle img-thumbnail" alt="Incident">
            
 
 
                                         <div class="form-group col-md-6">
-                                                <label for="timeStamp">timeStamp</label>
-                                                <input name="timeStamp"[(ngModel)]="this.dataApi.selectedIncidencia.timeStamp">
+                                                <label for="timeStamp">Fecha Resolucion</label>
+                                                <input name="timeStamp"[(ngModel)]="this.dataApi.selectedIncidenciaPorAprobar.timeStamp">
                                             </div>
     
-
+                                              <div>
+                                                <input name="imageURL"[(ngModel)]="this.dataApi.selectedIncidenciaPorAprobar.imageURL" style="display: none;">
+                                              </div>
 
                               <div class="modal-footer">
-                              <button type="button" class="btn btn-secondary" #btnClose data-dismiss="modal">Close</button>
-                              <button type="submit" class="btn btn-primary">Save Incidencia</button>
+                              <button type="button" class="btn btn-secondary" #btnClose data-dismiss="modal">Cerrar</button>
+                              <button type="submit" class="btn btn-primary">Aprobar Incidencia</button>
                             </div>
                       </form>
             </div>

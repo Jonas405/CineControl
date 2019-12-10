@@ -16,7 +16,7 @@ export class CheckersComponent implements OnInit {
 
   constructor( private dataApi: DataApiService, private authService: AuthService ) { }
 
-  private checkers: CheckersInterface[];
+  public checkers: CheckersInterface[];
   public isAdmin: any = null;
   public userUid: string = null;
   private user: UserInterface;
@@ -66,7 +66,7 @@ export class CheckersComponent implements OnInit {
     this.dataApi.selectedChecker = Object.assign({}, checker);
   }
 
-
+  searchTerm : string;
 
 
   

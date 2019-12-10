@@ -24,6 +24,9 @@ export class SonyMaterialesComponent implements OnInit {
     return R;
   }
 
+  pageActual = 1;
+  searchTerm : string;
+
   constructor( private dataApi: DataApiService, private authService: AuthService,
     config: NgbCarouselConfig ) { 
       config.interval = 5000;
@@ -36,7 +39,7 @@ export class SonyMaterialesComponent implements OnInit {
 
     }
 
-  private materialesSony: MaterialesSonyInterface[];
+  public materialesSony: MaterialesSonyInterface[];
   public isAdmin: any = null;
   public userUid: string = null;
   private user: UserInterface;

@@ -1,6 +1,15 @@
 {
   "hosting": {
     "public": "dist/CineControl",
+    "headers": [ {
+      "source": "**/*.@(eot|otf|ttf|ttc|woff|font.css)",
+      "headers": [ {
+        "key": "Access-Control-Allow-Origin",
+        "value": "*"
+      } ]}],
+    "origin": ["*"],
+    "method": ["GET"],
+    "maxAgeSeconds": 3600,
     "ignore": [
       "firebase.json",
       "**/.*",
@@ -12,5 +21,12 @@
         "destination": "/index.html"
       }
     ]
+  },
+  "database": {
+    "rules": "database.rules.json"
+  },
+  "firestore": {
+    "rules": "firestore.rules",
+    "indexes": "firestore.indexes.json"
   }
 }

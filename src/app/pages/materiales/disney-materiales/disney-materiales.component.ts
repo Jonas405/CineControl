@@ -18,11 +18,12 @@ export class DisneyMaterialesComponent implements OnInit {
 
   constructor( private dataApi: DataApiService, private authService: AuthService ) { }
 
-  private materialesDisney: MaterialesDisneyInterface[];
+  public materialesDisney: MaterialesDisneyInterface[];
   public isAdmin: any = null;
   public userUid: string = null;
   private user: UserInterface;
-
+  pageActual = 1;
+  searchTerm : string;
   ngOnInit() {
     this.getAllMaterialesDisney();
     this.getCurrentUser();

@@ -16,6 +16,8 @@ import {  NO_ERRORS_SCHEMA } from '@angular/core';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 //Angular Paginator
 import {NgxPaginationModule} from 'ngx-pagination';
+//Angular Filter
+
 //Firebase config
 import { environment } from '../environments/environment';
 import { AngularFireStorage } from '@angular/fire/storage';
@@ -63,6 +65,15 @@ import { SonyMaterialesDetalleComponent } from './pages/materiales/sony-material
 import { DisneyMaterialesDetalleComponent } from './pages/materiales/disney-materiales-detalle/disney-materiales-detalle.component';
 import { DisneyMaterialesComponent } from './pages/materiales/disney-materiales/disney-materiales.component';
 import { from } from 'rxjs';
+import { ManagedFilterPipe } from './pages/cinema/managed-filter.pipe';
+import { CheckerFilterPipe } from './pages/checkers/checkers-filter.pipe';
+import { MaterialDisneyFilterPipe } from './pages/materiales/disney-materiales/disney-material-filter.pipe';
+import { MaterialSonyFilterPipe } from './pages/materiales/sony-materiales/sony-material-filter.pipe';
+import { TitleSonyFilterPipe } from './pages/titles/sony-pictures-releasing/sony-title-filter.pipe';
+import { TitleDisneyFilterPipe } from './pages/titles/walt-disney-studios/walt-disney-title-filter.pipe';
+import { AsigTheaterCheckerComponent } from './modals/asig-theater-checker/asig-theater-checker.component';
+import { IncidentApprovedComponent } from './pages/incident-approved/incident-approved.component';
+import { IncidentApprovedDetailComponent } from './pages/incident-approved-detail/incident-approved-detail.component';
 
 @NgModule({
   declarations: [
@@ -98,6 +109,15 @@ import { from } from 'rxjs';
     SonyMaterialesDetalleComponent,
     DisneyMaterialesDetalleComponent,
     DisneyMaterialesComponent,
+    ManagedFilterPipe,
+    CheckerFilterPipe,
+    MaterialDisneyFilterPipe,
+    MaterialSonyFilterPipe,
+    TitleSonyFilterPipe,
+    TitleDisneyFilterPipe,
+    AsigTheaterCheckerComponent,
+    IncidentApprovedComponent,
+    IncidentApprovedDetailComponent,
   ],
   imports: [
     BrowserModule,

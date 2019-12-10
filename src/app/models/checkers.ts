@@ -6,6 +6,8 @@ export interface Roles {
 export interface CheckersInterface {
     checkerMail?: string;
     checkerName?: string;
+    imageURL?: string;
+    asignedTheaters?: object;
     key?: string;
     userID?:string;
   }
@@ -14,6 +16,9 @@ export interface CheckersInterface {
 export interface CheckerInterface {
   checkerMail?: string;
   checkerName?: string;
+  checkerImageUrl?: string;
+  imageURL?: string;
+  asignedTheaters?: object;
   key?: string;
   userID?: string;
 }

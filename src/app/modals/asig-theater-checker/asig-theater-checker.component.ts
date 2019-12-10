@@ -1,0 +1,105 @@
+import { Component, OnInit, ViewChild, ElementRef, Input } from '@angular/core';
+import { DataApiService } from '../../services/data-api.service';
+import { CheckerInterface } from '../../models/checkers';
+import { NgForm } from '@angular/forms';
+import { AngularFireList, AngularFireDatabase } from '@angular/fire/database';
+import { ManagedTheaterInterface, ManagedTheatersInterface } from 'src/app/models/managedTheaters';
+import { ActivatedRoute, Router } from '@angular/router';
+import { map } from 'rxjs/operators';
+
+@Component({
+  selector: 'app-asig-theater-checker',
+  templateUrl: './asig-theater-checker.component.html',
+  styleUrls: ['./asig-theater-checker.component.css']
+})
+export class AsigTheaterCheckerComponent implements OnInit {
+
+  
+  //Asignar cine a checker
+  idChecker;
+  manager : ManagedTheaterInterface;
+
+ 
+  assigTheaterCheckerRef: AngularFireList<ManagedTheaterInterface> = null;
+
+  constructor(public dataApi: DataApiService, private db: AngularFireDatabase,
+              private route: ActivatedRoute, private router: Router) {
+   
+   }
+  @ViewChild('btnClose', {static: false} ) btnClose: ElementRef;
+  //@Input() userUid: string;
+
+  ngOnInit() {
+
+    this.route.params.subscribe(params => {
+      const id = params.id;
+      console.log("ID Checker For Assig Theater", id);
+      this.idChecker = id;
+      console.log("This Id Checker for Assig Theater", id)
+      this.dbPathAssigTheaterChecker = '/USER/'+ this.idChecker +'/asignedTheaters';
+      console.log(this.idChecker);
+      if (id) {
+        this.dataApi.getAssigTheaterChecker(id).snapshotChanges()
+          .subscribe(res => {
+            if ((res.payload.exists())) {
+              this.manager = res.payload.toJSON() as CheckerInterface;
+              this.manager.key = res.key;
+              console.log("Assig Theater Res", this.manager);
+              return this.idChecker;
+            } else {
+            //  this.notificationService.dispatchErrorMessage('Todo does not exist');
+              this.router.navigate(['/cinema']);
+            }
+          }, err => {
+            //this.notificationService.dispatchErrorMessage(err.toString());
+            //debugger;
+          });
+      }
+    });
+  }
+
+  private dbPathAssigTheaterChecker = '/USER/'+ this.idChecker +'/asignedTheaters';
+
+  onSaveNewTheater(asingTheaterForm: NgForm): void {
+    if (asingTheaterForm.value.key == null) {
+      // New
+      console.log("Path for save theater", this.dbPathAssigTheaterChecker);
+      console.log("Path for save theater", this.assigTheaterCheckerRef);
+      console.log("ADD IND", asingTheaterForm.value);
+      this.assigTheaterCheckerRef = this.db.list(this.dbPathAssigTheaterChecker);
+      this.assigTheaterCheckerRef.push(asingTheaterForm.value);
+    } else {
+      // Update
+      let keyAssig = this.manager.key;
+      console.log("ADD UPDATE", keyAssig);
+      console.log("Object", this.manager);
+    //  this.assigTheaterCheckerRef = this.db.list(this.dbPathAssigTheaterChecker);
+      this.assigTheaterCheckerRef.update(keyAssig, asingTheaterForm.value)
+    }
+    asingTheaterForm.resetForm();
+    this.btnClose.nativeElement.click();
+  }
+
+
+/*  
+
+   // Add Cine list
+  public managedTheatersInsi : ManagedTheatersInterface[];
+    //add Search list 
+    searchTerm : string;
+    pageActual = 1;
+  
+  getManagedTheatersList() {
+    this.dataApi.getManagedTheatersList().snapshotChanges().pipe(
+      map(changes =>
+        changes.map(c =>
+          ({ key: c.payload.key, ...c.payload.val() })
+        )
+      )
+    ).subscribe(managedTheaters => {
+      this.managedTheatersInsi = managedTheaters;
+      console.log("ManagedTheaters Inside Assig", this.managedTheatersInsi)
+    });
+  } */
+
+}

@@ -17,10 +17,10 @@ export class HomeComponent implements OnInit {
 
   myDate = new Date();
   pageActual = 1;
-  constructor( private dataApi: DataApiService, private authService: AuthService ) { }
+  constructor( public dataApi: DataApiService, private authService: AuthService ) { }
 
-  private checkers: CheckersInterface[];
-  private managedTheaters : ManagedTheatersInterface[];
+  public checkers: CheckersInterface[];
+  public managedTheaters : ManagedTheatersInterface[];
   public isAdmin: any = null;
   public userUid: string = null;
   private user: UserInterface;

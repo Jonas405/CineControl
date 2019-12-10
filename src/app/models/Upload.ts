@@ -6,7 +6,7 @@ export class Upload {
     timeStamp: Date;
     file: File;
     name:string;
-    url:string;
+    url: string;
     progress:number;
     createdAt: Date = new Date();
 

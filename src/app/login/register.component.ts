@@ -48,7 +48,7 @@ export class RegisterComponent implements OnInit {
               displayName: '',
               photoURL: this.inputImageUser.nativeElement.value
             }).then(() => {
-              this.router.navigate(['home']);
+              this.router.navigate(['cinema']);
             }).catch((error) => console.log('error', error));
           }
         });

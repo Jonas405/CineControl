@@ -31,7 +31,7 @@ export class IncidentDetailComponent implements OnInit {
                 console.log("Incident Res", this.incidence);
               } else {
               //  this.notificationService.dispatchErrorMessage('Todo does not exist');
-                this.router.navigate(['/home']);
+                this.router.navigate(['/cinema']);
               }
             }, err => {
               //this.notificationService.dispatchErrorMessage(err.toString());

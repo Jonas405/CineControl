@@ -10,7 +10,7 @@ import { NgForm } from '@angular/forms';
 })
 export class AddTheatersComponent implements OnInit {
 
-  constructor(private dataApi: DataApiService) { }
+  constructor(public dataApi: DataApiService) { }
   @ViewChild('btnClose', {static: false} ) btnClose: ElementRef;
   @Input() userUid: string;
   ngOnInit() {
