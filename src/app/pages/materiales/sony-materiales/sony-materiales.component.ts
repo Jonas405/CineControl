@@ -76,6 +76,10 @@ export class SonyMaterialesComponent implements OnInit {
       });
   }
 
+  resetFilter() {
+    this.getAllMaterialesSony();
+  }
+
   filterByCine(cine) {
     this.dataApi
       .getAllMaterialesSonyList()
