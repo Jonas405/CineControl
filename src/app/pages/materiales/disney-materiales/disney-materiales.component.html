@@ -29,16 +29,27 @@
   Materiales Disney
 </h1>
 <section id="materialesDisney" class="mt-5">
-  <!-- Actual search box -->
-  <div class="form-group has-search">
-    <span class="fa fa-search form-control-feedback"></span>
-    <input
-      type="text"
-      class="form-control"
-      placeholder="Buscar"
-      [(ngModel)]="searchTerm"
-    />
+  <div class="p-1 bg-light rounded rounded-pill shadow-sm mb-4 w-50 mx-auto">
+    <div class="input-group">
+      <div class="input-group-append">
+        <button
+          id="button-addon1"
+          type="submit"
+          class="btn btn-link text-primary"
+        >
+          <i class="fa fa-search"></i>
+        </button>
+      </div>
+      <input
+        type="text"
+        placeholder="Buscar"
+        aria-label="Search"
+        [(ngModel)]="searchTerm"
+        class="form-control border-0 bg-light"
+      />
+    </div>
   </div>
+  <!-- Actual search box -->
 
   <div class="container">
     <div class="row">
