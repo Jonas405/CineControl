@@ -49,6 +49,52 @@
       />
     </div>
   </div>
+
+  <div
+    class="container-fluid center row d-flex py-0 my-2  justify-content-center w-100"
+  >
+    <div class="dropdown mx-3">
+      <button
+        class="btn btn-secondary dropdown-toggle"
+        type="button"
+        id="dropdownMenuButton"
+        data-toggle="dropdown"
+        aria-haspopup="true"
+        aria-expanded="false"
+      >
+        Filtrar por materiales
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a
+          class="dropdown-item"
+          *ngFor="let material of materiales"
+          (click)="filterByMaterial(material)"
+          >{{ material }}</a
+        >
+      </div>
+    </div>
+
+    <div class="dropdown mx-3">
+      <button
+        class="btn btn-secondary dropdown-toggle"
+        type="button"
+        id="dropdownMenuButton"
+        data-toggle="dropdown"
+        aria-haspopup="true"
+        aria-expanded="false"
+      >
+        Filtrar por cine
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a
+          class="dropdown-item"
+          *ngFor="let cine of cines"
+          (click)="filterByCine(cine)"
+          >{{ cine }}</a
+        >
+      </div>
+    </div>
+  </div>
   <div class="container">
     <div class="row">
       <div

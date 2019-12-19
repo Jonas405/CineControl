@@ -16,6 +16,10 @@
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     color: rgba(7, 42, 61, 0.829);
   }
+
+  .linkTitle {
+    cursor: pointer;
+  }
 </style>
 <style>
   h6 {
@@ -83,11 +87,14 @@
               <div class="card">
                 <div class="card-body text-center">
                   <p>
-                    <img class="img-fluid cardImage" src="{{ sonyTitle.imageURL }}" />
+                    <img
+                      class="img-fluid cardImage"
+                      src="{{ sonyTitle.imageURL }}"
+                    />
                   </p>
                   <h5
                     routerLink="/sonyTitle/{{ sonyTitle.key }}"
-                    class="card-title"
+                    class="card-title linkTitle"
                   >
                     {{ sonyTitle.movieName }}
                   </h5>
