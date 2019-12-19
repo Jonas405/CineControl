@@ -5,12 +5,12 @@
         a {font-family: Verdana, Geneva, Tahoma, sans-serif; color:rgba(7, 42, 61, 0.829)}
         h5 {font-family: Verdana, Geneva, Tahoma, sans-serif; color:rgba(7, 42, 61, 0.829)}
         </style>
-    
+   
     <section class="row mt-5">
         <div class="col">
           <button class="btn btn-primary float-right mb-3" data-toggle="modal" data-target="#modalAddIncidencia">Agregar Incidencia</button>
      
-      <section id="incidencias" class="mt-5">
+      <section id="content" class="mt-5" #content>
           <div class="container">
             <div class="row">
               <div class="col-xs-12 col-sm-6 col-md-4" *ngFor="let incidencia of incidencias | paginate: {itemsPerPage:3, currentPage: pageActual}; let i = index">
@@ -41,5 +41,6 @@
         </section>
         <pagination-controls (pageChange)="pageActual = $event"></pagination-controls>
       <app-add-incidencia></app-add-incidencia>
+      <!-- <button type="button" (click)="downloadPDF()">Download PDF</button> -->
 
     

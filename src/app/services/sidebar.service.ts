@@ -16,13 +16,13 @@ export class SidebarService {
         { titulo: 'Peliculas Sony', url: '/sonyTitles' },
         { titulo: 'Materiales Sony', url: '/materialesSony' },
         { titulo: 'Incidencias por aprobar Sony', url: '/pendingIncidentSony'},
-        { titulo: 'Incidencias aprobadas Sony', url: '/incidentApprovedSony'},
+        { titulo: 'Incidencias Sony', url: '/incidentApprovedSony'},
         { titulo: 'Peliculas Disney', url: '/waltDisneyTitles' },
         { titulo: 'Materiales Disney', url: '/materialesDisney' },
         { titulo: 'Incidencias Por Aprobar Disney', url: '/pendingIncidentDisney'},
         { titulo: 'Incidencias Walt Disney', url: '/incidentApprovedDisney'},
         { titulo: 'Incidencias por aprobar Generales', url: '/incident' },
-        { titulo: 'Incidencias aprobadas generales', url: '/incidentApproved'},
+        { titulo: 'Incidencias aprobadas Generales', url: '/incidentApproved'},
      
       //  { titulo: 'AssignTheaters', url: '/assignTheaters' },
        

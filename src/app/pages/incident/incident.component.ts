@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { DataApiService } from '../../services/data-api.service';
 import { IncidenciaInterface, IncidenciasInterface } from '../../models/incidencias';
 import { NgForm } from '@angular/forms';
@@ -6,6 +6,7 @@ import { AuthService } from '../../services/auth.service';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { UserInterface } from '../../models/users';
 import { map } from 'rxjs/operators';
+import * as jsPDF from 'jspdf';
 
 @Component({
   selector: 'app-incident',
@@ -14,6 +15,25 @@ import { map } from 'rxjs/operators';
 })
 export class IncidentComponent implements OnInit {
   constructor( private dataApi: DataApiService, private authService: AuthService ) { }
+
+  //PDF
+  @ViewChild('content', {static: false}) content: ElementRef;
+  public downloadPDF(){
+    let doc = new jsPDF();
+    let specialElementHandlers = {
+      '#editor': function(element,renderer){
+        return true;
+      }
+    };
+
+    let content = this.content.nativeElement;
+    doc.fromHTML(content.innerHTML, 15, 15, {
+      'width': 190,
+      'elementHandlers': specialElementHandlers
+    });
+
+    doc.save('test.pdf')
+  }
 
   public incidencias: IncidenciasInterface[];
   public isAdmin: any = null;
