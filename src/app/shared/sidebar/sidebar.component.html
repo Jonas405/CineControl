@@ -8,7 +8,7 @@
             <nav class="sidebar-nav">
                 <ul id="nav">
                     <li *ngFor="let menu of _sidebar.menu">
-                        <a class="has-arrow waves-effect waves-dark" aria-expanded="true"><i [class]="menu.icono"></i><span> {{ menu.titulo }} <span class="label label-rouded label-themecolor pull-right"> {{ menu.submenu.length }} </span></span></a>
+                        <a><span> {{ menu.titulo }} <span> {{ menu.submenu.length }} </span></span></a>
                         <ul>
                             <li *ngFor="let submenu of menu.submenu">
                                 <a routerLinkActive="active" [routerLink]="[ submenu.url ]"> {{ submenu.titulo }} </a>

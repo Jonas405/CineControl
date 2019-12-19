@@ -6,8 +6,13 @@
     h5 {font-family: Verdana, Geneva, Tahoma, sans-serif; color:rgba(7, 42, 61, 0.829)}
     </style>
   <section id="materialesDisney" class="mt-5">
-      <input type="text" class="form-control" placeholder="Buscar por Nombre"
-         [(ngModel)]="searchTerm">
+
+      <!-- Actual search box -->
+  <div class="form-group has-search">
+      <span class="fa fa-search form-control-feedback"></span>
+      <input type="text" class="form-control" placeholder="Buscar" [(ngModel)]="searchTerm">
+    </div>
+
       <div class="container">
         <div class="row">
           <div class="col-xs-12 col-sm-6 col-md-4" *ngFor="let materialDisney of materialesDisney | materialDisneyFilter:searchTerm | paginate: {itemsPerPage:3, currentPage: pageActual}; let i = index">

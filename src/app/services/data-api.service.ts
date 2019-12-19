@@ -38,14 +38,40 @@ export class DataApiService {
   private dbPathComments = '/Logistica'
   commentsRef: AngularFireList<CommentsInterface> = null;
 
-  private dbPathIncidenciasPorAprobar = 'WebRef/Incidences/incidenceForApproval'
+  private dbPathIncidenciasPorAprobar = 'WebRef/Incidences/incidenceForApprovalWeb/General'
   //'incidences/incForApproval/WeekNumber'
   incidenciasPorAprobarRef : AngularFireList<IncidenciasInterface> = null;
 
-  private dbPathIncidenciasAprobadas = 'WebRef/Incidences/incidenceApproved'
+  private dbPathIncidenciasAprobadas = 'WebRef/Incidences/incidenceApproved/General'
   //'incidences/incApproved/WeekNumber'
   incidenciasAprobadasRef : AngularFireList<IncidenciasInterface> = null;
 
+
+  // Incidencias agregadas a la fecha por separado disney y sony ----------------------------------
+
+
+  private dbPathIncidenciasAprobadasDisney = 'WebRef/Incidences/incidenceApproved/Walt Disney Studios'
+  //'incidences/incApproved/WeekNumber'
+  incidenciasAprobadasDisneyRef : AngularFireList<IncidenciasInterface> = null;
+
+  private dbPathIncidenciasAprobadasSony = 'WebRef/Incidences/incidenceApproved/Sony Pictures Releasing'
+  //'incidences/incApproved/WeekNumber'
+  incidenciasAprobadasSonyRef : AngularFireList<IncidenciasInterface> = null;
+
+
+  private dbPathIncidenciasPorAprobarDisney = 'WebRef/Incidences/incidenceForApprovalWeb/Walt Disney Studios'
+  //'incidences/incApproved/WeekNumber'
+  incidenciasPorAprobarDisneyRef : AngularFireList<IncidenciasInterface> = null;
+
+  private dbPathIncidenciasPorAprobarSony = 'WebRef/Incidences/incidenceForApprovalWeb/Sony Pictures Releasing'
+  //'incidences/incApproved/WeekNumber'
+  incidenciasPorAprobarSonyRef : AngularFireList<IncidenciasInterface> = null;
+
+ 
+  // ----------------------------------------------------------------------------------------
+
+
+  // -------------------------------------------
   private dbPathSonyMateriales = 'WebRef/MaterialsSony Pictures Releasing';
   materialesSonyRef: AngularFireList<MaterialesSonyInterface> = null;
 
@@ -66,7 +92,11 @@ export class DataApiService {
                 this.materialesDisneyRef = db.list(this.dbPathDisneyMateriales);
                 this.incidenciasPorAprobarRef = db.list(this.dbPathIncidenciasPorAprobar);
                 this.incidenciasAprobadasRef = db.list(this.dbPathIncidenciasAprobadas);
-               
+                this.incidenciasAprobadasDisneyRef = db.list(this.dbPathIncidenciasAprobadasDisney);
+                this.incidenciasAprobadasSonyRef = db.list(this.dbPathIncidenciasAprobadasSony);
+                this.incidenciasPorAprobarDisneyRef = db.list(this.dbPathIncidenciasPorAprobarDisney);
+                this.incidenciasPorAprobarSonyRef = db.list(this.dbPathIncidenciasPorAprobarSony);
+                
               }
               
 
@@ -325,6 +355,74 @@ export class DataApiService {
 
   }
 
+
+  
+     // ========================== IncidenciasPorAprobar Service Disney ==========================
+
+     public selectedIncidenciaPorAprobarDisney: IncidenciaInterface = {
+      key: null
+    };
+
+    getAllIncidenciasPorAprobarListDisney(): AngularFireList<IncidenciasInterface> {
+      console.log("Incidencias", this.incidenciasPorAprobarDisneyRef);
+      return this.incidenciasPorAprobarDisneyRef;
+    }  
+
+    addIncidenciaDisney( incidencia : IncidenciaInterface){
+      this.incidenciasPorAprobarDisneyRef.push(incidencia);
+    }
+
+    deleteIncidenciaPorAprobarDisney(key: string): Promise<void> {
+      return this.incidenciasPorAprobarDisneyRef.remove(key);
+    }
+
+    updateIncidenciaPorAprobarDisney(incidencia: IncidenciaInterface): void {
+      let keyIncidencia = incidencia.key;
+      console.log("UPDATE", incidencia);
+    this.incidenciasPorAprobarDisneyRef.update(keyIncidencia, incidencia)
+    }
+
+    incidencesTiDisney: AngularFireObject<IncidenciaInterface>;
+    getIncidenceByIdDisney(key: string): AngularFireObject<IncidenciaInterface> {
+      this.incidencesTi = this.db.object('WebRef/Incidences/incidenceForApprovalWeb/Walt Disney Studios' + key) as AngularFireObject<IncidenciaInterface>;
+      return this.incidencesTi;
+
+}
+
+
+  
+     // ========================== IncidenciasPorAprobar Service Sony ==========================
+
+     public selectedIncidenciaPorAprobarSony: IncidenciaInterface = {
+      key: null
+    };
+
+    getAllIncidenciasPorAprobarListSony(): AngularFireList<IncidenciasInterface> {
+      console.log("Incidencias", this.incidenciasPorAprobarSonyRef);
+      return this.incidenciasPorAprobarSonyRef;
+    }  
+
+    addIncidenciaSony( incidencia : IncidenciaInterface){
+      this.incidenciasPorAprobarSonyRef.push(incidencia);
+    }
+
+    deleteIncidenciaPorAprobarSony(key: string): Promise<void> {
+      return this.incidenciasPorAprobarSonyRef.remove(key);
+    }
+
+    updateIncidenciaPorAprobarSony(incidencia: IncidenciaInterface): void {
+      let keyIncidencia = incidencia.key;
+      console.log("UPDATE", incidencia);
+    this.incidenciasPorAprobarSonyRef.update(keyIncidencia, incidencia)
+    }
+
+    incidencesTiSony: AngularFireObject<IncidenciaInterface>;
+    getIncidenceByIdSony(key: string): AngularFireObject<IncidenciaInterface> {
+      this.incidencesTi = this.db.object('WebRef/Incidences/incidenceForApprovalWeb/Sony Pictures Releasing' + key) as AngularFireObject<IncidenciaInterface>;
+      return this.incidencesTi;
+
+}
+
         // ========================== Incidencias Aprobadas Service ==========================
 
         public selectedIncidenciaAprobadas: IncidenciaInterface = {
@@ -357,6 +455,71 @@ export class DataApiService {
   
     }
 
+
+            // ========================== Incidencias Aprobadas Service Disney ==========================
+
+            public selectedIncidenciaAprobadasDisney: IncidenciaInterface = {
+              key: null
+            };
+        
+            getAllIncidenciasAprobadasListDisney(): AngularFireList<IncidenciasInterface> {
+              console.log("Incidencias", this.incidenciasAprobadasDisneyRef);
+              return this.incidenciasAprobadasDisneyRef;
+            }  
+        
+            addIncidenciaAprobadaDisney( incidencia : IncidenciaInterface){
+              this.incidenciasAprobadasDisneyRef.push(incidencia);
+            }
+        
+            deleteIncidenciaAprobadaDisney(key: string): Promise<void> {
+              return this.incidenciasAprobadasDisneyRef.remove(key);
+            }
+        
+            updateIncidenciaAprobadaDisney(incidencia: IncidenciaInterface): void {
+              let keyIncidencia = incidencia.key;
+              console.log("UPDATE", incidencia);
+            this.incidenciasAprobadasDisneyRef.update(keyIncidencia, incidencia)
+            }
+    
+            incidencesTiApprovedDisney: AngularFireObject<IncidenciaInterface>;
+            getIncidenceByIdApprovedDisney(key: string): AngularFireObject<IncidenciaInterface> {
+              this.incidencesTi = this.db.object('WebRef/Incidences/incidenceApproved/Walt Disney Studios' + key) as AngularFireObject<IncidenciaInterface>;
+              return this.incidencesTi;
+      
+        }
+
+
+             // ========================== Incidencias Aprobadas Service Sony ==========================
+
+             public selectedIncidenciaAprobadasSony: IncidenciaInterface = {
+              key: null
+            };
+        
+            getAllIncidenciasAprobadasListSony(): AngularFireList<IncidenciasInterface> {
+              console.log("Incidencias", this.incidenciasAprobadasSonyRef);
+              return this.incidenciasAprobadasSonyRef;
+            }  
+        
+            addIncidenciaAprobadaSony( incidencia : IncidenciaInterface){
+              this.incidenciasAprobadasSonyRef.push(incidencia);
+            }
+        
+            deleteIncidenciaAprobadaSony(key: string): Promise<void> {
+              return this.incidenciasAprobadasSonyRef.remove(key);
+            }
+        
+            updateIncidenciaAprobadaSony(incidencia: IncidenciaInterface): void {
+              let keyIncidencia = incidencia.key;
+              console.log("UPDATE", incidencia);
+            this.incidenciasAprobadasSonyRef.update(keyIncidencia, incidencia)
+            }
+    
+            incidencesTiApprovedSony: AngularFireObject<IncidenciaInterface>;
+            getIncidenceByIdApprovedSony(key: string): AngularFireObject<IncidenciaInterface> {
+              this.incidencesTi = this.db.object('WebRef/Incidences/incidenceApproved/Sony Pictures Releasing' + key) as AngularFireObject<IncidenciaInterface>;
+              return this.incidencesTi;
+      
+        }
 
 
   //---------- Services Using Database CloudFireStore ------------------------

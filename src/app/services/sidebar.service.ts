@@ -10,16 +10,22 @@ export class SidebarService {
       titulo: 'Principal',
       icono: 'mdi mdi-gauge',
       submenu: [
-        { titulo: 'Cinema', url: '/cinema' },
+        { titulo: 'Logistica', url: '/comments' },
         { titulo : 'Checkers', url: '/checkers' },
-        { titulo: 'Sony Titles', url: '/sonyTitles' },
-        { titulo: 'Walt Disney Titles', url: '/waltDisneyTitles' },
-        { titulo: 'Incidencias Por Aprobar', url: '/incident' },
-        { titulo: 'Incidencias', url: '/incidentApproved'},
+        { titulo: 'Cines', url: '/cinema' },
+        { titulo: 'Peliculas Sony', url: '/sonyTitles' },
         { titulo: 'Materiales Sony', url: '/materialesSony' },
-        { titulo: 'Materiales Walt Disney', url: '/materialesDisney' },
+        { titulo: 'Incidencias por aprobar Sony', url: '/pendingIncidentSony'},
+        { titulo: 'Incidencias aprobadas Sony', url: '/incidentApprovedSony'},
+        { titulo: 'Peliculas Disney', url: '/waltDisneyTitles' },
+        { titulo: 'Materiales Disney', url: '/materialesDisney' },
+        { titulo: 'Incidencias Por Aprobar Disney', url: '/pendingIncidentDisney'},
+        { titulo: 'Incidencias Walt Disney', url: '/incidentApprovedDisney'},
+        { titulo: 'Incidencias por aprobar Generales', url: '/incident' },
+        { titulo: 'Incidencias aprobadas generales', url: '/incidentApproved'},
+     
       //  { titulo: 'AssignTheaters', url: '/assignTheaters' },
-        { titulo: 'Logistica', url: '/comments' }
+       
       ]
     }
   ];

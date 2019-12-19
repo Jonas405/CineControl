@@ -74,6 +74,14 @@ import { TitleDisneyFilterPipe } from './pages/titles/walt-disney-studios/walt-d
 import { AsigTheaterCheckerComponent } from './modals/asig-theater-checker/asig-theater-checker.component';
 import { IncidentApprovedComponent } from './pages/incident-approved/incident-approved.component';
 import { IncidentApprovedDetailComponent } from './pages/incident-approved-detail/incident-approved-detail.component';
+import { IncidentApprovedDisneyComponent } from './pages/incident-approved-disney/incident-approved-disney.component';
+import { IncidentApprovedSonyComponent } from './pages/incident-approved-sony/incident-approved-sony.component';
+import { IncidentPendingSonyComponent } from './pages/incident-pending-sony/incident-pending-sony.component';
+import { IncidentPendingDisneyComponent } from './pages/incident-pending-disney/incident-pending-disney.component';
+import { AddIncidenciaDisneyComponent } from './modals/add-incidencia-disney/add-incidencia-disney.component';
+import { AddIncidenciaSonyComponent } from './modals/add-incidencia-sony/add-incidencia-sony.component';
+import { IncidentApprovedDisneyDetailComponent } from './pages/incident-approved-disney-detail/incident-approved-disney-detail.component';
+import { IncidentApprovedSonyDetailComponent } from './pages/incident-approved-sony-detail/incident-approved-sony-detail.component';
 
 @NgModule({
   declarations: [
@@ -118,6 +126,14 @@ import { IncidentApprovedDetailComponent } from './pages/incident-approved-detai
     AsigTheaterCheckerComponent,
     IncidentApprovedComponent,
     IncidentApprovedDetailComponent,
+    IncidentApprovedDisneyComponent,
+    IncidentApprovedSonyComponent,
+    IncidentPendingSonyComponent,
+    IncidentPendingDisneyComponent,
+    AddIncidenciaDisneyComponent,
+    AddIncidenciaSonyComponent,
+    IncidentApprovedDisneyDetailComponent,
+    IncidentApprovedSonyDetailComponent,
   ],
   imports: [
     BrowserModule,

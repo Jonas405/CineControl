@@ -10,7 +10,7 @@ import { map } from 'rxjs/operators';
 @Component({
   selector: 'app-checkers',
   templateUrl: './checkers.component.html',
-  styles: []
+  styles: ['./checkers.component.css']
 })
 export class CheckersComponent implements OnInit {
 

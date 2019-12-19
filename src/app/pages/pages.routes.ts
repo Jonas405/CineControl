@@ -19,6 +19,10 @@ import { DisneyMaterialesComponent } from './materiales/disney-materiales/disney
 import { SonyMaterialesComponent} from './materiales/sony-materiales/sony-materiales.component';
 import { IncidentApprovedComponent } from './incident-approved/incident-approved.component';
 import { IncidentApprovedDetailComponent } from './incident-approved-detail/incident-approved-detail.component';
+import { IncidentApprovedDisneyComponent } from './incident-approved-disney/incident-approved-disney.component';
+import { IncidentApprovedSonyComponent } from './incident-approved-sony/incident-approved-sony.component';
+import { IncidentPendingDisneyComponent } from './incident-pending-disney/incident-pending-disney.component';
+import { IncidentPendingSonyComponent } from './incident-pending-sony/incident-pending-sony.component';
 
 const pagesRoutes: Routes = [
     {
@@ -36,6 +40,14 @@ const pagesRoutes: Routes = [
             { path: 'incidencedetail/:id', component: IncidentDetailComponent, data: { tittle: 'IncidentDetail' }},
             { path: 'incident', component: IncidentComponent, data: { tittle: 'Incident' }},
             { path: 'incidentApproved', component: IncidentApprovedComponent, data: { tittle: 'IncidentApproved' }},
+
+            { path: 'pendingIncidentDisney', component: IncidentPendingDisneyComponent, data: { tittle: 'PendingIncidentDisney' }},
+            { path: 'pendingIncidentSony', component: IncidentPendingSonyComponent, data: { tittle: 'PendingIncidentSony' }},
+
+
+            { path: 'incidentApprovedDisney', component: IncidentApprovedDisneyComponent, data: { tittle: 'IncidentApprovedDisney' }},
+            { path: 'incidentApprovedSony', component: IncidentApprovedSonyComponent, data: { tittle: 'IncidentApprovedSony' }},
+
             { path: 'incidentApprovedDetail/:id', component: IncidentApprovedDetailComponent, data: { tittle: 'IncidentApprovedDetailComponent' }},
             { path: 'materialesDisney', component: DisneyMaterialesComponent, data: { tittle: 'materialesDisney' }},
             { path: 'materialesSony', component: SonyMaterialesComponent, data: { tittle: 'materialesSony' }},
