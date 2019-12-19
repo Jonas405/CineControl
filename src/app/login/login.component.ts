@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
   }
 
   onLoginRedirect(): void {
-    this.router.navigate(['/comments']);
+    this.router.navigate(['/cinema']);
   }
 
 }

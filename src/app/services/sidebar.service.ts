@@ -6,6 +6,7 @@ import { Injectable } from '@angular/core';
 export class SidebarService {
 
   menu: any = [
+    
     {
       titulo: 'Principal',
       icono: 'mdi mdi-gauge',
@@ -20,7 +21,7 @@ export class SidebarService {
         { titulo: 'Peliculas Disney', url: '/waltDisneyTitles' },
         { titulo: 'Materiales Disney', url: '/materialesDisney' },
         { titulo: 'Incidencias Por Aprobar Disney', url: '/pendingIncidentDisney'},
-        { titulo: 'Incidencias Walt Disney', url: '/incidentApprovedDisney'},
+        { titulo: 'Incidencias Disney', url: '/incidentApprovedDisney'},
         { titulo: 'Incidencias por aprobar Generales', url: '/incident' },
         { titulo: 'Incidencias aprobadas Generales', url: '/incidentApproved'},
      
