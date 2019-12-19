@@ -23,7 +23,7 @@ export class DisneyMaterialesComponent implements OnInit {
   public userUid: string = null;
   private user: UserInterface;
   pageActual = 1;
-  searchTerm : string;
+  searchTerm : string; 
   ngOnInit() {
     this.getAllMaterialesDisney();
     this.getCurrentUser();

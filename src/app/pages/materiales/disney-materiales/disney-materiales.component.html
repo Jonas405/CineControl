@@ -46,7 +46,7 @@
         class="col-xs-12 col-sm-6 col-md-4"
         *ngFor="
           let materialDisney of materialesDisney
-            | materialDisneyFilter: searchTerm
+            | materialDisneyFilter: searchTerm 
             | paginate: { itemsPerPage: 3, currentPage: pageActual };
           let i = index
         "
