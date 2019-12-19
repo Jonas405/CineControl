@@ -1,32 +1,79 @@
 <style>
+  div {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: rgba(7, 42, 61, 0.829);
+  }
+  h4 {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: bold;
+    color: rgba(7, 42, 61, 0.829);
+  }
+  a {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: rgba(7, 42, 61, 0.829);
+  }
+  h5 {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: rgba(7, 42, 61, 0.829);
+  }
+</style>
 
-  div {font-family: Verdana, Geneva, Tahoma, sans-serif; color:rgba(7, 42, 61, 0.829)}
-  h4 {font-family: Verdana, Geneva, Tahoma, sans-serif; font-weight: bold; color:rgba(7, 42, 61, 0.829)}
-  a {font-family: Verdana, Geneva, Tahoma, sans-serif; color:rgba(7, 42, 61, 0.829)}
-  h5 {font-family: Verdana, Geneva, Tahoma, sans-serif; color:rgba(7, 42, 61, 0.829)}
-  </style>
+<h1 class="header">
+  Logistica
+</h1>
 
 <section class="row mt-5">
   <div class="col">
-    <button class="btn btn-primary float-right mb-3" data-toggle="modal" data-target="#modalAddComments">Enviar Logistica</button>
+    <button
+      class="btn btn-primary float-right mb-3"
+      data-toggle="modal"
+      data-target="#modalAddComments"
+    >
+      Enviar Logistica
+    </button>
 
-    <section >
-        <div class="card w-100" style="border-color: rgb(9, 181, 211);" *ngFor="let comment of comments">
-            <div class="card-body">
-              <h5 class="card-title"> {{comment.encabezado }}</h5>
-              <hr/>
-              <p class="card-text"> {{comment.cuerpo }}</p>
-              <p class="card-text"> {{comment.fecha }}</p>
-              <p class="card-text"> {{comment.timeStamp }}</p>
-              <i class="fas fa-file" src="{{comment.url}}" (click)="openFile(comment.url)" width="500" height="500"></i>
-              <span class="oi oi-data-transfer-download"></span>
+    <section>
+      <div
+        class="card w-100"
+        style="border-color: rgb(9, 181, 211);"
+        *ngFor="let comment of comments"
+      >
+        <div class="card-body">
+          <h5 class="card-title">{{ comment.encabezado }}</h5>
+          <hr />
+          <p class="card-text">{{ comment.cuerpo }}</p>
+          <p class="card-text">{{ comment.fecha }}</p>
+          <p class="card-text">{{ comment.timeStamp }}</p>
+          <i
+            class="fas fa-file"
+            src="{{ comment.url }}"
+            (click)="openFile(comment.url)"
+            width="500"
+            height="500"
+          ></i>
+          <span class="oi oi-data-transfer-download"></span>
 
-              <footer>
-                  <button class="btn btn-primary float-right" style="background:rgb(10,137,241)" data-toggle="modal" data-target="#modalAddComments" (click)="onPreUpdateComment(comment)">Actualizar</button>
-                  &#160;&#160;&#160; 
-                  <button class="btn btn-danger float-right" (click)="deleteComment(comment.key)">Eliminar</button>
-                </footer>
-            </div>
-          </div>
+          <footer>
+            <button
+              class="btn btn-primary float-right"
+              style="background:rgb(10,137,241)"
+              data-toggle="modal"
+              data-target="#modalAddComments"
+              (click)="onPreUpdateComment(comment)"
+            >
+              Actualizar
+            </button>
+            &#160;&#160;&#160;
+            <button
+              class="btn btn-danger float-right"
+              (click)="deleteComment(comment.key)"
+            >
+              Eliminar
+            </button>
+          </footer>
+        </div>
+      </div>
     </section>
-<app-add-comments></app-add-comments>
+    <app-add-comments></app-add-comments>
+  </div>
+</section>

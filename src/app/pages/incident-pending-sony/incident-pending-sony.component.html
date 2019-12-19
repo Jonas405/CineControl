@@ -1,48 +1,101 @@
 <style>
+  div {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: rgba(7, 42, 61, 0.829);
+  }
+  h4 {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: bold;
+    color: rgba(7, 42, 61, 0.829);
+  }
+  a {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: rgba(7, 42, 61, 0.829);
+  }
+  h5 {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: rgba(7, 42, 61, 0.829);
+  }
+  .header {
+    position: fixed;
+    z-index: 200;
+    top: 3%;
+    left: 30%;
+  }
+</style>
 
-        div {font-family: Verdana, Geneva, Tahoma, sans-serif; color:rgba(7, 42, 61, 0.829)}
-        h4 {font-family: Verdana, Geneva, Tahoma, sans-serif; font-weight: bold; color:rgba(7, 42, 61, 0.829)}
-        a {font-family: Verdana, Geneva, Tahoma, sans-serif; color:rgba(7, 42, 61, 0.829)}
-        h5 {font-family: Verdana, Geneva, Tahoma, sans-serif; color:rgba(7, 42, 61, 0.829)}
-        </style>
-    
-    <section class="row mt-5">
-        <div class="col">
-       <!--    <button class="btn btn-primary float-right mb-3" data-toggle="modal" data-target="#modalAddIncidencia">Agregar Incidencia</button>
+<h1 class="header">
+  Incidencias Por Aprobar Sony
+</h1>
+
+<section class="row mt-5">
+  <div class="col">
+    <!--    <button class="btn btn-primary float-right mb-3" data-toggle="modal" data-target="#modalAddIncidencia">Agregar Incidencia</button>
       -->
-      <section id="incidencias" class="mt-5">
-          <div class="container">
-            <div class="row">
-              <div class="col-xs-12 col-sm-6 col-md-4" *ngFor="let incidencia of incidencias | paginate: {itemsPerPage:3, currentPage: pageActual}; let i = index">
-                <div class="card_book">
-                  <div class="card">
-                    <div class="card-body text-center">
-                      <p>
-                        <img class="img-fluid" src="{{incidencia.imageURL}}" alt="{{incidencia.Encabezado}}">
-                      </p>
-                      <!-- <h4 routerLink="/checkersdetail/{{checker.key}}" class="card-title">{{checker.checkerName}}</h4> -->
-                      <h4 routerLink="/incidencedetail/{{incidencia.key}}" class="card-title">{{incidencia.Cine}}</h4>
-                     
-                      <p class="card-text">
-                        {{incidencia.Descripcion }}
-                      </p>
-                      <p class="card-text">
-                          {{incidencia.Fecha }}
-                        </p>
-                     
-                        <footer>
-                          <button class="btn btn-primary" style="background:rgb(10,137,241)" data-toggle="modal" data-target="#modalAddIncidencia" (click)="onPreUpdateIncidencia(incidencia)">Actualizar</button>
-                          &#160;&#160;&#160; 
-                          <button class="btn btn-danger" (click)="deleteIncidenciaPorAprobarSony(incidencia.key)">Eliminar</button>
-                        </footer>
-                    </div>
-                  </div>
+    <section id="incidencias" class="mt-5">
+      <div class="container">
+        <div class="row">
+          <div
+            class="col-xs-12 col-sm-6 col-md-4"
+            *ngFor="
+              let incidencia of incidencias
+                | paginate: { itemsPerPage: 3, currentPage: pageActual };
+              let i = index
+            "
+          >
+            <div class="card_book">
+              <div class="card">
+                <div class="card-body text-center">
+                  <p>
+                    <img
+                      class="img-fluid"
+                      src="{{ incidencia.imageURL }}"
+                      alt="{{ incidencia.Encabezado }}"
+                    />
+                  </p>
+                  <!-- <h4 routerLink="/checkersdetail/{{checker.key}}" class="card-title">{{checker.checkerName}}</h4> -->
+                  <h4
+                    routerLink="/incidencedetail/{{ incidencia.key }}"
+                    class="card-title"
+                  >
+                    {{ incidencia.Cine }}
+                  </h4>
+
+                  <p class="card-text">
+                    {{ incidencia.Descripcion }}
+                  </p>
+                  <p class="card-text">
+                    {{ incidencia.Fecha }}
+                  </p>
+
+                  <footer>
+                    <button
+                      class="btn btn-primary"
+                      style="background:rgb(10,137,241)"
+                      data-toggle="modal"
+                      data-target="#modalAddIncidencia"
+                      (click)="onPreUpdateIncidencia(incidencia)"
+                    >
+                      Actualizar
+                    </button>
+                    &#160;&#160;&#160;
+                    <button
+                      class="btn btn-danger"
+                      (click)="deleteIncidenciaPorAprobarSony(incidencia.key)"
+                    >
+                      Eliminar
+                    </button>
+                  </footer>
                 </div>
               </div>
             </div>
           </div>
-        </section>
-        <pagination-controls (pageChange)="pageActual = $event"></pagination-controls>
-      <app-add-incidencia-sony></app-add-incidencia-sony>
-
-    
+        </div>
+      </div>
+    </section>
+    <pagination-controls
+      (pageChange)="pageActual = $event"
+    ></pagination-controls>
+    <app-add-incidencia-sony></app-add-incidencia-sony>
+  </div>
+</section>

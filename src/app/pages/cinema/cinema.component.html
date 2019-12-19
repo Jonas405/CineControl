@@ -1,103 +1,188 @@
 <head>
-
-  <style> 
-  h5 {font-family: Verdana, Geneva, Tahoma, sans-serif;
-    color:hsla(202, 77%, 17%, 0.829)}
-  p{font-family: Verdana, Geneva, Tahoma, sans-serif;
-  color:hsla(202, 77%, 17%, 0.829)}
-  small {font-weight: bold;
-  color:hsla(202, 77%, 17%, 0.829);
-  font-family: Verdana, Geneva, Tahoma, sans-serif}
-  table {padding: 20px;}
-  table td {border: 20px;
-            padding: 8px;
-          text-align: center}
-  td strong {
-    font-weight: bold;
-     color: rgba(7, 42, 61, 0.829)}
-  i {font-size: 22px;
-  color: rgba(7, 42, 61, 0.829);}
-  tbody {font-family: Verdana, Geneva, Tahoma, sans-serif;
-    font-weight: bold;
-  color: rgba(7, 42, 61, 0.829)}
-  thead {font-family: Verdana, Geneva, Tahoma, sans-serif;
-  color:rgba(7, 42, 61, 0.829)}
-  td {font-family: Verdana, Geneva, Tahoma, sans-serif;
-  color:rgba(7, 42, 61, 0.829)}
-  a {font-family: Verdana, Geneva, Tahoma, sans-serif;
-  color: rgba(7, 42, 61, 0.829)}
+  <style>
+    h5 {
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
+      color: hsla(202, 77%, 17%, 0.829);
+    }
+    p {
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
+      color: hsla(202, 77%, 17%, 0.829);
+    }
+    small {
+      font-weight: bold;
+      color: hsla(202, 77%, 17%, 0.829);
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
+    }
+    table {
+      padding: 20px;
+    }
+    table td {
+      border: 20px;
+      padding: 8px;
+      text-align: center;
+    }
+    td strong {
+      font-weight: bold;
+      color: rgba(7, 42, 61, 0.829);
+    }
+    i {
+      font-size: 22px;
+      color: rgba(7, 42, 61, 0.829);
+    }
+    tbody {
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
+      font-weight: bold;
+      color: rgba(7, 42, 61, 0.829);
+    }
+    thead {
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
+      color: rgba(7, 42, 61, 0.829);
+    }
+    td {
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
+      color: rgba(7, 42, 61, 0.829);
+    }
+    a {
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
+      color: rgba(7, 42, 61, 0.829);
+    }
+    .header {
+      position: fixed;
+      z-index: 200;
+      top: 3%;
+      left: 50%;
+    }
   </style>
 </head>
 
-
+<h1 class="header">
+  Cines
+</h1>
 <!-- Esta es la parte de lista de cines -->
-
-  <input type="text" class="form-control" placeholder="Buscar por Cine"
-         [(ngModel)]="searchTerm">
-  <div class="input-group-append">
-  <button class="btn btn-primary float-right" data-toggle="modal" data-target="#modalAddTheater">Agregar Cine</button>
+<div class="p-1 bg-light rounded rounded-pill shadow-sm mb-4 w-50 mx-auto">
+  <div class="input-group">
+    <div class="input-group-append">
+      <button
+        id="button-addon1"
+        type="submit"
+        class="btn btn-link text-primary"
+      >
+        <i class="fa fa-search"></i>
+      </button>
+    </div>
+    <input
+      type="search"
+      placeholder="Buscar por Cine"
+      [(ngModel)]="searchTerm"
+      aria-describedby="button-addon1"
+      class="form-control border-0 bg-light"
+    />
   </div>
+</div>
 
+<div class="container-fluid center row py-0 my-2   w-100">
+  <button
+    class="btn btn-primary mx-auto"
+    data-toggle="modal"
+    data-target="#modalAddTheater"
+  >
+    Agregar Cine
+  </button>
+</div>
 
 <style>
+  div {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: rgba(7, 42, 61, 0.829);
+  }
+  h4 {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: bold;
+    color: rgba(7, 42, 61, 0.829);
+  }
+  a {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: rgba(7, 42, 61, 0.829);
+  }
+  h5 {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: rgba(7, 42, 61, 0.829);
+  }
+</style>
 
-    div {font-family: Verdana, Geneva, Tahoma, sans-serif; color:rgba(7, 42, 61, 0.829)}
-    h4 {font-family: Verdana, Geneva, Tahoma, sans-serif; font-weight: bold; color:rgba(7, 42, 61, 0.829)}
-    a {font-family: Verdana, Geneva, Tahoma, sans-serif; color:rgba(7, 42, 61, 0.829)}
-    h5 {font-family: Verdana, Geneva, Tahoma, sans-serif; color:rgba(7, 42, 61, 0.829)}
-    </style>
-
-<section class="row mt-5">
-
-    <div class="col">
-        <section id="managedTheaters" class="mt-5">
+<section class="row mt-3">
+  <div class="col">
+    <section id="managedTheaters" class="mt-0">
       <div class="container">
         <div class="row">
-          <div class="col-xs-12 col-sm-6 col-md-4" *ngFor="let theater of managedTheaters | managedFilter:searchTerm |  paginate: {itemsPerPage:3, currentPage: pageActual}; let i = index">
-            <div class="card_book">
-              <div class="card">
-                <div class="card-body text-center">
-
-             
-                  <div *ngIf="theater.Circuito == 'CNPL'">
-                    <img src ="assets/images/CinepolisLogo.ico">
-                  </div>
-                  <div *ngIf="theater.Circuito == 'CNMX'">
-                      <img src ="assets/images/Cinemex.ico">
-                  </div>
-
-                  <div *ngIf="theater.Circuito != 'CNPL' && theater.Circuito != 'CNMX'">
-                      <img src ="assets/images/Others.png">
-                  </div>
-
-              
-                  <h5 routerLink="/cinedetail/{{theater.key}}" class="card-title">{{theater.Cine}}</h5>
-                  <p class="card-text">
-                    {{theater.Circuito }}
-                  </p>
-                    <p class="card-text">
-                      {{theater.Ciudad}}
-                    </p>
-                    <p class="card-text">
-                      {{theater.Estado}}
-                    </p>
-                    <p class="card-text">
-                        {{theater.RtkXrefNo}}
-                      </p>
-                    <footer>
-                        <button class="btn btn-primary" data-toggle="modal" data-target="#modalAddTheater" (click)="onPreUpdateTheater(theater)">Actualizar</button>
-                        &#160;&#160;&#160; 
-                        <button class="btn btn-danger" (click)="deleteManagedTheater(theater.key)">Eliminar</button>
-                    </footer>
+          <ul class="list-group  mx-auto mb-3">
+            <li
+              class="list-group-item w-100 d-flex align-items-center my-1"
+              *ngFor="
+                let theater of managedTheaters
+                  | managedFilter: searchTerm
+                  | paginate: { itemsPerPage: 5, currentPage: pageActual };
+                let i = index
+              "
+            >
+              <div class="image-parent mr-2">
+                <div *ngIf="theater.Circuito == 'CNPL'">
+                  <img
+                    class="img-fluid"
+                    style="max-width: 50px; border-radius: 20px;"
+                    src="assets/images/Cinepolis-Logo.png"
+                  />
+                </div>
+                <div *ngIf="theater.Circuito == 'CNMX'">
+                  <img
+                    class="img-fluid"
+                    src="assets/images/Cinemex-Logo.jpeg"
+                    style="max-width: 50px; border-radius: 20px;"
+                  />
+                </div>
+                <div
+                  *ngIf="
+                    theater.Circuito != 'CNPL' && theater.Circuito != 'CNMX'
+                  "
+                >
+                  <img
+                    src="assets/images/Others.png"
+                    class="img-fluid"
+                    style="max-width: 50px; border-radius: 20px;"
+                  />
                 </div>
               </div>
-            </div>
-          </div>
+              <a
+                routerLink="/cinedetail/{{ theater.key }}"
+                class="mr-auto pr-2"
+              >
+                {{ theater.Cine }} {{ theater.Circuito }} {{ theater.Ciudad }}
+                {{ theater.Estado }} {{ theater.RtkXrefNo }}
+              </a>
+
+              <button
+                class="btn btn-primary"
+                data-toggle="modal"
+                data-target="#modalAddTheater"
+                (click)="onPreUpdateTheater(theater)"
+              >
+                Actualizar
+              </button>
+              &#160;&#160;&#160;
+              <button
+                class="btn btn-danger mr-2"
+                (click)="deleteManagedTheater(theater.key)"
+              >
+                Eliminar
+              </button>
+            </li>
+          </ul>
         </div>
       </div>
-      <pagination-controls (pageChange)="pageActual = $event"></pagination-controls>
+      <pagination-controls
+        (pageChange)="pageActual = $event"
+      ></pagination-controls>
     </section>
     <app-add-theaters></app-add-theaters>
-  
-  
- 
+  </div>
+</section>

@@ -1,60 +1,118 @@
 <style>
+  div {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: rgba(7, 42, 61, 0.829);
+  }
+  h4 {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: bold;
+    color: rgba(7, 42, 61, 0.829);
+  }
+  a {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: rgba(7, 42, 61, 0.829);
+  }
+  h5 {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: rgba(7, 42, 61, 0.829);
+  }
 
-    div {font-family: Verdana, Geneva, Tahoma, sans-serif; color:rgba(7, 42, 61, 0.829)}
-    h4 {font-family: Verdana, Geneva, Tahoma, sans-serif; font-weight: bold; color:rgba(7, 42, 61, 0.829)}
-    a {font-family: Verdana, Geneva, Tahoma, sans-serif; color:rgba(7, 42, 61, 0.829)}
-    h5 {font-family: Verdana, Geneva, Tahoma, sans-serif; color:rgba(7, 42, 61, 0.829)}
-    </style>
-    <style>
-        h6 {text-align: center;}
-        </style>
-        
-        <div class="card-deck">
-        <div class="col-md-6">
-            <div class="card-body">
-                <div class="card-text-right">
-                  <h5>2019</h5>
-                  </div>
-                </div>
-              </div>
-                  <div class="col-md-6">
-                      <div class="card-body">
-                          <div class="input-group">
-                              <input type="text" class="form-control" placeholder="Buscar por Titulo"
-                              [(ngModel)]="searchTerm" style="max-width: 25rem;">
-                              <div class="input-group-append">
-                                  <button class="btn btn-primary float-right mb-3" data-toggle="modal" data-target="#modalAddDisneyTitle">Agregar Titulo</button>
-                              </div>
-                            </div>
-                        </div>
-                      </div>
-                    </div>
-                    
+  h6 {
+    text-align: center;
+  }
+  .header {
+    position: fixed;
+    z-index: 200;
+    top: 3%;
+    left: 40%;
+  }
+</style>
+
+<h1 class="header">
+  Peliculas Disney
+</h1>
+
+<div class="card-deck">
+  <div class="col-md-6">
+    <div class="card-body">
+      <div class="card-text-right">
+        <h5>2019</h5>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="card-body">
+      <div class="input-group">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Buscar por Titulo"
+          [(ngModel)]="searchTerm"
+          style="max-width: 25rem;"
+        />
+        <div class="input-group-append">
+          <button
+            class="btn btn-primary float-right mb-3"
+            data-toggle="modal"
+            data-target="#modalAddDisneyTitle"
+          >
+            Agregar Titulo
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <section class="row mt-5">
-    <div class="col">
-  <section id="disney" class="mt-5">
+  <div class="col">
+    <section id="disney" class="mt-5">
       <div class="container">
         <div class="row">
-          <div class="col-xs-12 col-sm-6 col-md-4" *ngFor="let disneyTitle of disneyTitles| titleDisneyFilter:searchTerm | paginate: {itemsPerPage:3, currentPage: pageActual}; let i = index">
+          <div
+            class="col-xs-12 col-sm-6 col-md-4"
+            *ngFor="
+              let disneyTitle of disneyTitles
+                | titleDisneyFilter: searchTerm
+                | paginate: { itemsPerPage: 3, currentPage: pageActual };
+              let i = index
+            "
+          >
             <div class="card_book">
               <div class="card">
                 <div class="card-body text-center">
                   <p>
-                    <img class="img-fluid" src="{{disneyTitle.imageURL}}">
+                    <img class="img-fluid" src="{{ disneyTitle.imageURL }}" />
                   </p>
-                  <h4 routerLink="/waltDisneyTitle/{{disneyTitle.key}}" class="card-title">{{disneyTitle.movieName}}</h4>
-                    <p class="card-text">
-                      {{disneyTitle.releaseDate}}
-                    </p>
-                    <p class="card-text">
-                      {{disneyTitle.studio}}
-                    </p>
-                    <footer>
-                        <button class="btn btn-primary" data-toggle="modal" data-target="#modalAddDisneyTitle" (click)="onPreUpdateDisneyTitle(disneyTitle)">Actualizar</button>
-                        &#160;&#160;&#160; 
-                        <button class="btn btn-danger" (click)="deleteDisneyTitle(disneyTitle.key)">Eliminar</button>
-                    </footer>
+                  <h4
+                    routerLink="/waltDisneyTitle/{{ disneyTitle.key }}"
+                    class="card-title"
+                  >
+                    {{ disneyTitle.movieName }}
+                  </h4>
+                  <p class="card-text">
+                    {{ disneyTitle.releaseDate }}
+                  </p>
+                  <p class="card-text">
+                    {{ disneyTitle.studio }}
+                  </p>
+                  <footer>
+                    <button
+                      class="btn btn-primary"
+                      data-toggle="modal"
+                      data-target="#modalAddDisneyTitle"
+                      (click)="onPreUpdateDisneyTitle(disneyTitle)"
+                    >
+                      Actualizar
+                    </button>
+                    &#160;&#160;&#160;
+                    <button
+                      class="btn btn-danger"
+                      (click)="deleteDisneyTitle(disneyTitle.key)"
+                    >
+                      Eliminar
+                    </button>
+                  </footer>
                 </div>
               </div>
             </div>
@@ -62,5 +120,9 @@
         </div>
       </div>
     </section>
-    <pagination-controls (pageChange)="pageActual = $event"></pagination-controls>
+    <pagination-controls
+      (pageChange)="pageActual = $event"
+    ></pagination-controls>
     <app-add-walt-disney-title></app-add-walt-disney-title>
+  </div>
+</section>

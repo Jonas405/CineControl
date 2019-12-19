@@ -1,40 +1,114 @@
 <style>
+  div {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: rgba(7, 42, 61, 0.829);
+  }
+  h4 {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: bold;
+    color: rgba(7, 42, 61, 0.829);
+  }
+  a {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: rgba(7, 42, 61, 0.829);
+  }
+  h5 {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: rgba(7, 42, 61, 0.829);
+  }
 
-    div {font-family: Verdana, Geneva, Tahoma, sans-serif; color:rgba(7, 42, 61, 0.829)}
-    h4 {font-family: Verdana, Geneva, Tahoma, sans-serif; font-weight: bold; color:rgba(7, 42, 61, 0.829)}
-    a {font-family: Verdana, Geneva, Tahoma, sans-serif; color:rgba(7, 42, 61, 0.829)}
-    h5 {font-family: Verdana, Geneva, Tahoma, sans-serif; color:rgba(7, 42, 61, 0.829)}
-    </style>
+  .header {
+    position: fixed;
+    z-index: 200;
+    top: 3%;
+    left: 50%;
+  }
+</style>
 
-<form class="form-inline md-form form-sm">
-    <mdb-icon fas icon="search" aria-hidden="true"></mdb-icon>
-    <input type="text" class="form-control form-control-sm ml-3 w-75" placeholder="Buscar" aria-label="Search"
-     [(ngModel)]="searchTerm" mdbInput>
-  </form>
+<h1 class="header">
+  Checkers
+</h1>
 
-<section class="row mt-5">
-    <div class="col">
-  <button class="btn btn-primary float-right mb-3" data-toggle="modal" data-target="#modalAddChecker">Agregar Checker</button>
-  <section id="checkers" class="mt-5">
+<div class="p-1 bg-light rounded rounded-pill shadow-sm mb-4 w-50 mx-auto">
+  <div class="input-group">
+    <div class="input-group-append">
+      <button
+        id="button-addon1"
+        type="submit"
+        class="btn btn-link text-primary"
+      >
+        <i class="fa fa-search"></i>
+      </button>
+    </div>
+    <input
+      type="text"
+      placeholder="Buscar"
+      aria-label="Search"
+      [(ngModel)]="searchTerm"
+      class="form-control border-0 bg-light"
+      mdbInput
+    />
+  </div>
+</div>
+
+<div class="container-fluid center row py-0 my-2   w-100">
+  <button
+    class="btn btn-primary mb-0 mx-auto"
+    data-toggle="modal"
+    data-target="#modalAddChecker"
+  >
+    Agregar Checker
+  </button>
+</div>
+
+<section class="row">
+  <div class="col">
+    <section id="checkers" class="mt-5">
       <div class="container">
         <div class="row">
-          <div class="col-xs-12 col-sm-6 col-md-4" *ngFor="let checker of checkers | checkerFilter:searchTerm" >
+          <div
+            class="col-xs-12 col-sm-6 col-md-4"
+            *ngFor="let checker of checkers | checkerFilter: searchTerm"
+          >
             <div class="card_book">
               <div class="card">
                 <div class="card-body text-center">
                   <p>
-                    <img class="img-fluid" src="{{checker.imageURL}}" alt="{{checker.imageURL}}">
+                    <img
+                      class="img-fluid"
+                      src="{{ checker.imageURL }}"
+                      alt="{{ checker.imageURL }}"
+                      style="max-width: 250px; max-height: 250px;"
+                    />
                   </p>
-                  <h4 routerLink="/checkersdetail/{{checker.key}}" class="card-title">{{checker.checkerName}}</h4>
+                  <h4
+                    routerLink="/checkersdetail/{{ checker.key }}"
+                    class="card-title"
+                  >
+                    {{ checker.checkerName }}
+                  </h4>
                   <p class="card-text">
-                    {{checker.checkerMail }}
+                    {{ checker.checkerMail }}
                   </p>
-                 
-                    <footer>
-                      <button class="btn btn-primary" style="background:rgb(10,137,241)" data-toggle="modal" data-target="#modalAddChecker" (click)="onPreUpdateChecker(checker)">Actualizar</button>
-                      &#160;&#160;&#160; 
-                      <button class="btn btn-danger" (click)="deleteChecker(checker.key)">Eliminar</button>
-                    </footer>
+
+                  <footer>
+                    <button
+                      class="btn btn-primary"
+                      style="background:rgb(10,137,241)"
+                      data-toggle="modal"
+                      data-target="#modalAddChecker"
+                      (click)="onPreUpdateChecker(checker)"
+                    >
+                      Actualizar
+                    </button>
+                    &#160;&#160;&#160;
+                    <button
+                      class="btn btn-danger"
+                      (click)="deleteChecker(checker.key)"
+                    >
+                      Eliminar
+                    </button>
+                  </footer>
                 </div>
               </div>
             </div>
@@ -42,4 +116,6 @@
         </div>
       </div>
     </section>
-  <app-add-checker></app-add-checker>
+    <app-add-checker></app-add-checker>
+  </div>
+</section>
