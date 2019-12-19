@@ -5,5 +5,6 @@ export interface AssigTheatersInterface {
     ciudad?: string;
     direccion?: string;
     estado?: string;
+    key?: string;
     Rtk?: string
   }

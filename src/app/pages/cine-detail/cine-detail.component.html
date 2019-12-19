@@ -6,7 +6,7 @@
 
         <div class="card-body">
           <h5 class="card-title"><i class='fas fa-map-marker-alt' style='font-size:24px'></i>&#160;&#160; Estado: {{theater.Estado}}</h5>
-          <p class="card-text"><i class='fas fa-search-location' style='font-size:24px'></i>&#160; Direccion exacta del cine</p>
+          <p class="card-text"><i class='fas fa-search-location' style='font-size:24px'></i>&#160; Direccion: {{theater.Direccion}}</p>
         </div>
       </div>
 
@@ -14,7 +14,7 @@
     <div class="card col-4 col-sm-4 col-md-4 col-lg-4"  *ngFor="let theater of toArray(theater.Salas)| paginate: {itemsPerPage:4, currentPage: pageActual}; let i = index" >
         <div class="card-body">
             <h5 class="card-title">Sala {{theater.RoomNumber}}</h5>
-            <p class="card-text">  {{theater.RoomCapacity}}  Butacas.</p>
+            <p class="card-text">{{theater.RoomCapacity}}  Butacas.</p>
           </div>
     </div>
   </div>

@@ -9,6 +9,7 @@ export interface TheatersInterface {
     circuito?: string;
     ciudad?: string;
     direccion?: string;
+    Direccion?: string;
     estado?: string;
     Estado?: string;
     gerente?: string;
@@ -26,6 +27,7 @@ export interface TheatersInterface {
     circuito?: string;
     ciudad?: string;
     direccion?: string;
+    Direccion?: string;
     estado?: string;
     Estado?: string;
     gerente?: string;
