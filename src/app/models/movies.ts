@@ -6,6 +6,7 @@ export interface MoviesInterface {
   imageURL?: string;
   file?: File;
   key?: string;
+  typeMovie?: string;
   
   }
   
@@ -16,5 +17,6 @@ studio?: string;
 imageURL?: string;
 file?: File;
 key?: string;
+typeMovie?: string;
 }
   
