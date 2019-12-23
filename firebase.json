@@ -1,7 +1,7 @@
 {
   "hosting": {
     "public": "dist/CineControl",
-    "site": "cinecontrol-d59c7",
+    "site": "cinecontrolwaltdisneymx",
     "headers": [ {
       "source": "**/*.@(eot|otf|ttf|ttc|woff|font.css)",
       "headers": [ {

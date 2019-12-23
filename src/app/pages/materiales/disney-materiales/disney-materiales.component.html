@@ -16,7 +16,6 @@
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     color: rgba(7, 42, 61, 0.829);
   }
-
   .header {
     position: fixed;
     z-index: 200;
@@ -42,20 +41,68 @@
       </div>
       <input
         type="text"
-        placeholder="Buscar"
+        placeholder="Buscar Por Pelicula"
         aria-label="Search"
         [(ngModel)]="searchTerm"
         class="form-control border-0 bg-light"
       />
     </div>
   </div>
+
+  <div
+    class="container-fluid center row d-flex py-0 my-2  justify-content-center w-100"
+  >
+    <div class="dropdown mx-3">
+      <button
+        class="btn btn-secondary dropdown-toggle"
+        type="button"
+        id="dropdownMenuButton"
+        data-toggle="dropdown"
+        aria-haspopup="true"
+        aria-expanded="false"
+      >
+        Filtrar por materiales
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a
+          class="dropdown-item"
+          *ngFor="let material of materiales"
+          (click)="filterByMaterial(material)"
+          >{{ material }}</a
+        >
+      </div>
+    </div>
+
+    <div class="dropdown mx-3">
+      <button
+        class="btn btn-secondary dropdown-toggle"
+        type="button"
+        id="dropdownMenuButton"
+        data-toggle="dropdown"
+        aria-haspopup="true"
+        aria-expanded="false"
+      >
+        Filtrar por cine
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a
+          class="dropdown-item"
+          *ngFor="let cine of cines"
+          (click)="filterByCine(cine)"
+          >{{ cine }}</a
+        >
+      </div>
+    </div>
+  </div>
+  <!-- Actual search box -->
+
   <div class="container">
     <div class="row">
       <div
         class="col-xs-12 col-sm-6 col-md-4"
         *ngFor="
           let materialDisney of materialesDisney
-            | materialDisneyFilter: searchTerm 
+            | materialDisneyFilter: searchTerm
             | paginate: { itemsPerPage: 3, currentPage: pageActual };
           let i = index
         "
@@ -65,7 +112,7 @@
             <div class="card-body text-center">
               <p>
                 <img
-                  class="img-fluid"
+                  class="img-fluid cardImage"
                   src="{{ materialDisney.imageURL }}"
                   alt="{{ materialDisney.Encabezado }}"
                 />
@@ -106,7 +153,6 @@
 <!--    
 <section class="row mt-5">
     <div class="col">
-
         <div class="card-group">
             <div class="card">
               <img src="{{materialesDisney[0].imageURL}}" class="card-img-top" alt="...">
@@ -149,9 +195,6 @@
                 <p class="card-text">5 Cines</p>
                           <div class="card-group">
               <div class="card">
-
-
-
           <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
             <ngb-carousel>  
               <ng-template ngbSlide *ngFor="let materialDisney of materialesDisney; let i=index">  
@@ -165,10 +208,7 @@
         </div>
               </div>
             </div>
-
-
      
-
         
           
             
