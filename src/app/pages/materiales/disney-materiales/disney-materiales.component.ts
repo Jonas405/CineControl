@@ -45,6 +45,10 @@ export class DisneyMaterialesComponent implements OnInit {
     });
   }
 
+  resetFilter() {
+    this.getAllMaterialesDisney();
+  }
+
   filterByMaterial(material) {
     this.dataApi
       .getAllMaterialesSonyList()
