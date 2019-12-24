@@ -44,16 +44,18 @@
           <p class="card-text">{{ comment.cuerpo }}</p>
           <p class="card-text">{{ comment.fecha }}</p>
           <p class="card-text">{{ comment.timeStamp }}</p>
-          <i
-            class="fas fa-file"
-            src="{{ comment.url }}"
-            (click)="openFile(comment.url)"
-            width="500"
-            height="500"
-          ></i>
+
           <span class="oi oi-data-transfer-download"></span>
 
           <footer>
+            <a
+              src="{{ comment.url }}"
+              (click)="openFile(comment.url)"
+              class="btn btn-outline-info d-inline"
+            >
+              <i class="fas fa-file" width="500" height="500"></i>
+              Archivo: {{ comment.encabezado }}
+            </a>
             <button
               class="btn btn-primary float-right"
               style="background:rgb(10,137,241)"
