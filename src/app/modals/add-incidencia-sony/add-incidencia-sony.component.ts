@@ -26,6 +26,7 @@ export class AddIncidenciaSonyComponent implements OnInit {
     } else {
       // Update
       console.log("incidencia Update", incidenciaForm);
+      incidenciaForm.value.Aprovacion = "true";
       this.dataApi.updateIncidenciaPorAprobarSony(incidenciaForm.value); 
       this.dataApi.addIncidenciaAprobadaSony(incidenciaForm.value);
       this.dataApi.deleteIncidenciaPorAprobarSony(incidenciaForm.value.incidenciaKey).catch(err => console.log(err));

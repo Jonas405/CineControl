@@ -21,6 +21,12 @@
                         <input name="movieName" [(ngModel)]="this.dataApi.selectedDisneyTitle.movieName" >
                     </div>
 
+                    <div class="form-group col-md-6">
+                      <label for="typeMovie">Clasificación</label>
+                      <input name="typeMovie" [(ngModel)]="this.dataApi.selectedDisneyTitle.typeMovie" >
+                  </div>
+
+
                     <div class="text-center">
                       <img [src]="imgSrc" width="350px" height="250px" (click)="fileUploader.click()">
                     </div>

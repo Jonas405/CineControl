@@ -24,6 +24,7 @@ export class AddIncidenciaDisneyComponent implements OnInit {
       this.dataApi.addIncidenciaDisney(incidenciaForm.value);
     } else {
       // Update
+      incidenciaForm.value.Aprovacion = "true";
       console.log("incidencia Update", incidenciaForm);
       this.dataApi.updateIncidenciaPorAprobarDisney(incidenciaForm.value); 
       this.dataApi.addIncidenciaAprobadaDisney(incidenciaForm.value);
