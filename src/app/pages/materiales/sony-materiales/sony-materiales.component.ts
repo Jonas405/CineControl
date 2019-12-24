@@ -46,8 +46,12 @@ export class SonyMaterialesComponent implements OnInit {
   public isAdmin: any = null;
   public userUid: string = null;
   private user: UserInterface;
-  materiales: Array<Object>;
-  cines: Array<Object>;
+  materiales: Array<any>;
+  cines: Array<any>;
+  weeks: Array<any>;
+  materialsFilter = "Materiales";
+  cinesFilter = "Cines";
+  weeksFilter = "Semana";
 
   ngOnInit() {
     this.getAllMaterialesSony();
@@ -56,6 +60,9 @@ export class SonyMaterialesComponent implements OnInit {
   }
 
   filterByMaterial(material) {
+    this.materialsFilter = material;
+    this.cinesFilter = "Cines";
+    this.weeksFilter = "Semana";
     this.dataApi
       .getAllMaterialesSonyList()
       .snapshotChanges()
@@ -76,11 +83,11 @@ export class SonyMaterialesComponent implements OnInit {
       });
   }
 
-  resetFilter() {
-    this.getAllMaterialesSony();
-  }
-
   filterByCine(cine) {
+    this.cinesFilter = cine;
+    this.materialsFilter = "Materiales";
+    this.weeksFilter = "Semana";
+
     this.dataApi
       .getAllMaterialesSonyList()
       .snapshotChanges()
@@ -99,6 +106,37 @@ export class SonyMaterialesComponent implements OnInit {
 
         this.materialesSony = filtered;
       });
+  }
+  filterByWeek(week) {
+    this.cinesFilter = "Cines";
+    this.materialsFilter = "Materiales";
+    this.weeksFilter = week;
+
+    this.dataApi
+      .getAllMaterialesSonyList()
+      .snapshotChanges()
+      .pipe(
+        map(changes =>
+          changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
+        )
+      )
+      .subscribe(materialesSony => {
+        let filtered = [];
+        for (let i = 0; i < materialesSony.length; i++) {
+          if (materialesSony[i].Theater == week) {
+            filtered.push(materialesSony[i]);
+          }
+        }
+
+        this.materialesSony = filtered;
+      });
+  }
+
+  resetFilter() {
+    this.materialsFilter = "Materiales";
+    this.cinesFilter = "Cines";
+    this.weeksFilter = "Semana";
+    this.getAllMaterialesSony();
   }
 
   getCurrentUser() {
@@ -136,6 +174,12 @@ export class SonyMaterialesComponent implements OnInit {
           return item["Theater"];
         });
         this.cines = [...new Set(this.cines)];
+
+        //get an array with all the weeks
+        this.weeks = this.materialesSony.map(function(item) {
+          return item["Week"];
+        });
+        this.weeks = [...new Set(this.weeks)];
       });
   }
 

@@ -62,7 +62,7 @@
         aria-haspopup="true"
         aria-expanded="false"
       >
-        Filtrar por materiales
+        {{ materialsFilter }}
       </button>
       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
         <a
@@ -83,7 +83,7 @@
         aria-haspopup="true"
         aria-expanded="false"
       >
-        Filtrar por cine
+        {{ cinesFilter }}
       </button>
       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
         <a
@@ -91,6 +91,27 @@
           *ngFor="let cine of cines"
           (click)="filterByCine(cine)"
           >{{ cine }}</a
+        >
+      </div>
+    </div>
+
+    <div class="dropdown mx-3">
+      <button
+        class="btn btn-secondary dropdown-toggle"
+        type="button"
+        id="dropdownMenuButton"
+        data-toggle="dropdown"
+        aria-haspopup="true"
+        aria-expanded="false"
+      >
+        {{ weeksFilter }}
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a
+          class="dropdown-item"
+          *ngFor="let week of weeks"
+          (click)="filterByCine(cine)"
+          >{{ week }}</a
         >
       </div>
     </div>
