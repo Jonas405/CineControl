@@ -27,8 +27,12 @@ export class DisneyMaterialesComponent implements OnInit {
   private user: UserInterface;
   pageActual = 1;
   searchTerm: string;
-  materiales: Array<Object>;
-  cines: Array<Object>;
+  materiales: Array<any>;
+  cines: Array<any>;
+  weeks: Array<any>;
+  materialsFilter = "Materiales";
+  cinesFilter = "Cines";
+  weeksFilter = "Semana";
 
   ngOnInit() {
     this.getAllMaterialesDisney();
@@ -45,11 +49,10 @@ export class DisneyMaterialesComponent implements OnInit {
     });
   }
 
-  resetFilter() {
-    this.getAllMaterialesDisney();
-  }
-
   filterByMaterial(material) {
+    this.materialsFilter = material;
+    this.cinesFilter = "Cines";
+    this.weeksFilter = "Semana";
     this.dataApi
       .getAllMaterialesSonyList()
       .snapshotChanges()
@@ -70,6 +73,9 @@ export class DisneyMaterialesComponent implements OnInit {
       });
   }
   filterByCine(cine) {
+    this.cinesFilter = cine;
+    this.materialsFilter = "Materiales";
+    this.weeksFilter = "Semana";
     this.dataApi
       .getAllMaterialesDisneyList()
       .snapshotChanges()
@@ -88,6 +94,35 @@ export class DisneyMaterialesComponent implements OnInit {
 
         this.materialesDisney = filtered;
       });
+  }
+
+  filterByWeek(week) {
+    this.cinesFilter = "Cines";
+    this.materialsFilter = "Materiales";
+    this.weeksFilter = week;
+
+    this.dataApi
+      .getAllMaterialesDisneyList()
+      .snapshotChanges()
+      .pipe(
+        map(changes =>
+          changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
+        )
+      )
+      .subscribe(materialesDisney => {
+        let filtered = [];
+        for (let i = 0; i < materialesDisney.length; i++) {
+          if (materialesDisney[i].Week == week) {
+            filtered.push(materialesDisney[i]);
+          }
+        }
+
+        this.materialesDisney = filtered;
+      });
+  }
+
+  resetFilter() {
+    this.getAllMaterialesDisney();
   }
 
   //---------- Using RealTime database -------------------
@@ -115,6 +150,12 @@ export class DisneyMaterialesComponent implements OnInit {
           return item["Theater"];
         });
         this.cines = [...new Set(this.cines)];
+
+        //get an array with all the weeks
+        this.weeks = this.materialesDisney.map(function(item) {
+          return item["Week"];
+        });
+        this.weeks = [...new Set(this.weeks)];
       });
   }
 

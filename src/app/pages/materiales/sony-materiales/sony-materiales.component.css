@@ -1,3 +1,7 @@
 .dropdown-item {
   cursor: pointer;
 }
+
+.dropdown-item:hover {
+  background: rgb(179, 179, 179);
+}

@@ -93,6 +93,26 @@
         >
       </div>
     </div>
+    <div class="dropdown mx-3">
+      <button
+        class="btn btn-secondary dropdown-toggle"
+        type="button"
+        id="dropdownMenuButton"
+        data-toggle="dropdown"
+        aria-haspopup="true"
+        aria-expanded="false"
+      >
+        {{ weeksFilter }}
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a
+          class="dropdown-item"
+          *ngFor="let week of weeks"
+          (click)="filterByWeek(week)"
+          >{{ week }}</a
+        >
+      </div>
+    </div>
     <button class="btn btn-secondary" type="button" (click)="resetFilter()">
       Resetear filtros
     </button>

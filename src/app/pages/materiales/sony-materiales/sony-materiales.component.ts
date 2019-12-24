@@ -123,7 +123,7 @@ export class SonyMaterialesComponent implements OnInit {
       .subscribe(materialesSony => {
         let filtered = [];
         for (let i = 0; i < materialesSony.length; i++) {
-          if (materialesSony[i].Theater == week) {
+          if (materialesSony[i].Week == week) {
             filtered.push(materialesSony[i]);
           }
         }
