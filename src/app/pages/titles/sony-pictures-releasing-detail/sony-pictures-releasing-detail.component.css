@@ -1,0 +1,14 @@
+.movie-card {
+  max-width: 900px;
+}
+
+.card-img-right {
+  height: 400px;
+  border-radius: 0 3px 3px 0;
+  width: 34%;
+}
+
+.flex-auto {
+  -ms-flex: 0 0 auto;
+  flex: 0 0 auto;
+}
