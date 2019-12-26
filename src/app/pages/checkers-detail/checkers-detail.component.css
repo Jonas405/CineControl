@@ -1,6 +1,14 @@
 agm-map {
-    height: 300px;
-  }
+  height: 300px;
+}
 
-  h5 span {color: blue;}
-  p span {color: coral;}
+h5 span {
+  color: blue;
+}
+p span {
+  color: coral;
+}
+
+.image-parent {
+  max-width: 40px;
+}

@@ -1,37 +1,89 @@
- <style>
-  
-            h5 span {font-family: Verdana, Geneva, Tahoma, sans-serif; color:rgba(7, 42, 61, 0.829)}
-            p span {font-family: Verdana, Geneva, Tahoma, sans-serif; color:rgba(7, 42, 61, 0.829)}
-            </style>
-      
-      <div class="card w-100">
-          <button class="btn btn-primary float-right mb-3" data-toggle="modal" data-target="#modalAddTheaterChecker">Asignar Cine</button>
- 
-              <div class="card-body">
-                  
-                  <h5 class="card-title"><img class="img-fluid" width="25" height="25" src="{{checker.imageURL}}" alt="{{checker.imageURL}}"> &#160;&#160;Checker: {{checker.checkerName}}</h5>
-                <p class="card-text"><i class='far fa-envelope' style='font-size:24px'></i>&#160;&#160; Email: {{checker.checkerMail}}</p>
-              </div>
-      
-            </div>
-      
-        <div class="card-deck">
-          <div class="card col-3 col-sm-3 col-md-3 col-lg-3"  *ngFor="let theater of toArray(checker.asignedTheaters)| paginate: {itemsPerPage:3, currentPage: pageActual}; let i = index" >
-            <div class="card-body">
-              <h5  routerLink="/cinedetail/{{theater.key}}"  class="card-title">{{theater.Cine}}</h5>
-              <p class="card-text">  {{theater.Ciudad}}</p>
-              <p class="card-text">{{theater.Circuito}}</p>
-              <footer>
-                <!--   <button class="btn btn-primary" data-toggle="modal" data-target="#modalAddTheaterChecker" (click)="onPreUpdateAssigTheater(theater)">Update</button> -->
-                  &#160;&#160;&#160; 
-                  <button class="btn btn-danger" (click)="deleteAssigTheater(theater.key)">Delete</button>
-              </footer>
-            </div>
-          </div>
-        </div>
-        <pagination-controls (pageChange)="pageActual = $event"></pagination-controls>
-        <app-asig-theater-checker></app-asig-theater-checker>
-      
+<style>
+  h5 span {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: rgba(7, 42, 61, 0.829);
+  }
+  p span {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: rgba(7, 42, 61, 0.829);
+  }
+</style>
+
+<div class="card w-100">
+  <button
+    class="btn btn-primary float-right mb-3"
+    data-toggle="modal"
+    data-target="#modalAddTheaterChecker"
+  >
+    Asignar Cine
+  </button>
+
+  <div class="card-body">
+    <h5 class="card-title">
+      <img
+        class="img-fluid"
+        width="25"
+        height="25"
+        src="{{ checker.imageURL }}"
+        alt="{{ checker.imageURL }}"
+      />
+      &#160;&#160;Checker: {{ checker.checkerName }}
+    </h5>
+    <p class="card-text">
+      <i class="far fa-envelope" style="font-size:24px"></i>&#160;&#160; Email:
+      {{ checker.checkerMail }}
+    </p>
+  </div>
+</div>
+
+<ul class="list-group  mx-auto mb-3">
+  <li
+    class="list-group-item w-100 d-flex align-items-center my-1"
+    *ngFor="
+      let theater of toArray(checker.asignedTheaters)
+        | paginate: { itemsPerPage: 5, currentPage: pageActual };
+      let i = index
+    "
+  >
+    <div class="image-parent mr-2">
+      <div *ngIf="theater.Circuito == 'CNPL'">
+        <img
+          class="img-fluid"
+          style="max-width: 50px; border-radius: 20px;"
+          src="assets/images/Cinepolis-Logo.png"
+        />
+      </div>
+      <div *ngIf="theater.Circuito == 'CNMX'">
+        <img
+          class="img-fluid"
+          src="assets/images/Cinemex-Logo.jpeg"
+          style="max-width: 50px; border-radius: 20px;"
+        />
+      </div>
+      <div *ngIf="theater.Circuito != 'CNPL' && theater.Circuito != 'CNMX'">
+        <img
+          src="assets/images/Others.png"
+          class="img-fluid"
+          style="max-width: 50px; border-radius: 20px;"
+        />
+      </div>
+    </div>
+    <a routerLink="/cinedetail/{{ theater.key }}" class="mr-auto pr-2">
+      {{ theater.Cine }} {{ theater.Circuito }} {{ theater.Ciudad }}
+      {{ theater.Estado }} {{ theater.RtkXrefNo }}
+    </a>
+    &#160;&#160;&#160;
+    <button class="btn btn-danger" (click)="deleteAssigTheater(theater.key)">
+      Eliminar
+    </button>
+  </li>
+</ul>
+<pagination-controls
+  class="d-flex justify-content-center center"
+  (pageChange)="pageActual = $event"
+></pagination-controls>
+<app-asig-theater-checker></app-asig-theater-checker>
+
 <!--        
     <h2>Checker Ubication</h2>
     <agm-map [latitude]="lat" [longitude]="lng">
