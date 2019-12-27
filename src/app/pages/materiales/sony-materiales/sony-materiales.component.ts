@@ -110,7 +110,7 @@ export class SonyMaterialesComponent implements OnInit {
   filterByWeek(week) {
     this.cinesFilter = "Cines";
     this.materialsFilter = "Materiales";
-    this.weeksFilter = week;
+    this.weeksFilter = "Semana: " + week;
 
     this.dataApi
       .getAllMaterialesSonyList()
