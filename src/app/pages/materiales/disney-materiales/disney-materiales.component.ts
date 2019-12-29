@@ -122,6 +122,9 @@ export class DisneyMaterialesComponent implements OnInit {
   }
 
   resetFilter() {
+    this.weeksFilter = "Semana";
+    this.cinesFilter = "Cines";
+    this.materialsFilter = "Materiales";
     this.getAllMaterialesDisney();
   }
 
