@@ -20,14 +20,12 @@ export class SonyPicturesReleasingDetailComponent implements OnInit {
 
     this.route.params.subscribe(params => {
       const id = params.id;
-      console.log("ID movie", id);
       if (id) {
         this.dataApi.getSonyTitleByID(id).snapshotChanges()
           .subscribe(res => {
             if ((res.payload.exists())) {
               this.movie = res.payload.toJSON() as MovieInterface;
               this.movie.key = res.key;
-              console.log("Movie Res", this.movie);
             } else {
             //  this.notificationService.dispatchErrorMessage('Todo does not exist');
               this.router.navigate(['/cinema']);

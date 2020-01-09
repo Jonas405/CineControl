@@ -36,7 +36,7 @@ export class DisneyMaterialesComponent implements OnInit {
 
   ngOnInit() {
     this.getAllMaterialesDisney();
-    this.getCurrentUser();
+    // this.getCurrentUser();
   }
 
   getCurrentUser() {
@@ -163,7 +163,6 @@ export class DisneyMaterialesComponent implements OnInit {
   }
 
   deleteMaterialDisney(materialDisneyKey: string) {
-    console.log("SELECTED", materialDisneyKey);
     const confirmacion = confirm("Are you sure?");
     if (confirmacion) {
       this.dataApi
@@ -173,7 +172,6 @@ export class DisneyMaterialesComponent implements OnInit {
   }
 
   onPreUpdateMaterialDisney(materialDisney: MaterialDisneyInterface) {
-    console.log("ON PRE UPGRADE", materialDisney);
     this.dataApi.selectedChecker = Object.assign({}, materialDisney);
   }
 }

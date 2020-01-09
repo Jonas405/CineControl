@@ -24,8 +24,8 @@ export class CinemaComponent implements OnInit {
     roles: {}
   };
 
-  
-  
+
+
   //private theaters: TheatersInterface[];
   public managedTheaters : ManagedTheatersInterface[];
   public isAdmin: any = null;
@@ -34,12 +34,12 @@ export class CinemaComponent implements OnInit {
 
   ngOnInit() {
    // this.getListTheaters();
-    this.getCurrentUser();
-    this.getManagedTheatersList() 
+    // this.getCurrentUser()
+    this.getManagedTheatersList()
 
   }
 
-   
+
   getCurrentUser() {
     this.authService.isAuth().subscribe(user => {
       if (user) {
@@ -62,21 +62,18 @@ export class CinemaComponent implements OnInit {
     ).subscribe(managedTheaters => {
       this.managedTheaters = managedTheaters;
      // this.applyFilters();
-      console.log("ManagedTheaters", this.managedTheaters)
     });
   }
 
   deleteManagedTheater(managedTheatersKey: string){
-    console.log("SELECTED", managedTheatersKey);
     const confirmacion = confirm('Are you sure?');
     if (confirmacion){
       this.dataApi.deleteManagedTheater(managedTheatersKey).catch(err => console.log(err));
     }
-  
+
   }
 
   onPreUpdateTheater(theater: ManagedTheaterInterface){
-    console.log("ON PRE UPGRADE", theater)
     this.dataApi.selectedManagedTheater = Object.assign({}, theater);
   }
 
@@ -125,7 +122,7 @@ export class CinemaComponent implements OnInit {
     this.applyFilters()
   } */
   //------------------ Using CloudFireStore database ------------
-  /* 
+  /*
 
   getListTheaters() {
     this.dataApi.getAllTheaters()

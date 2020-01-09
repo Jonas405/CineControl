@@ -24,12 +24,9 @@ export class LoginComponent implements OnInit {
   ngOnInit() {}
 
   onLogIn(f: NgForm): void {
-    console.log("email", this.email);
-    console.log("password", this.password);
     this.authService
       .loginEmailUser(this.email, this.password)
       .then(res => {
-        console.log("resUser", res);
         this.onLoginRedirect();
       })
       .catch(err => {

@@ -25,16 +25,16 @@ export class HomeComponent implements OnInit {
   public userUid: string = null;
   private user: UserInterface;
 
-  
+
 
   ngOnInit() {
     this.getAllCheckers();
-    this.getCurrentUser();
+    // this.getCurrentUser();
     this.getManagedTheatersList();
-  
+
   }
 
- 
+
   getCurrentUser() {
     this.authService.isAuth().subscribe(user => {
       if (user) {
@@ -45,10 +45,10 @@ export class HomeComponent implements OnInit {
     })
   }
 
-  
+
   //------- Get First elements -------
- 
-  
+
+
 
   //---------- Using RealTime database -------------------
 
@@ -61,25 +61,22 @@ export class HomeComponent implements OnInit {
       )
     ).subscribe(checkers => {
       this.checkers = checkers;
-      console.log("Checkers Info", this.checkers);
-      
+
     });
   }
 
   deleteChecker(checkerKey: string){
-    console.log("SELECTED", checkerKey);
     const confirmacion = confirm('Are you sure?');
     if (confirmacion){
       this.dataApi.deleteChecker(checkerKey).catch(err => console.log(err));
     }
-  
+
   }
 
   onPreUpdateChecker(checker: CheckerInterface){
-    console.log("ON PRE UPGRADE", checker)
     this.dataApi.selectedChecker = Object.assign({}, checker);
   }
-  
+
 
   getManagedTheatersList() {
     this.dataApi.getManagedTheatersList().snapshotChanges().pipe(
@@ -90,7 +87,6 @@ export class HomeComponent implements OnInit {
       )
     ).subscribe(managedTheaters => {
       this.managedTheaters = managedTheaters;
-      console.log("ManagedTheaters", this.managedTheaters)
     });
   }
 
@@ -98,13 +94,12 @@ export class HomeComponent implements OnInit {
     return Object.keys(asignedTheaters).map(key => ({
       key,
       ...asignedTheaters[key]
-     
+
     }))
-   
+
   }
 
 
 }
 
 
-  

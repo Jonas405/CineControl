@@ -23,7 +23,7 @@ export class SonyPicturesReleasingComponent implements OnInit {
     photoUrl: '',
     roles: {}
   };
-  
+
   //private theaters: TheatersInterface[];
   public sonyTitles : MoviesInterface[];
   public isAdmin: any = null;
@@ -32,12 +32,12 @@ export class SonyPicturesReleasingComponent implements OnInit {
 
   ngOnInit() {
    // this.getListTheaters();
-    this.getCurrentUser();
-    this.getSonyTitlesList() 
+    // this.getCurrentUser();
+    this.getSonyTitlesList()
 
   }
 
-   
+
   getCurrentUser() {
     this.authService.isAuth().subscribe(user => {
       if (user) {
@@ -59,25 +59,22 @@ export class SonyPicturesReleasingComponent implements OnInit {
       )
     ).subscribe(sonyTitles => {
       this.sonyTitles = sonyTitles;
-      console.log("Sony Titles", this.sonyTitles)
     });
   }
 
   deleteSonyTitle(sonyTitleKey: string){
-    console.log("SELECTED", sonyTitleKey);
     const confirmacion = confirm('Are you sure?');
     if (confirmacion){
       this.dataApi.deleteSonyTitle(sonyTitleKey).catch(err => console.log(err));
     }
-  
+
   }
 
   onPreUpdateSonyTitle(sonyTitle: MovieInterface){
-    console.log("ON PRE UPGRADE", sonyTitle)
     this.dataApi.selectedSonyTitle = Object.assign({}, sonyTitle);
   }
- 
- 
+
+
 }
 
 

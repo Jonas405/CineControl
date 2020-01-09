@@ -18,7 +18,7 @@ import {NgbDateAdapter, NgbDateNativeAdapter} from '@ng-bootstrap/ng-bootstrap';
 })
 export class AddCommentsComponent implements OnInit {
 
-  
+
   model3: Date;
   get today() {
     return new Date();
@@ -32,10 +32,10 @@ export class AddCommentsComponent implements OnInit {
   }
 
      //upload file
-    
+
      private uploadTask: firebase.storage.UploadTask;
      fileToUpload: File = null;
-  
+
   onSaveComment(commentForm: NgForm): void {
     if (commentForm.value.key == null) {
       //
@@ -58,26 +58,23 @@ export class AddCommentsComponent implements OnInit {
 
         this.uploadTask.snapshot.ref.getDownloadURL().then(downloadURL => {
           const imageUrl = downloadURL;
-          console.log('URL TESTING:' + imageUrl);
          // comment.url = imageUrl
-         console.log("UNIQUE ID", uniqueId);
-         
+
         commentForm.value.logisticID = uniqueId;
         commentForm.value.url = imageUrl;
-        console.log("FORM", commentForm.value);
-       
+
         });
 
-      
+
         const b = this.model3.toLocaleString();
         commentForm.value.timeStamp = b;
         this.dataApi.addComments(commentForm.value);
-    
+
       //
-      // New 
+      // New
     //  let logisticReference = DatabaseService.shared.logisticRef.childByAutoId()
      // let childAutoID = logisticReference.key;
-    
+
     } else {
       // Update
       this.dataApi.updateComment(commentForm.value);
@@ -86,8 +83,8 @@ export class AddCommentsComponent implements OnInit {
     this.btnClose.nativeElement.click();
   }
 
-   //Upload a file 
- 
+   //Upload a file
+
    handleFileInput(files: FileList) {
     this.fileToUpload = files.item(0);
 }

@@ -23,10 +23,10 @@ export class CheckersComponent implements OnInit {
 
   ngOnInit() {
     this.getAllCheckers();
-    this.getCurrentUser();
+    // this.getCurrentUser();
   }
 
- 
+
   getCurrentUser() {
     this.authService.isAuth().subscribe(user => {
       if (user) {
@@ -48,30 +48,27 @@ export class CheckersComponent implements OnInit {
       )
     ).subscribe(checkers => {
       this.checkers = checkers;
-      console.log("ManagedTheaters", this.checkers);
     });
   }
 
   deleteChecker(checkerKey: string){
-    console.log("SELECTED", checkerKey);
     const confirmacion = confirm('Are you sure?');
     if (confirmacion){
       this.dataApi.deleteChecker(checkerKey).catch(err => console.log(err));
     }
-  
+
   }
 
   onPreUpdateChecker(checker: CheckerInterface){
-    console.log("ON PRE UPGRADE", checker)
     this.dataApi.selectedChecker = Object.assign({}, checker);
   }
 
   searchTerm : string;
 
 
-  
+
  //------------------ Using CloudFireStore database ------------
-/* 
+/*
   getListChecker() {
     this.dataApi.getAllCheckers()
       .subscribe(checkers => {

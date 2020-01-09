@@ -23,33 +23,29 @@ export class CheckersDetailComponent implements OnInit {
     //Asignar cine a checker
 
     manager : ManagedTheaterInterface;
-   
+
     assigTheaterCheckerRef: AngularFireList<ManagedTheaterInterface> = null;
 
- 
+
   pageActual = 1;
   constructor(private dataApi: DataApiService, private route: ActivatedRoute,
               private db: AngularFireDatabase, private router: Router) {}
-  
-  checker: CheckerInterface; 
+
+  checker: CheckerInterface;
 
   ngOnInit() {
 
 
      this.route.params.subscribe(params => {
       const id = params.id;
-      console.log("ID Checker", id);
       this.idChecker = id;
-      console.log("This Id Checker", id)
       this.dbPathAssigTheaterChecker = '/USER/'+ this.idChecker +'/asignedTheaters';
-      console.log(this.idChecker);
       if (id) {
         this.dataApi.getCheckerById(id).snapshotChanges()
           .subscribe(res => {
             if ((res.payload.exists())) {
               this.checker = res.payload.toJSON() as CheckerInterface;
               this.checker.key = res.key;
-              console.log("Checker Res", this.checker);
               return this.idChecker;
             } else {
             //  this.notificationService.dispatchErrorMessage('Todo does not exist');
@@ -67,7 +63,6 @@ export class CheckersDetailComponent implements OnInit {
 
   deleteAssigTheater(key: string): Promise<void> {
     const confirmacion = confirm('Are you sure?');
-    console.log("Dentro del delete", key)
     if (confirmacion){
     this.assigTheaterCheckerRef = this.db.list(this.dbPathAssigTheaterChecker);
     return this.assigTheaterCheckerRef.remove(key);
@@ -76,24 +71,23 @@ export class CheckersDetailComponent implements OnInit {
   }
 
   onPreUpdateAssigTheater(theater: ManagedTheaterInterface){
-    console.log("ON PRE UPGRADE", theater)
     this.dataApi.selectedAssigTheaterChecker = Object.assign({}, theater);
   }
-   
+
   toArray(asignedTheaters: object) {
     return Object.keys(asignedTheaters).map(key => ({
       key,
       ...asignedTheaters[key]
-     
+
     }))
   }
  }
 
-   
-  
+
+
    // console.log("DATAAPI", this.dataApi.getOneChecker(idChecker));
 
-  
+
 /*   getDetails(idChecker: string): void {
     this.dataApi.getOneChecker(idChecker);
     console.log
@@ -106,7 +100,7 @@ export class CheckersDetailComponent implements OnInit {
       console.log('URLPARAMS', checker);
     });
   } */
-/* 
+/*
   public barChartOptions: ChartOptions = {
     responsive: true,
     // We use these empty structures as placeholders for dynamic theming.

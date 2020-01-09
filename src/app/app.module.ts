@@ -1,24 +1,24 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-//Routes
+// Routes
 import { APP_ROUTES } from './app.routes';
 import { PAGES_ROUTES } from './pages/pages.routes';
 
-//Angular Maps
+// Angular Maps
 import { AgmCoreModule } from '@agm/core';
 
-//Angular charts
+// Angular charts
 import { ChartsModule } from 'ng2-charts';
-//Angular Carousel
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';  
+// Angular Carousel
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {  NO_ERRORS_SCHEMA } from '@angular/core';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
-//Angular Paginator
+// Angular Paginator
 import {NgxPaginationModule} from 'ngx-pagination';
-//Angular Filter
+// Angular Filter
 
-//Firebase config
+// Firebase config
 import { environment } from '../environments/environment';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { AngularFireModule } from '@angular/fire';
@@ -28,10 +28,10 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFirestore } from '@angular/fire/firestore';
 
 
-//Forms
-import { FormsModule }   from '@angular/forms';
+// Forms
+import { FormsModule } from '@angular/forms';
 
-//Components
+// Components
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent} from './login/register.component'

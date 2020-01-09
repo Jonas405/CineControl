@@ -24,7 +24,7 @@ export class IncidentPendingSonyComponent implements OnInit {
 
   ngOnInit() {
     this.getAllIncidenciasPorAprobarSony();
-    this.getCurrentUser();
+    // this.getCurrentUser();
   }
 
   getCurrentUser() {
@@ -48,21 +48,18 @@ export class IncidentPendingSonyComponent implements OnInit {
       )
     ).subscribe(incidencias => {
       this.incidencias = incidencias;
-      console.log("Incidencias", this.incidencias);
     });
   }
 
   deleteIncidenciaPorAprobarSony(incidenciaKey: string){
-    console.log("SELECTED", incidenciaKey);
     const confirmacion = confirm('Are you sure?');
     if (confirmacion){
       this.dataApi.deleteIncidenciaPorAprobarSony(incidenciaKey).catch(err => console.log(err));
     }
-  
+
   }
 
   onPreUpdateIncidencia(incidencia: IncidenciaInterface){
-    console.log("ON PRE UPGRADE", incidencia)
     this.dataApi.selectedIncidenciaPorAprobarSony = Object.assign({}, incidencia);
   }
 }

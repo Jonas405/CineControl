@@ -55,7 +55,7 @@ export class SonyMaterialesComponent implements OnInit {
 
   ngOnInit() {
     this.getAllMaterialesSony();
-    this.getCurrentUser();
+    // this.getCurrentUser();
     //this.slides = this.chunk(this.getAllMaterialesSony, 3);
   }
 
@@ -184,7 +184,6 @@ export class SonyMaterialesComponent implements OnInit {
   }
 
   deleteMaterialSony(materialSonyKey: string) {
-    console.log("SELECTED", materialSonyKey);
     const confirmacion = confirm("Are you sure?");
     if (confirmacion) {
       this.dataApi
@@ -194,7 +193,6 @@ export class SonyMaterialesComponent implements OnInit {
   }
 
   onPreUpdateMaterialSony(materialSony: MaterialSonyInterface) {
-    console.log("ON PRE UPGRADE", materialSony);
     this.dataApi.selectedSonyMaterial = Object.assign({}, materialSony);
   }
 }

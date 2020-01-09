@@ -22,10 +22,10 @@ export class IncidentApprovedComponent implements OnInit {
   private user: UserInterface;
   pageActual = 1;
 
-  
+
   ngOnInit() {
     this.getAllIncidenciasAprobadas();
-    this.getCurrentUser();
+    // this.getCurrentUser();
   }
 
   getCurrentUser() {
@@ -49,24 +49,16 @@ export class IncidentApprovedComponent implements OnInit {
       )
     ).subscribe(incidencias => {
       this.incidencias = incidencias;
-      console.log("Incidencias", this.incidencias);
     });
   }
 
   deleteIncidenciaAprobada(incidenciaKey: string){
-    console.log("SELECTED", incidenciaKey);
-
-      this.dataApi.deleteIncidenciaAprobada(incidenciaKey).catch(err => console.log(err));
-    
-  
+    this.dataApi.deleteIncidenciaAprobada(incidenciaKey).catch(err => console.log(err));
   }
 
   onPreUpdateIncidenciaAprobada(incidencia: IncidenciaInterface){
-    console.log("ON PRE UPGRADE", incidencia)
     this.dataApi.selectedIncidenciaAprobadas = Object.assign({}, incidencia);
   }
-
-
 }
 
 

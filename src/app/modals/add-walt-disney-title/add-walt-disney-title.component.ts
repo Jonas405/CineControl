@@ -26,13 +26,13 @@ export class AddWaltDisneyTitleComponent implements OnInit {
   }
 
 //Add URL Storage
-  
+
 private uploadTask: firebase.storage.UploadTask;
 
 onSaveDisneyTitle(disneyTitleForm: NgForm): void {
  if (disneyTitleForm.value.key == null) {
-   // New 
- 
+   // New
+
    let storageRef = firebase.storage().ref('WaltDisneyTitles/' + this.selectedImage.name);
    this.uploadTask = storageRef.put(this.selectedImage);
    this.uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
@@ -54,20 +54,18 @@ onSaveDisneyTitle(disneyTitleForm: NgForm): void {
 
      const a = this.model2.toLocaleString();
      disneyTitleForm.value.releaseDate = a;
-     console.log("Esta debe ser la fecha", a )
 
      this.dataApi.addDisneyTitle(disneyTitleForm.value);
 
  } else {
    // Update
-   console.log("Update", disneyTitleForm.value);
    this.dataApi.updateDisneyTitle(disneyTitleForm.value);
  }
  disneyTitleForm.resetForm();
  this.btnClose.nativeElement.click();
-} 
+}
 
-////// Method for check image 
+////// Method for check image
 imgSrc: string;
 selectedImage: File = null;
 isSubmitted: boolean;
@@ -87,7 +85,7 @@ showPreview(event: any) {
 
 }
 
-/* 
+/*
 onSubmit(formValue) {
  this.isSubmitted = true;
  if (this.formTemplate.valid) {

@@ -43,10 +43,10 @@ export class IncidentComponent implements OnInit {
 
   ngOnInit() {
     this.getAllIncidenciasPorAprobar();
-    this.getCurrentUser();
+    // this.getCurrentUser();
   }
 
- 
+
   getCurrentUser() {
     this.authService.isAuth().subscribe(user => {
       if (user) {
@@ -68,21 +68,18 @@ export class IncidentComponent implements OnInit {
       )
     ).subscribe(incidencias => {
       this.incidencias = incidencias;
-      console.log("Incidencias", this.incidencias);
     });
   }
 
   deleteIncidenciaPorAprobar(incidenciaKey: string){
-    console.log("SELECTED", incidenciaKey);
     const confirmacion = confirm('Are you sure?');
     if (confirmacion){
       this.dataApi.deleteIncidenciaPorAprobar(incidenciaKey).catch(err => console.log(err));
     }
-  
+
   }
 
   onPreUpdateIncidencia(incidencia: IncidenciaInterface){
-    console.log("ON PRE UPGRADE", incidencia)
     this.dataApi.selectedIncidenciaPorAprobar = Object.assign({}, incidencia);
   }
 }

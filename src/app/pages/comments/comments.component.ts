@@ -21,7 +21,7 @@ import { Router } from '@angular/router';
 export class CommentsComponent implements OnInit {
 
 
-  
+
 
   constructor( private dataApi: DataApiService, private authService: AuthService,
     private storage: AngularFireStorage, private router: Router) { }
@@ -30,11 +30,11 @@ export class CommentsComponent implements OnInit {
   public isAdmin: any = null;
   public userUid: string = null;
   private user: UserInterface;
-  
+
 
   ngOnInit() {
     this.getCommentsList();
-    this.getCurrentUser();
+    // this.getCurrentUser();
   }
 
   getCurrentUser() {
@@ -56,22 +56,19 @@ export class CommentsComponent implements OnInit {
       )
     ).subscribe(comments => {
       this.comments = comments;
-      console.log("Comments", this.comments)
     });
   }
 
 
   deleteComment(commentKey: string){
-    console.log("SELECTED", commentKey);
     const confirmacion = confirm('Are you sure?');
     if (confirmacion){
       this.dataApi.deleteComment(commentKey).catch(err => console.log(err));
     }
-  
+
   }
 
   onPreUpdateComment(comment: CommentsInterface){
-    console.log("ON PRE UPGRADE", comment)
     this.dataApi.selectedComments = Object.assign({}, comment);
   }
 

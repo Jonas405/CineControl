@@ -25,22 +25,22 @@ export class AddSonyTitleComponent implements OnInit {
   @ViewChild('btnClose', {static: false} ) btnClose: ElementRef;
   @Input() userUid: string;
 
-  
+
   ngOnInit() {
   }
 
    //Add URL Storage
-  
+
    private uploadTask: firebase.storage.UploadTask;
-/* 
+/*
    selectToday() {
     this.model = this.calendar.getToday();
   }
  */
    onSaveSonyTitle(sonyTitleForm: NgForm): void {
     if (sonyTitleForm.value.key == null) {
-      // New 
-     
+      // New
+
       let uniqueId = uuid();
       let storageRef = firebase.storage().ref('SonyTitles/' + this.selectedImage.name);
       this.uploadTask = storageRef.put(this.selectedImage);
@@ -62,21 +62,19 @@ export class AddSonyTitleComponent implements OnInit {
         });
 
         const a = this.model2.toLocaleString();
-        
+
         sonyTitleForm.value.releaseDate = a;
-        console.log("Esta debe ser la fecha", a )
         this.dataApi.addSonyTitle(sonyTitleForm.value);
 
     } else {
       // Update
-      console.log("Update", sonyTitleForm.value);
       this.dataApi.updateSonyTitle(sonyTitleForm.value);
     }
     sonyTitleForm.resetForm();
     this.btnClose.nativeElement.click();
-  } 
+  }
 
-  ////// Method for check image 
+  ////// Method for check image
   imgSrc: string;
   selectedImage: File = null;
   isSubmitted: boolean;
@@ -96,7 +94,7 @@ export class AddSonyTitleComponent implements OnInit {
 
  }
 
-/* 
+/*
   onSubmit(formValue) {
     this.isSubmitted = true;
     if (this.formTemplate.valid) {

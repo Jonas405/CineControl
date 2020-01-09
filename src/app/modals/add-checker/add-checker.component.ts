@@ -20,15 +20,13 @@ export class AddCheckerComponent implements OnInit {
   }
 
 
-  
+
 
   onSaveChecker(checkerForm: NgForm): void {
     if (checkerForm.value.key == null) {
-      // New 
+      // New
       let uniqueId = uuid();
-      console.log("UNIQUE ID", uniqueId);
       checkerForm.value.userID = uniqueId;
-      console.log("ADD IND", checkerForm.value);
       this.dataApi.addChecker(checkerForm.value);
     } else {
       // Update

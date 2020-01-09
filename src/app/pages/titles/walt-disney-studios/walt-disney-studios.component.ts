@@ -23,21 +23,21 @@ export class WaltDisneyStudiosComponent implements OnInit {
   };
   pageActual = 1;
   searchTerm : string;
-  
+
   //private theaters: TheatersInterface[];
   public disneyTitles : MoviesInterface[];
   public isAdmin: any = null;
   public userUid: string = null;
-  
+
 
   ngOnInit() {
    // this.getListTheaters();
-    this.getCurrentUser();
-    this.getDisneyTitlesList() 
+    // this.getCurrentUser();
+    this.getDisneyTitlesList()
 
   }
 
-   
+
   getCurrentUser() {
     this.authService.isAuth().subscribe(user => {
       if (user) {
@@ -59,25 +59,22 @@ export class WaltDisneyStudiosComponent implements OnInit {
       )
     ).subscribe(disneyTitles => {
       this.disneyTitles = disneyTitles;
-      console.log("Disney Titles", this.disneyTitles)
     });
   }
 
   deleteDisneyTitle(disneyTitleKey: string){
-    console.log("SELECTED", disneyTitleKey);
     const confirmacion = confirm('Are you sure?');
     if (confirmacion){
       this.dataApi.deleteDisneyTitle(disneyTitleKey).catch(err => console.log(err));
     }
-  
+
   }
 
   onPreUpdateDisneyTitle(disneyTitle: MovieInterface){
-    console.log("ON PRE UPGRADE", disneyTitle)
     this.dataApi.selectedDisneyTitle = Object.assign({}, disneyTitle);
   }
- 
- 
+
+
 }
 
 

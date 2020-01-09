@@ -31,7 +31,7 @@ export class AuthService {
   }
 
   isAuth() {
-    return this.afsAuth.authState.pipe(map(auth => auth));
+    return this.afsAuth.user;
   }
 
   logoutUser() {

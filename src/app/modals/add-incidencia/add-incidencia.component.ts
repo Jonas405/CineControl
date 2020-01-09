@@ -19,14 +19,12 @@ export class AddIncidenciaComponent implements OnInit {
 
   onSaveIncidencia(incidenciaForm: NgForm): void {
     if (incidenciaForm.value.key == null) {
-      // New 
-      console.log("incidencia New", incidenciaForm);
+      // New
       this.dataApi.addIncidencia(incidenciaForm.value);
     } else {
       // Update
       incidenciaForm.value.Aprovacion = "true";
-      console.log("incidencia Update", incidenciaForm);
-      this.dataApi.updateIncidenciaPorAprobar(incidenciaForm.value); 
+      this.dataApi.updateIncidenciaPorAprobar(incidenciaForm.value);
       this.dataApi.addIncidenciaAprobada(incidenciaForm.value);
       this.dataApi.deleteIncidenciaPorAprobar(incidenciaForm.value.incidenciaKey).catch(err => console.log(err));
     }

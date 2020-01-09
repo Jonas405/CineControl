@@ -73,7 +73,7 @@ export class RegisterComponent implements OnInit {
         })
         .catch(err => console.log("err", err.message));
     } else {
-      console.log("there's a problem");
+      return;
     }
   }
 }

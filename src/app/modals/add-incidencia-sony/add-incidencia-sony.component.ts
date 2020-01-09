@@ -10,7 +10,7 @@ import { NgForm } from '@angular/forms';
 })
 export class AddIncidenciaSonyComponent implements OnInit {
 
- 
+
   constructor(public dataApi: DataApiService) { }
   @ViewChild('btnClose', {static: false} ) btnClose: ElementRef;
   @Input() userUid: string;
@@ -20,14 +20,12 @@ export class AddIncidenciaSonyComponent implements OnInit {
 
   onSaveIncidencia(incidenciaForm: NgForm): void {
     if (incidenciaForm.value.key == null) {
-      // New 
-      console.log("incidencia New", incidenciaForm);
+      // New
       this.dataApi.addIncidenciaSony(incidenciaForm.value);
     } else {
       // Update
-      console.log("incidencia Update", incidenciaForm);
       incidenciaForm.value.Aprovacion = "true";
-      this.dataApi.updateIncidenciaPorAprobarSony(incidenciaForm.value); 
+      this.dataApi.updateIncidenciaPorAprobarSony(incidenciaForm.value);
       this.dataApi.addIncidenciaAprobadaSony(incidenciaForm.value);
       this.dataApi.deleteIncidenciaPorAprobarSony(incidenciaForm.value.incidenciaKey).catch(err => console.log(err));
     }

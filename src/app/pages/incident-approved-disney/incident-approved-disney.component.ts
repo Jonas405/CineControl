@@ -23,10 +23,10 @@ export class IncidentApprovedDisneyComponent implements OnInit {
   private user: UserInterface;
   pageActual = 1;
 
-  
+
   ngOnInit() {
     this.getAllIncidenciasAprobadasDisney();
-    this.getCurrentUser();
+    // this.getCurrentUser();
   }
 
   getCurrentUser() {
@@ -50,20 +50,17 @@ export class IncidentApprovedDisneyComponent implements OnInit {
       )
     ).subscribe(incidencias => {
       this.incidencias = incidencias;
-      console.log("Incidencias", this.incidencias);
     });
   }
 
   deleteIncidenciaAprobadaDisney(incidenciaKey: string){
-    console.log("SELECTED", incidenciaKey);
 
       this.dataApi.deleteIncidenciaAprobadaDisney(incidenciaKey).catch(err => console.log(err));
-    
-  
+
+
   }
 
   onPreUpdateIncidenciaAprobadaDisney(incidencia: IncidenciaInterface){
-    console.log("ON PRE UPGRADE", incidencia)
     this.dataApi.selectedIncidenciaAprobadasDisney = Object.assign({}, incidencia);
   }
 

@@ -19,21 +19,19 @@ export class CineDetailComponent implements OnInit {
 
   constructor(private dataApi: DataApiService, private route: ActivatedRoute,
     private db: AngularFireDatabase, private router: Router) { }
-   
+
   theater: TheaterInterface;
 
   ngOnInit() {
 
     this.route.params.subscribe(params => {
       const id = params.id;
-      console.log("ID Cine", id);
       if (id) {
         this.dataApi.getTheaterById(id).snapshotChanges()
           .subscribe(res => {
             if ((res.payload.exists())) {
               this.theater = res.payload.toJSON() as TheaterInterface;
               this.theater.key = res.key;
-              console.log("Theater Res", this.theater);
             } else {
             //  this.notificationService.dispatchErrorMessage('Todo does not exist');
               this.router.navigate(['/cinema']);
@@ -50,9 +48,9 @@ export class CineDetailComponent implements OnInit {
     return Object.keys(asignedTheaters).map(key => ({
       key,
       ...asignedTheaters[key]
-     
+
     }))
-   
+
   }
 
 }

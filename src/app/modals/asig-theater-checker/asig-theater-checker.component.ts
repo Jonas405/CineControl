@@ -14,17 +14,17 @@ import { map } from 'rxjs/operators';
 })
 export class AsigTheaterCheckerComponent implements OnInit {
 
-  
+
   //Asignar cine a checker
   idChecker;
   manager : ManagedTheaterInterface;
 
- 
+
   assigTheaterCheckerRef: AngularFireList<ManagedTheaterInterface> = null;
 
   constructor(public dataApi: DataApiService, private db: AngularFireDatabase,
               private route: ActivatedRoute, private router: Router) {
-   
+
    }
   @ViewChild('btnClose', {static: false} ) btnClose: ElementRef;
   //@Input() userUid: string;
@@ -33,18 +33,14 @@ export class AsigTheaterCheckerComponent implements OnInit {
 
     this.route.params.subscribe(params => {
       const id = params.id;
-      console.log("ID Checker For Assig Theater", id);
       this.idChecker = id;
-      console.log("This Id Checker for Assig Theater", id)
       this.dbPathAssigTheaterChecker = '/USER/'+ this.idChecker +'/asignedTheaters';
-      console.log(this.idChecker);
       if (id) {
         this.dataApi.getAssigTheaterChecker(id).snapshotChanges()
           .subscribe(res => {
             if ((res.payload.exists())) {
               this.manager = res.payload.toJSON() as CheckerInterface;
               this.manager.key = res.key;
-              console.log("Assig Theater Res", this.manager);
               return this.idChecker;
             } else {
             //  this.notificationService.dispatchErrorMessage('Todo does not exist');
@@ -63,16 +59,13 @@ export class AsigTheaterCheckerComponent implements OnInit {
   onSaveNewTheater(asingTheaterForm: NgForm): void {
     if (asingTheaterForm.value.key == null) {
       // New
-      console.log("Path for save theater", this.dbPathAssigTheaterChecker);
-      console.log("Path for save theater", this.assigTheaterCheckerRef);
-      console.log("ADD IND", asingTheaterForm.value);
+
       this.assigTheaterCheckerRef = this.db.list(this.dbPathAssigTheaterChecker);
       this.assigTheaterCheckerRef.push(asingTheaterForm.value);
     } else {
       // Update
       let keyAssig = this.manager.key;
-      console.log("ADD UPDATE", keyAssig);
-      console.log("Object", this.manager);
+
     //  this.assigTheaterCheckerRef = this.db.list(this.dbPathAssigTheaterChecker);
       this.assigTheaterCheckerRef.update(keyAssig, asingTheaterForm.value)
     }
@@ -81,14 +74,14 @@ export class AsigTheaterCheckerComponent implements OnInit {
   }
 
 
-/*  
+/*
 
    // Add Cine list
   public managedTheatersInsi : ManagedTheatersInterface[];
-    //add Search list 
+    //add Search list
     searchTerm : string;
     pageActual = 1;
-  
+
   getManagedTheatersList() {
     this.dataApi.getManagedTheatersList().snapshotChanges().pipe(
       map(changes =>
