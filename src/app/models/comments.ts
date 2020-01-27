@@ -4,19 +4,14 @@ export interface Roles {
   }
 
 export interface CommentsInterface {
-
-
-    cuerpo?: string;
-    encabezado?: string;
-    fecha?: Date;
-    timeStamp?: string;
-    file?: File;
-    name?:string;
-    url?:string;
-    progress?:number;
-    createdAt?: string;
-    key?:string;
-    logisticID?: any;
+  
+  cuerpo?: string;
+  encabezado?: string;
+  timeStamp?: string;
+  url?:string;
+  progress?:number;
+  logisticID?: any;
+  key?: string;
   
   }
   

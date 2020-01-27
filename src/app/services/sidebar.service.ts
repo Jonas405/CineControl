@@ -15,7 +15,7 @@ export class SidebarService {
         { titulo : 'Checkers', url: '/checkers' },
         { titulo: 'Cines', url: '/cinema' },
         { titulo: 'Peliculas Sony', url: '/sonyTitles' },
-        { titulo: 'Materiales Sony', url: '/materialesSony' },
+       { titulo: 'Materiales Sony', url: '/materialesSony' },
         { titulo: 'Incidencias por aprobar Sony', url: '/pendingIncidentSony'},
         { titulo: 'Incidencias Sony', url: '/incidentApprovedSony'},
         { titulo: 'Peliculas Disney', url: '/waltDisneyTitles' },
@@ -23,7 +23,7 @@ export class SidebarService {
         { titulo: 'Incidencias Por Aprobar Disney', url: '/pendingIncidentDisney'},
         { titulo: 'Incidencias Disney', url: '/incidentApprovedDisney'},
         { titulo: 'Incidencias por aprobar Generales', url: '/incident' },
-        { titulo: 'Incidencias aprobadas Generales', url: '/incidentApproved'},
+        { titulo: 'Incidencias Generales', url: '/incidentApproved'},
      
       //  { titulo: 'AssignTheaters', url: '/assignTheaters' },
        
