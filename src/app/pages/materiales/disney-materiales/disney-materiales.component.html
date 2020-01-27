@@ -61,7 +61,27 @@
         aria-haspopup="true"
         aria-expanded="false"
       >
-        {{materialsFilter}}
+        {{ movieFilter }}
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a
+          class="dropdown-item"
+          *ngFor="let movie of movies"
+          (click)="filterByMovie(movie)"
+          >{{ movie }}</a
+        >
+      </div>
+    </div>
+    <div class="dropdown mx-3">
+      <button
+        class="btn btn-secondary dropdown-toggle"
+        type="button"
+        id="dropdownMenuButton"
+        data-toggle="dropdown"
+        aria-haspopup="true"
+        aria-expanded="false"
+      >
+        {{ materialsFilter }}
       </button>
       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
         <a
@@ -82,7 +102,7 @@
         aria-haspopup="true"
         aria-expanded="false"
       >
-        {{cinesFilter}}
+        {{ cinesFilter }}
       </button>
       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
         <a
@@ -176,7 +196,7 @@
   class="d-flex justify-content-center center"
   (pageChange)="pageActual = $event"
 ></pagination-controls>
-<!--    
+<!--
 <section class="row mt-5">
     <div class="col">
         <div class="card-group">
@@ -212,7 +232,7 @@
           </table>
           </div>
           </div>
-          
+
             <div class="card">
               <img src="..." class="card-img-top" alt="FOTO Supervisor">
               <div class="card-body">
@@ -222,20 +242,20 @@
                           <div class="card-group">
               <div class="card">
           <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-            <ngb-carousel>  
-              <ng-template ngbSlide *ngFor="let materialDisney of materialesDisney; let i=index">  
+            <ngb-carousel>
+              <ng-template ngbSlide *ngFor="let materialDisney of materialesDisney; let i=index">
                   <img class="img-fluid" src="{{materialDisney.imageURL}}" alt="{{materialDisney.Encabezado}}">
-                  <div class="carousel-caption">  
-                  </div>  
-              </ng-template>    
-          </ngb-carousel> 
+                  <div class="carousel-caption">
+                  </div>
+              </ng-template>
+          </ngb-carousel>
             </div>
           </div>
         </div>
               </div>
             </div>
-     
-        
-          
-            
+
+
+
+
                     -->

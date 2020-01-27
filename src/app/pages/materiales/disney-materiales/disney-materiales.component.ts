@@ -31,12 +31,15 @@ export class DisneyMaterialesComponent implements OnInit {
   materiales: Array<any>;
   cines: Array<any>;
   weeks: Array<any>;
+  movies: Array<any>;
   materialsFilter = "Materiales";
   cinesFilter = "Cines";
   weeksFilter = "Semana";
+  movieFilter = "Pelicula";
 
   ngOnInit() {
     this.getAllMaterialesDisney();
+
     // this.getCurrentUser();
   }
 
@@ -51,6 +54,7 @@ export class DisneyMaterialesComponent implements OnInit {
   }
 
   filterByMaterial(material) {
+    this.movieFilter = "Peliculas";
     this.materialsFilter = material;
     this.cinesFilter = "Cines";
     this.weeksFilter = "Semana";
@@ -64,9 +68,9 @@ export class DisneyMaterialesComponent implements OnInit {
     }
 
     this.materialesDisney = filtered;
-
   }
   filterByCine(cine) {
+    this.movieFilter = "Peliculas";
     this.cinesFilter = cine;
     this.materialsFilter = "Materiales";
     this.weeksFilter = "Semana";
@@ -81,8 +85,25 @@ export class DisneyMaterialesComponent implements OnInit {
 
     this.materialesDisney = filtered;
   }
+  filterByMovie(movie) {
+    this.cinesFilter = "Cines";
+    this.materialsFilter = "Materiales";
+    this.weeksFilter = "Semana";
+    this.movieFilter = movie;
+    const materialesCopy = [...this.materialesState];
+    const filtered = [];
+
+    for (let i = 0; i < materialesCopy.length; i++) {
+      if (materialesCopy[i].Title == movie) {
+        filtered.push(materialesCopy[i]);
+      }
+    }
+
+    this.materialesDisney = filtered;
+  }
 
   filterByWeek(week) {
+    this.movieFilter = "Peliculas";
     this.cinesFilter = "Cines";
     this.materialsFilter = "Materiales";
     this.weeksFilter = "Semana: " + week;
@@ -99,13 +120,14 @@ export class DisneyMaterialesComponent implements OnInit {
   }
 
   resetFilter() {
+    this.movieFilter = "Peliculas";
     this.weeksFilter = "Semana";
     this.cinesFilter = "Cines";
     this.materialsFilter = "Materiales";
     this.materialesDisney = this.materialesState;
   }
 
-  //---------- Using RealTime database -------------------
+  // ---------- Using RealTime database -------------------
 
   getAllMaterialesDisney() {
     this.dataApi
@@ -119,29 +141,36 @@ export class DisneyMaterialesComponent implements OnInit {
       .subscribe(materialesDisney => {
         this.materialesDisney = materialesDisney;
         this.materialesState = materialesDisney;
+        console.log(this.materialesState);
 
-        //get an array with all the materials
+        // get an array with all the materials
         this.materiales = this.materialesDisney.map(function(item) {
-          return item["MaterialType"];
+          return item.MaterialType;
         });
         this.materiales = [...new Set(this.materiales)];
 
-        //get an array with all the theathers
+        // get an array with all the theathers
         this.cines = this.materialesDisney.map(function(item) {
-          return item["Theater"];
+          return item.Theater;
         });
         this.cines = [...new Set(this.cines)];
 
-        //get an array with all the weeks
+        // get an array with all the movies
+        this.movies = this.materialesDisney.map(function(item) {
+          return item.Title;
+        });
+        this.movies = [...new Set(this.movies)];
+
+        // get an array with all the weeks
         this.weeks = this.materialesDisney.map(function(item) {
-          return item["Week"];
+          return item.Week;
         });
         this.weeks = [...new Set(this.weeks)];
       });
   }
 
   deleteMaterialDisney(materialDisneyKey: string) {
-    const confirmacion = confirm("Are you sure?");
+    const confirmacion = confirm("Estas seguro?");
     if (confirmacion) {
       this.dataApi
         .deleteMaterialDisney(materialDisneyKey)

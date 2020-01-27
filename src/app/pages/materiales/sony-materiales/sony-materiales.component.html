@@ -62,6 +62,26 @@
         aria-haspopup="true"
         aria-expanded="false"
       >
+        {{ movieFilter }}
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a
+          class="dropdown-item"
+          *ngFor="let movie of movies"
+          (click)="filterByMovie(movie)"
+          >{{ movie }}</a
+        >
+      </div>
+    </div>
+    <div class="dropdown mx-3">
+      <button
+        class="btn btn-secondary dropdown-toggle"
+        type="button"
+        id="dropdownMenuButton"
+        data-toggle="dropdown"
+        aria-haspopup="true"
+        aria-expanded="false"
+      >
         {{ materialsFilter }}
       </button>
       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">

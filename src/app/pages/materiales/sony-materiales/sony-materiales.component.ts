@@ -25,9 +25,12 @@ export class SonyMaterialesComponent implements OnInit {
   materiales: Array<any>;
   cines: Array<any>;
   weeks: Array<any>;
+  movies: Array<any>;
+  cinesFilter = "Cines";
   materialsFilter = "Materiales";
   cinesFilter = "Cines";
   weeksFilter = "Semana";
+  movieFilter = "Pelicula";
 
   slides: any = [[]];
   chunk(arr, chunkSize) {
@@ -55,11 +58,11 @@ export class SonyMaterialesComponent implements OnInit {
   }
 
   ngOnInit() {
-        this.materialesSony = this.dataApi.materialesSony;
-        this.materialesState = this.dataApi.materialesSony;
-        if (this.materialesSony) {
-          this.getFilters();
-        }
+    this.materialesSony = this.dataApi.materialesSony;
+    this.materialesState = this.dataApi.materialesSony;
+    if (this.materialesSony) {
+      this.getFilters();
+    }
     // this.getCurrentUser();
     //this.slides = this.chunk(this.getAllMaterialesSony, 3);
   }
@@ -80,6 +83,22 @@ export class SonyMaterialesComponent implements OnInit {
     this.materialesSony = filtered;
   }
 
+  filterByMovie(movie) {
+    this.cinesFilter = "Cines";
+    this.materialsFilter = "Materiales";
+    this.weeksFilter = "Semana";
+    this.movieFilter = movie;
+    const materialesCopy = [...this.materialesState];
+    const filtered = [];
+
+    for (let i = 0; i < materialesCopy.length; i++) {
+      if (materialesCopy[i].Title == movie) {
+        filtered.push(materialesCopy[i]);
+      }
+    }
+
+    this.materialesSony = filtered;
+  }
   filterByCine(cine) {
     this.cinesFilter = cine;
     this.materialsFilter = "Materiales";
@@ -131,6 +150,12 @@ export class SonyMaterialesComponent implements OnInit {
   //---------- Using RealTime database -------------------
 
   getFilters() {
+    // get an array with all the movies
+    this.movies = this.materialesSony.map(function(item) {
+      return item.Title;
+    });
+    this.movies = [...new Set(this.movies)];
+
     // get an array with all the materials
     this.materiales = this.materialesSony.map(function(item) {
       return item["MaterialType"];
