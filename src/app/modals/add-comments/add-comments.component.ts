@@ -18,10 +18,11 @@ import {NgbDateAdapter, NgbDateNativeAdapter} from '@ng-bootstrap/ng-bootstrap';
 })
 export class AddCommentsComponent implements OnInit {
 
-
   model3: Date;
+
   get today() {
     return new Date();
+    
   }
 
   constructor(public dataApi: DataApiService, public calendar: NgbCalendar) { }
@@ -40,40 +41,26 @@ export class AddCommentsComponent implements OnInit {
     if (commentForm.value.key == null) {
       //
       let uniqueId = uuid();
+      console.log(uniqueId + "uniqueID")
       commentForm.value.logisticID = uniqueId;
+      console.log(commentForm.value.logisticID + "comment form")
       let storageRef = firebase.storage().ref('Logistica/' + this.fileToUpload.name);
      // this.uploadTask = storageRef.child(`${this.basePath}/${uniqueId}`).put(this.fileToUpload);
-      this.uploadTask = storageRef.put(this.fileToUpload);
-      this.uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
-        (snapshot) => {
-     //   upload.progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-        },
-        (error) => {
-          console.log(error)
-        },
-        () => {
-
-       //   this.saveFileData(upload)
-        })
-
-        this.uploadTask.snapshot.ref.getDownloadURL().then(downloadURL => {
-          const imageUrl = downloadURL;
-         // comment.url = imageUrl
-
+      
+     this.uploadTask = storageRef.put(this.fileToUpload);
+      console.log(this.uploadTask + "uploadtask")
+      this.uploadTask.snapshot.ref.getDownloadURL().then(downloadURL => {
+        console.log(downloadURL + "downloadURl")
+        const imageUrl = downloadURL;
+        // comment.url = imageUrl
         commentForm.value.logisticID = uniqueId;
         commentForm.value.url = imageUrl;
-
         });
-
 
         const b = this.model3.toLocaleString();
         commentForm.value.timeStamp = b;
+        console.log(commentForm.value)
         this.dataApi.addComments(commentForm.value);
-
-      //
-      // New
-    //  let logisticReference = DatabaseService.shared.logisticRef.childByAutoId()
-     // let childAutoID = logisticReference.key;
 
     } else {
       // Update
