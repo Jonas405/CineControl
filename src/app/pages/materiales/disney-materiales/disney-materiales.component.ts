@@ -21,6 +21,7 @@ export class DisneyMaterialesComponent implements OnInit {
     private authService: AuthService
   ) {}
 
+  materialesState: Array<any>;
   public materialesDisney: MaterialesDisneyInterface[];
   public isAdmin: any = null;
   public userUid: string = null;
@@ -53,79 +54,55 @@ export class DisneyMaterialesComponent implements OnInit {
     this.materialsFilter = material;
     this.cinesFilter = "Cines";
     this.weeksFilter = "Semana";
-    this.dataApi
-      .getAllMaterialesSonyList()
-      .snapshotChanges()
-      .pipe(
-        map(changes =>
-          changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
-        )
-      )
-      .subscribe(materialesDisney => {
-        let filtered = [];
-        for (let i = 0; i < materialesDisney.length; i++) {
-          if (materialesDisney[i].MaterialType == material) {
-            filtered.push(materialesDisney[i]);
-          }
-        }
+    const materialesCopy = [...this.materialesState];
+    const filtered = [];
 
-        this.materialesDisney = filtered;
-      });
+    for (let i = 0; i < materialesCopy.length; i++) {
+      if (materialesCopy[i].MaterialType == material) {
+        filtered.push(materialesCopy[i]);
+      }
+    }
+
+    this.materialesDisney = filtered;
+
   }
   filterByCine(cine) {
     this.cinesFilter = cine;
     this.materialsFilter = "Materiales";
     this.weeksFilter = "Semana";
-    this.dataApi
-      .getAllMaterialesDisneyList()
-      .snapshotChanges()
-      .pipe(
-        map(changes =>
-          changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
-        )
-      )
-      .subscribe(materialesDisney => {
-        let filtered = [];
-        for (let i = 0; i < materialesDisney.length; i++) {
-          if (materialesDisney[i].Theater == cine) {
-            filtered.push(materialesDisney[i]);
-          }
-        }
+    const materialesCopy = [...this.materialesState];
+    const filtered = [];
 
-        this.materialesDisney = filtered;
-      });
+    for (let i = 0; i < materialesCopy.length; i++) {
+      if (materialesCopy[i].Theater == cine) {
+        filtered.push(materialesCopy[i]);
+      }
+    }
+
+    this.materialesDisney = filtered;
   }
 
   filterByWeek(week) {
     this.cinesFilter = "Cines";
     this.materialsFilter = "Materiales";
     this.weeksFilter = "Semana: " + week;
+    const materialesCopy = [...this.materialesState];
+    const filtered = [];
 
-    this.dataApi
-      .getAllMaterialesDisneyList()
-      .snapshotChanges()
-      .pipe(
-        map(changes =>
-          changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
-        )
-      )
-      .subscribe(materialesDisney => {
-        let filtered = [];
-        for (let i = 0; i < materialesDisney.length; i++) {
-          if (materialesDisney[i].Week == week) {
-            filtered.push(materialesDisney[i]);
-          }
-        }
+    for (let i = 0; i < materialesCopy.length; i++) {
+      if (materialesCopy[i].Week == week) {
+        filtered.push(materialesCopy[i]);
+      }
+    }
 
-        this.materialesDisney = filtered;
-      });
+    this.materialesDisney = filtered;
   }
 
   resetFilter() {
     this.weeksFilter = "Semana";
     this.cinesFilter = "Cines";
     this.materialsFilter = "Materiales";
-    this.getAllMaterialesDisney();
+    this.materialesDisney = this.materialesState;
   }
 
   //---------- Using RealTime database -------------------
@@ -141,6 +118,7 @@ export class DisneyMaterialesComponent implements OnInit {
       )
       .subscribe(materialesDisney => {
         this.materialesDisney = materialesDisney;
+        this.materialesState = materialesDisney;
 
         //get an array with all the materials
         this.materiales = this.materialesDisney.map(function(item) {

@@ -17,6 +17,18 @@ import { NgbCarousel, NgbCarouselConfig } from "@ng-bootstrap/ng-bootstrap";
   styleUrls: ["./sony-materiales.component.css"]
 })
 export class SonyMaterialesComponent implements OnInit {
+  materialesState: Array<any>;
+  public materialesSony: MaterialesSonyInterface[];
+  public isAdmin: any = null;
+  public userUid: string = null;
+  private user: UserInterface;
+  materiales: Array<any>;
+  cines: Array<any>;
+  weeks: Array<any>;
+  materialsFilter = "Materiales";
+  cinesFilter = "Cines";
+  weeksFilter = "Semana";
+
   slides: any = [[]];
   chunk(arr, chunkSize) {
     let R = [];
@@ -42,19 +54,12 @@ export class SonyMaterialesComponent implements OnInit {
     config.showNavigationIndicators = true;
   }
 
-  public materialesSony: MaterialesSonyInterface[];
-  public isAdmin: any = null;
-  public userUid: string = null;
-  private user: UserInterface;
-  materiales: Array<any>;
-  cines: Array<any>;
-  weeks: Array<any>;
-  materialsFilter = "Materiales";
-  cinesFilter = "Cines";
-  weeksFilter = "Semana";
-
   ngOnInit() {
-    this.getAllMaterialesSony();
+        this.materialesSony = this.dataApi.materialesSony;
+        this.materialesState = this.dataApi.materialesSony;
+        if (this.materialesSony) {
+          this.getFilters();
+        }
     // this.getCurrentUser();
     //this.slides = this.chunk(this.getAllMaterialesSony, 3);
   }
@@ -63,80 +68,54 @@ export class SonyMaterialesComponent implements OnInit {
     this.materialsFilter = material;
     this.cinesFilter = "Cines";
     this.weeksFilter = "Semana";
-    this.dataApi
-      .getAllMaterialesSonyList()
-      .snapshotChanges()
-      .pipe(
-        map(changes =>
-          changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
-        )
-      )
-      .subscribe(materialesSony => {
-        let filtered = [];
-        for (let i = 0; i < materialesSony.length; i++) {
-          if (materialesSony[i].MaterialType == material) {
-            filtered.push(materialesSony[i]);
-          }
-        }
+    const materialesCopy = [...this.materialesState];
+    const filtered = [];
 
-        this.materialesSony = filtered;
-      });
+    for (let i = 0; i < materialesCopy.length; i++) {
+      if (materialesCopy[i].MaterialType == material) {
+        filtered.push(materialesCopy[i]);
+      }
+    }
+
+    this.materialesSony = filtered;
   }
 
   filterByCine(cine) {
     this.cinesFilter = cine;
     this.materialsFilter = "Materiales";
     this.weeksFilter = "Semana";
+    const materialesCopy = [...this.materialesState];
+    const filtered = [];
 
-    this.dataApi
-      .getAllMaterialesSonyList()
-      .snapshotChanges()
-      .pipe(
-        map(changes =>
-          changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
-        )
-      )
-      .subscribe(materialesSony => {
-        let filtered = [];
-        for (let i = 0; i < materialesSony.length; i++) {
-          if (materialesSony[i].Theater == cine) {
-            filtered.push(materialesSony[i]);
-          }
-        }
+    for (let i = 0; i < materialesCopy.length; i++) {
+      if (materialesCopy[i].Theater == cine) {
+        filtered.push(materialesCopy[i]);
+      }
+    }
 
-        this.materialesSony = filtered;
-      });
+    this.materialesSony = filtered;
   }
   filterByWeek(week) {
     this.cinesFilter = "Cines";
     this.materialsFilter = "Materiales";
     this.weeksFilter = "Semana: " + week;
+    const materialesCopy = [...this.materialesState];
+    const filtered = [];
 
-    this.dataApi
-      .getAllMaterialesSonyList()
-      .snapshotChanges()
-      .pipe(
-        map(changes =>
-          changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
-        )
-      )
-      .subscribe(materialesSony => {
-        let filtered = [];
-        for (let i = 0; i < materialesSony.length; i++) {
-          if (materialesSony[i].Week == week) {
-            filtered.push(materialesSony[i]);
-          }
-        }
+    for (let i = 0; i < materialesCopy.length; i++) {
+      if (materialesCopy[i].Week == week) {
+        filtered.push(materialesCopy[i]);
+      }
+    }
 
-        this.materialesSony = filtered;
-      });
+    this.materialesSony = filtered;
   }
 
   resetFilter() {
-    this.materialsFilter = "Materiales";
-    this.cinesFilter = "Cines";
     this.weeksFilter = "Semana";
-    this.getAllMaterialesSony();
+    this.cinesFilter = "Cines";
+    this.materialsFilter = "Materiales";
+    this.materialesSony = this.materialesState;
   }
 
   getCurrentUser() {
@@ -151,36 +130,24 @@ export class SonyMaterialesComponent implements OnInit {
 
   //---------- Using RealTime database -------------------
 
-  getAllMaterialesSony() {
-    this.dataApi
-      .getAllMaterialesSonyList()
-      .snapshotChanges()
-      .pipe(
-        map(changes =>
-          changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
-        )
-      )
-      .subscribe(materialesSony => {
-        this.materialesSony = materialesSony;
+  getFilters() {
+    // get an array with all the materials
+    this.materiales = this.materialesSony.map(function(item) {
+      return item["MaterialType"];
+    });
+    this.materiales = [...new Set(this.materiales)];
 
-        //get an array with all the materials
-        this.materiales = this.materialesSony.map(function(item) {
-          return item["MaterialType"];
-        });
-        this.materiales = [...new Set(this.materiales)];
+    // get an array with all the theathers
+    this.cines = this.materialesSony.map(function(item) {
+      return item["Theater"];
+    });
+    this.cines = [...new Set(this.cines)];
 
-        //get an array with all the theathers
-        this.cines = this.materialesSony.map(function(item) {
-          return item["Theater"];
-        });
-        this.cines = [...new Set(this.cines)];
-
-        //get an array with all the weeks
-        this.weeks = this.materialesSony.map(function(item) {
-          return item["Week"];
-        });
-        this.weeks = [...new Set(this.weeks)];
-      });
+    // get an array with all the weeks
+    this.weeks = this.materialesSony.map(function(item) {
+      return item["Week"];
+    });
+    this.weeks = [...new Set(this.weeks)];
   }
 
   deleteMaterialSony(materialSonyKey: string) {

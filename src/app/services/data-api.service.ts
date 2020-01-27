@@ -20,14 +20,14 @@ import * as firebase from 'firebase'
   providedIn: 'root'
 })
 export class DataApiService {
-
+  materialesSony: Array<any>
 
   private dbPathManagedTheaters = '/managedTheaters';
   managedTheatersRef: AngularFireList<ManagedTheatersInterface> = null;
 
   private dbPathCheckers = '/USER';
   checkersRef: AngularFireList<CheckersInterface> = null;
-  
+
 
   private dbPathMoviesSony = '/TITLES/Sony Pictures Releasing';
   titlesSonyRef: AngularFireList<MoviesInterface> = null;
@@ -67,7 +67,7 @@ export class DataApiService {
   //'incidences/incApproved/WeekNumber'
   incidenciasPorAprobarSonyRef : AngularFireList<IncidenciasInterface> = null;
 
- 
+
   // ----------------------------------------------------------------------------------------
 
 
@@ -77,11 +77,10 @@ export class DataApiService {
 
   private dbPathDisneyMateriales = 'WebRef/MaterialsWalt Disney Studios';
   materialesDisneyRef: AngularFireList<MaterialesDisneyInterface> = null;
-  
+
 
   constructor(private afs: AngularFirestore,
               private db: AngularFireDatabase) {
-
 
                 this.managedTheatersRef = db.list(this.dbPathManagedTheaters);
                 this.checkersRef = db.list(this.dbPathCheckers);
@@ -96,9 +95,10 @@ export class DataApiService {
                 this.incidenciasAprobadasSonyRef = db.list(this.dbPathIncidenciasAprobadasSony);
                 this.incidenciasPorAprobarDisneyRef = db.list(this.dbPathIncidenciasPorAprobarDisney);
                 this.incidenciasPorAprobarSonyRef = db.list(this.dbPathIncidenciasPorAprobarSony);
-                
+
+                this.getAllMaterialesSonyList();
               }
-              
+
 
   //---------- Services Using Database RealTime  ------------------------
 
@@ -110,8 +110,8 @@ export class DataApiService {
 
   getManagedTheatersList(): AngularFireList<ManagedTheatersInterface> {
     return this.managedTheatersRef;
-  }    
-  
+  }
+
   addManagedTheaters(managedTheaters : ManagedTheatersInterface){
     this.managedTheatersRef.push(managedTheaters);
   }
@@ -122,7 +122,6 @@ export class DataApiService {
 
   updateManagedTheater(managedTheaters: ManagedTheaterInterface): void {
     let keyTheater = managedTheaters.key;
-    console.log("UPDATE", managedTheaters);
    this.managedTheatersRef.update(keyTheater, managedTheaters)
   }
 
@@ -133,7 +132,7 @@ export class DataApiService {
       return this.theatery;
 
     }
-  
+
 
     // ========================== Checkers Service ==========================
 
@@ -143,9 +142,9 @@ export class DataApiService {
 
     getAllCheckersList(): AngularFireList<CheckersInterface> {
       return this.checkersRef;
-    }    
+    }
 
-    
+
     addChecker( checker : CheckerInterface){
       this.checkersRef.push(checker);
     }
@@ -156,7 +155,6 @@ export class DataApiService {
 
     updateChecker(checker: CheckerInterface): void {
       let keyChecker = checker.key;
-      console.log("UPDATE", checker);
     this.checkersRef.update(keyChecker, checker)
     }
 
@@ -175,12 +173,11 @@ export class DataApiService {
 
     managedy: AngularFireObject<ManagedTheaterInterface>;
     getAssigTheaterChecker(key: string): AngularFireObject<ManagedTheaterInterface> {
-      console.log("Entro al Assig", key);
       this.managedy = this.db.object('/USER/' + key + '/asignedTheaters') as AngularFireObject<ManagedTheaterInterface>;
       return this.managedy;
     }
-     
- 
+
+
    // ========================== Titles Sony Service ==========================
 
    public selectedSonyTitle: MovieInterface = {
@@ -188,9 +185,9 @@ export class DataApiService {
     };
 
     getAllSonyTitlesList(): AngularFireList<MoviesInterface> {
-      console.log("SONY", this.titlesSonyRef);
+      console.log('SONY', this.titlesSonyRef);
       return this.titlesSonyRef;
-    }  
+    }
 
     addSonyTitle( title : MovieInterface){
       this.titlesSonyRef.push(title);
@@ -202,7 +199,6 @@ export class DataApiService {
 
     updateSonyTitle(title: MovieInterface): void {
       let keyChecker = title.key;
-      console.log("UPDATE", title);
     this.titlesSonyRef.update(keyChecker, title)
     }
 
@@ -221,9 +217,8 @@ export class DataApiService {
   };
 
   getAllDisneyTitlesList(): AngularFireList<MoviesInterface> {
-    console.log("SONY", this.titlesDisneyRef);
     return this.titlesDisneyRef;
-  }  
+  }
 
   addDisneyTitle( title : MovieInterface){
     this.titlesDisneyRef.push(title);
@@ -234,8 +229,7 @@ export class DataApiService {
   }
 
   updateDisneyTitle(title: MovieInterface): void {
-    let keyChecker = title.key;
-    console.log("UPDATE", title);
+  let keyChecker = title.key;
   this.titlesDisneyRef.update(keyChecker, title)
   }
 
@@ -254,21 +248,19 @@ export class DataApiService {
       };
 
       getAllCommentsList(): AngularFireList<CommentsInterface> {
-        console.log("COMMENTS", this.commentsRef);
         return this.commentsRef;
-      }  
-    
+      }
+
        addComments( comment : CommentsInterface){
         this.commentsRef.push(comment);
-      } 
-    
+      }
+
       deleteComment(key: string): Promise<void> {
         return this.commentsRef.remove(key);
       }
-    
+
       updateComment(comment: CommentsInterface): void {
         let keyComment = comment.key;
-        console.log("UPDATE", comment.key);
       this.commentsRef.update(keyComment, comment)
       }
 
@@ -278,20 +270,27 @@ export class DataApiService {
         public selectedSonyMaterial: MaterialSonyInterface = {
           key: null
         };
-    
-        getAllMaterialesSonyList(): AngularFireList<MaterialesSonyInterface> {
-          console.log("SONY MATERIALES", this.materialesSonyRef);
-          return this.materialesSonyRef;
-        }  
-    
+
+        getAllMaterialesSonyList() {
+          this.materialesSonyRef.snapshotChanges()
+          .pipe(
+            map(changes =>
+              changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
+            )
+          )
+          .subscribe(materialesSony => {
+            this.materialesSony = materialesSony;
+          });
+        }
+
         addMaterialSony( materialSony : MaterialSonyInterface){
           this.materialesSonyRef.push(materialSony);
         }
-    
+
         deleteMaterialSony(key: string): Promise<void> {
           return this.materialesSonyRef.remove(key);
         }
-    
+
       /*   updateMaterialSony(sonyMaterial: MaterialSonyInterface): void {
           let keyChecker = sonyMaterial.key;
           console.log("UPDATE", sonyMaterial);
@@ -303,20 +302,19 @@ export class DataApiService {
         public selectedDisneyMaterial: MaterialDisneyInterface = {
         key: null
       };
-  
+
       getAllMaterialesDisneyList(): AngularFireList<MaterialesDisneyInterface> {
-        console.log("Disney MATERIALES", this.materialesDisneyRef);
         return this.materialesDisneyRef;
-      }  
-  
+      }
+
       addMaterialDisney( materialDisney : MaterialDisneyInterface){
         this.materialesDisneyRef.push(materialDisney);
       }
-  
+
       deleteMaterialDisney(key: string): Promise<void> {
         return this.materialesDisneyRef.remove(key);
       }
-  
+
     /*   updateMaterialDisney(disneyMaterial: MaterialDisneyInterface): void {
         let keyChecker = disneyMaterial.key;
         console.log("UPDATE", disneyMaterial);
@@ -328,23 +326,21 @@ export class DataApiService {
         public selectedIncidenciaPorAprobar: IncidenciaInterface = {
         key: null
       };
-  
+
       getAllIncidenciasPorAprobarList(): AngularFireList<IncidenciasInterface> {
-        console.log("Incidencias", this.incidenciasPorAprobarRef);
         return this.incidenciasPorAprobarRef;
-      }  
-  
+      }
+
       addIncidencia( incidencia : IncidenciaInterface){
         this.incidenciasPorAprobarRef.push(incidencia);
       }
-  
+
       deleteIncidenciaPorAprobar(key: string): Promise<void> {
         return this.incidenciasPorAprobarRef.remove(key);
       }
-  
+
       updateIncidenciaPorAprobar(incidencia: IncidenciaInterface): void {
         let keyIncidencia = incidencia.key;
-        console.log("UPDATE", incidencia);
       this.incidenciasPorAprobarRef.update(keyIncidencia, incidencia)
       }
 
@@ -356,7 +352,7 @@ export class DataApiService {
   }
 
 
-  
+
      // ========================== IncidenciasPorAprobar Service Disney ==========================
 
      public selectedIncidenciaPorAprobarDisney: IncidenciaInterface = {
@@ -364,9 +360,8 @@ export class DataApiService {
     };
 
     getAllIncidenciasPorAprobarListDisney(): AngularFireList<IncidenciasInterface> {
-      console.log("Incidencias", this.incidenciasPorAprobarDisneyRef);
       return this.incidenciasPorAprobarDisneyRef;
-    }  
+    }
 
     addIncidenciaDisney( incidencia : IncidenciaInterface){
       this.incidenciasPorAprobarDisneyRef.push(incidencia);
@@ -378,7 +373,6 @@ export class DataApiService {
 
     updateIncidenciaPorAprobarDisney(incidencia: IncidenciaInterface): void {
       let keyIncidencia = incidencia.key;
-      console.log("UPDATE", incidencia);
     this.incidenciasPorAprobarDisneyRef.update(keyIncidencia, incidencia)
     }
 
@@ -390,7 +384,7 @@ export class DataApiService {
 }
 
 
-  
+
      // ========================== IncidenciasPorAprobar Service Sony ==========================
 
      public selectedIncidenciaPorAprobarSony: IncidenciaInterface = {
@@ -398,9 +392,8 @@ export class DataApiService {
     };
 
     getAllIncidenciasPorAprobarListSony(): AngularFireList<IncidenciasInterface> {
-      console.log("Incidencias", this.incidenciasPorAprobarSonyRef);
       return this.incidenciasPorAprobarSonyRef;
-    }  
+    }
 
     addIncidenciaSony( incidencia : IncidenciaInterface){
       this.incidenciasPorAprobarSonyRef.push(incidencia);
@@ -412,7 +405,6 @@ export class DataApiService {
 
     updateIncidenciaPorAprobarSony(incidencia: IncidenciaInterface): void {
       let keyIncidencia = incidencia.key;
-      console.log("UPDATE", incidencia);
     this.incidenciasPorAprobarSonyRef.update(keyIncidencia, incidencia)
     }
 
@@ -428,23 +420,21 @@ export class DataApiService {
         public selectedIncidenciaAprobadas: IncidenciaInterface = {
           key: null
         };
-    
+
         getAllIncidenciasAprobadasList(): AngularFireList<IncidenciasInterface> {
-          console.log("Incidencias", this.incidenciasAprobadasRef);
           return this.incidenciasAprobadasRef;
-        }  
-    
+        }
+
         addIncidenciaAprobada( incidencia : IncidenciaInterface){
           this.incidenciasAprobadasRef.push(incidencia);
         }
-    
+
         deleteIncidenciaAprobada(key: string): Promise<void> {
           return this.incidenciasAprobadasRef.remove(key);
         }
-    
+
         updateIncidenciaAprobada(incidencia: IncidenciaInterface): void {
           let keyIncidencia = incidencia.key;
-          console.log("UPDATE", incidencia);
         this.incidenciasAprobadasRef.update(keyIncidencia, incidencia)
         }
 
@@ -452,7 +442,7 @@ export class DataApiService {
         getIncidenceByIdApproved(key: string): AngularFireObject<IncidenciaInterface> {
           this.incidencesTi = this.db.object('WebRef/Incidences/incidenceApproved/' + key) as AngularFireObject<IncidenciaInterface>;
           return this.incidencesTi;
-  
+
     }
 
 
@@ -461,31 +451,30 @@ export class DataApiService {
             public selectedIncidenciaAprobadasDisney: IncidenciaInterface = {
               key: null
             };
-        
+
             getAllIncidenciasAprobadasListDisney(): AngularFireList<IncidenciasInterface> {
-              console.log("Incidencias", this.incidenciasAprobadasDisneyRef);
               return this.incidenciasAprobadasDisneyRef;
-            }  
-        
+            }
+
             addIncidenciaAprobadaDisney( incidencia : IncidenciaInterface){
               this.incidenciasAprobadasDisneyRef.push(incidencia);
             }
-        
+
             deleteIncidenciaAprobadaDisney(key: string): Promise<void> {
               return this.incidenciasAprobadasDisneyRef.remove(key);
             }
-        
+
             updateIncidenciaAprobadaDisney(incidencia: IncidenciaInterface): void {
               let keyIncidencia = incidencia.key;
-              console.log("UPDATE", incidencia);
+              console.log('UPDATE', incidencia);
             this.incidenciasAprobadasDisneyRef.update(keyIncidencia, incidencia)
             }
-    
+
             incidencesTiApprovedDisney: AngularFireObject<IncidenciaInterface>;
             getIncidenceByIdApprovedDisney(key: string): AngularFireObject<IncidenciaInterface> {
               this.incidencesTi = this.db.object('WebRef/Incidences/incidenceApproved/Walt Disney Studios' + key) as AngularFireObject<IncidenciaInterface>;
               return this.incidencesTi;
-      
+
         }
 
 
@@ -494,31 +483,31 @@ export class DataApiService {
              public selectedIncidenciaAprobadasSony: IncidenciaInterface = {
               key: null
             };
-        
+
             getAllIncidenciasAprobadasListSony(): AngularFireList<IncidenciasInterface> {
-              console.log("Incidencias", this.incidenciasAprobadasSonyRef);
+              console.log('Incidencias', this.incidenciasAprobadasSonyRef);
               return this.incidenciasAprobadasSonyRef;
-            }  
-        
+            }
+
             addIncidenciaAprobadaSony( incidencia : IncidenciaInterface){
               this.incidenciasAprobadasSonyRef.push(incidencia);
             }
-        
+
             deleteIncidenciaAprobadaSony(key: string): Promise<void> {
               return this.incidenciasAprobadasSonyRef.remove(key);
             }
-        
+
             updateIncidenciaAprobadaSony(incidencia: IncidenciaInterface): void {
               let keyIncidencia = incidencia.key;
-              console.log("UPDATE", incidencia);
+              console.log('UPDATE', incidencia);
             this.incidenciasAprobadasSonyRef.update(keyIncidencia, incidencia)
             }
-    
+
             incidencesTiApprovedSony: AngularFireObject<IncidenciaInterface>;
             getIncidenceByIdApprovedSony(key: string): AngularFireObject<IncidenciaInterface> {
               this.incidencesTi = this.db.object('WebRef/Incidences/incidenceApproved/Sony Pictures Releasing' + key) as AngularFireObject<IncidenciaInterface>;
               return this.incidencesTi;
-      
+
         }
 
 
@@ -526,7 +515,7 @@ export class DataApiService {
 
 /*
   Also for this requerimients I was used id for idetification and then for the other
-  database I´ll used key relation 
+  database I´ll used key relation
   private checkersCollection: AngularFirestoreCollection<CheckersInterface>;
   private checkers: Observable<CheckersInterface[]>;
   private checkerDoc: AngularFirestoreDocument<CheckerInterface>;
@@ -541,8 +530,8 @@ export class DataApiService {
   public selectedTheater: TheaterInterface = {
     id: null
   };
- 
-  
+
+
   getAllCheckers() {
     this.checkersCollection = this.afs.collection<CheckersInterface>('checkers');
     return this.checkers = this.checkersCollection.snapshotChanges()
@@ -554,7 +543,7 @@ export class DataApiService {
         });
       }));
   }
-  getAllTheaters(){ 
+  getAllTheaters(){
      this.theatersCollection = this.afs.collection<TheatersInterface>('theaters');
   return this.theaters = this.theatersCollection.snapshotChanges()
     .pipe(map(changes => {
@@ -595,7 +584,7 @@ export class DataApiService {
   }
   addChecker(checker: CheckerInterface): void {
     this.checkersCollection.add(checker);
-   
+
   }
   addTheater(theater: TheaterInterface): void {
     this.theatersCollection.add(theater);
@@ -624,6 +613,6 @@ export class DataApiService {
     this.theaterDoc.delete();
   } */
 
-  
+
 
 }
