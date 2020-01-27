@@ -28,7 +28,6 @@ export class SonyMaterialesComponent implements OnInit {
   movies: Array<any>;
   cinesFilter = "Cines";
   materialsFilter = "Materiales";
-  cinesFilter = "Cines";
   weeksFilter = "Semana";
   movieFilter = "Pelicula";
 
