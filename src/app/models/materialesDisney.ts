@@ -1,4 +1,5 @@
 export interface MaterialesDisneyInterface {
+  Circuito?: any;
   materialID?: any;
   Distribuitor?: string;
   Fecha?: string;

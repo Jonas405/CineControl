@@ -1,4 +1,5 @@
 export interface MaterialesSonyInterface {
+  Circuito?: any;
   materialID?: any;
   Distribuitor?: string;
   Fecha?: string;

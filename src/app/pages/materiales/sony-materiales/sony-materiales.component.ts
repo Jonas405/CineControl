@@ -27,10 +27,12 @@ export class SonyMaterialesComponent implements OnInit {
   cines: Array<any>;
   weeks: Array<any>;
   movies: Array<any>;
+  circuitos: Array<any>;
   cinesFilter = "Cines";
   materialsFilter = "Materiales";
   weeksFilter = "Semana";
   movieFilter = "Pelicula";
+  circuitosFilter = "Circuitos";
 
   slides: any = [[]];
   chunk(arr, chunkSize) {
@@ -156,6 +158,25 @@ export class SonyMaterialesComponent implements OnInit {
     this.materialesSony = filtered;
   }
 
+  filterByCircuito(cto) {
+    this.movieFilter = "Peliculas";
+    this.cinesFilter = "Cines";
+    this.materialsFilter = "Materiales";
+    this.weeksFilter = "Semana";
+    this.circuitosFilter = cto;
+
+    const materialesCopy = [...this.materialesState];
+    const filtered = [];
+
+    for (let i = 0; i < materialesCopy.length; i++) {
+      if (materialesCopy[i].Circuito == cto) {
+        filtered.push(materialesCopy[i]);
+      }
+    }
+
+    this.materialesSony = filtered;
+  }
+
   resetFilter() {
     this.weeksFilter = "Semana";
     this.cinesFilter = "Cines";
@@ -199,6 +220,12 @@ export class SonyMaterialesComponent implements OnInit {
       return item["Week"];
     });
     this.weeks = [...new Set(this.weeks)];
+
+    // get an array with all the circuitos
+    this.circuitos = this.materialesSony.map(function(item) {
+      return item.Circuito;
+    });
+    this.circuitos = [...new Set(this.circuitos)];
   }
 
   deleteMaterialSony(materialSonyKey: string) {

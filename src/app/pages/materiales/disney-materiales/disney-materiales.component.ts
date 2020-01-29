@@ -33,10 +33,12 @@ export class DisneyMaterialesComponent implements OnInit {
   cines: Array<any>;
   weeks: Array<any>;
   movies: Array<any>;
+  circuitos: Array<any>;
   materialsFilter = "Materiales";
   cinesFilter = "Cines";
   weeksFilter = "Semana";
   movieFilter = "Pelicula";
+  circuitosFilter = "Circuitos";
 
   ngOnInit() {
     this.getAllMaterialesDisney();
@@ -85,6 +87,8 @@ export class DisneyMaterialesComponent implements OnInit {
     this.materialsFilter = material;
     this.cinesFilter = "Cines";
     this.weeksFilter = "Semana";
+    this.circuitosFilter = "Circuitos";
+
     const materialesCopy = [...this.materialesState];
     const filtered = [];
 
@@ -101,6 +105,8 @@ export class DisneyMaterialesComponent implements OnInit {
     this.cinesFilter = cine;
     this.materialsFilter = "Materiales";
     this.weeksFilter = "Semana";
+    this.circuitosFilter = "Circuitos";
+
     const materialesCopy = [...this.materialesState];
     const filtered = [];
 
@@ -117,6 +123,8 @@ export class DisneyMaterialesComponent implements OnInit {
     this.materialsFilter = "Materiales";
     this.weeksFilter = "Semana";
     this.movieFilter = movie;
+    this.circuitosFilter = "Circuitos";
+
     const materialesCopy = [...this.materialesState];
     const filtered = [];
 
@@ -134,6 +142,8 @@ export class DisneyMaterialesComponent implements OnInit {
     this.cinesFilter = "Cines";
     this.materialsFilter = "Materiales";
     this.weeksFilter = "Semana: " + week;
+    this.circuitosFilter = "Circuitos";
+
     const materialesCopy = [...this.materialesState];
     const filtered = [];
 
@@ -146,11 +156,31 @@ export class DisneyMaterialesComponent implements OnInit {
     this.materialesDisney = filtered;
   }
 
+  filterByCircuito(cto) {
+    this.movieFilter = "Peliculas";
+    this.cinesFilter = "Cines";
+    this.materialsFilter = "Materiales";
+    this.weeksFilter = "Semana";
+    this.circuitosFilter = cto;
+
+    const materialesCopy = [...this.materialesState];
+    const filtered = [];
+
+    for (let i = 0; i < materialesCopy.length; i++) {
+      if (materialesCopy[i].Circuito == cto) {
+        filtered.push(materialesCopy[i]);
+      }
+    }
+
+    this.materialesDisney = filtered;
+  }
+
   resetFilter() {
     this.movieFilter = "Peliculas";
     this.weeksFilter = "Semana";
     this.cinesFilter = "Cines";
     this.materialsFilter = "Materiales";
+    this.circuitosFilter = "Circuitos";
     this.materialesDisney = this.materialesState;
   }
 
@@ -193,6 +223,12 @@ export class DisneyMaterialesComponent implements OnInit {
           return item.Week;
         });
         this.weeks = [...new Set(this.weeks)];
+
+        // get an array with all the circuitos
+        this.circuitos = this.materialesDisney.map(function(item) {
+          return item.Circuito;
+        });
+        this.circuitos = [...new Set(this.circuitos)];
       });
   }
 

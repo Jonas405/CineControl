@@ -50,9 +50,9 @@
   </div>
 
   <div
-    class="container-fluid center row d-flex py-0 my-2  justify-content-center w-100"
+    class="container-fluid center row ml-3 d-flex py-0 justify-content-center w-100"
   >
-    <div class="dropdown mx-3">
+    <div class="dropdown mx-3 my-1">
       <button
         class="btn btn-secondary dropdown-toggle"
         type="button"
@@ -72,7 +72,7 @@
         >
       </div>
     </div>
-    <div class="dropdown mx-3">
+    <div class="dropdown mx-3 my-1">
       <button
         class="btn btn-secondary dropdown-toggle"
         type="button"
@@ -93,7 +93,7 @@
       </div>
     </div>
 
-    <div class="dropdown mx-3">
+    <div class="dropdown mx-3 my-1">
       <button
         class="btn btn-secondary dropdown-toggle"
         type="button"
@@ -113,7 +113,7 @@
         >
       </div>
     </div>
-    <div class="dropdown mx-3">
+    <div class="dropdown mx-3 my-1">
       <button
         class="btn btn-secondary dropdown-toggle"
         type="button"
@@ -130,6 +130,26 @@
           *ngFor="let week of weeks"
           (click)="filterByWeek(week)"
           >{{ week }}</a
+        >
+      </div>
+    </div>
+    <div class="dropdown mx-3 my-1">
+      <button
+        class="btn btn-secondary dropdown-toggle"
+        type="button"
+        id="dropdownMenuButton"
+        data-toggle="dropdown"
+        aria-haspopup="true"
+        aria-expanded="false"
+      >
+        {{ circuitosFilter }}
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a
+          class="dropdown-item"
+          *ngFor="let circuito of circuitos"
+          (click)="filterByCircuito(circuito)"
+          >{{ circuito }}</a
         >
       </div>
     </div>
