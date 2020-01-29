@@ -16,3 +16,13 @@
   height: 10vh;
   object-fit: scale-down;
 }
+
+.csv-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 11px;
+}
+
+.btn-csv {
+  width: 30%;
+}

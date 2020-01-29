@@ -9,6 +9,7 @@ import {
   MaterialDisneyInterface,
   MaterialesDisneyInterface
 } from "src/app/models/materialesDisney";
+import { ExportToCsv } from "export-to-csv";
 
 @Component({
   selector: "app-disney-materiales",
@@ -51,6 +52,32 @@ export class DisneyMaterialesComponent implements OnInit {
         this.user.photoUrl = user.photoURL;
       }
     });
+  }
+
+  exportCsv() {
+    const options = {
+      fieldSeparator: ",",
+      quoteStrings: '"',
+      decimalSeparator: ".",
+      showLabels: true,
+      showTitle: true,
+      title: "Reporte CineControl",
+      useTextFile: false,
+      useBom: true,
+      useKeysAsHeaders: true
+    };
+    const csvExporter = new ExportToCsv(options);
+
+    const materialesCopy = [...this.materialesDisney];
+    const filtered = [];
+
+    for (const material of materialesCopy) {
+      delete material.key;
+      delete material.materialID;
+      delete material.checkerID;
+    }
+    console.log(materialesCopy);
+    csvExporter.generateCsv(materialesCopy);
   }
 
   filterByMaterial(material) {
