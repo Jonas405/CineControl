@@ -6,6 +6,7 @@ import * as firebase from 'firebase';
 import { v4 as uuid } from 'uuid';
 import {NgbDateStruct, NgbCalendar} from '@ng-bootstrap/ng-bootstrap';
 import {NgbDateAdapter, NgbDateNativeAdapter} from '@ng-bootstrap/ng-bootstrap';
+import { Observable } from 'rxjs';
 
 
 
@@ -30,21 +31,55 @@ export class AddSonyTitleComponent implements OnInit {
   }
 
    //Add URL Storage
-
-   private uploadTask: firebase.storage.UploadTask;
+//   private uploadTask: firebase.storage.UploadTask;
 /*
    selectToday() {
     this.model = this.calendar.getToday();
   }
  */
+
    onSaveSonyTitle(sonyTitleForm: NgForm): void {
     if (sonyTitleForm.value.key == null) {
       // New
-
-      let uniqueId = uuid();
+      sonyTitleForm.value.studio = 'Sony Pictures Releasing'
       let storageRef = firebase.storage().ref('SonyTitles/' + this.selectedImage.name);
-      this.uploadTask = storageRef.put(this.selectedImage);
-      this.uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
+ //     this.uploadTask = storageRef.put(this.selectedImage);
+// Firebase doc Test
+
+
+      var uploadTask = storageRef.child('SonyTitles/' + this.selectedImage.name).put(this.selectedImage);
+   
+          // Register three observers:
+          // 1. 'state_changed' observer, called any time the state changes
+          // 2. Error observer, called on failure
+          // 3. Completion observer, called on successful completion
+          uploadTask.on('state_changed', function(snapshot){
+            // Observe state change events such as progress, pause, and resume
+            // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+            var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            console.log('Upload is ' + progress + '% done');
+            switch (snapshot.state) {
+              case firebase.storage.TaskState.PAUSED: // or 'paused'
+                console.log('Upload is paused');
+                break;
+              case firebase.storage.TaskState.RUNNING: // or 'running'
+                console.log('Upload is running');
+                break;
+            }
+          }, function(error) {
+            // Handle unsuccessful uploads
+          }, function() {
+            // Handle successful uploads on complete
+            // For instance, get the download URL: https://firebasestorage.googleapis.com/...
+            uploadTask.snapshot.ref.getDownloadURL().then(function(downloadURL) {
+              console.log('File available at', downloadURL);
+              const imageUrl = downloadURL;
+              console.log("This is the URL", imageUrl);
+              sonyTitleForm.value.imageURL = imageUrl;
+            });
+          });
+
+    /*   this.uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
         (snapshot) => {
         //  movie.progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
         },
@@ -55,20 +90,26 @@ export class AddSonyTitleComponent implements OnInit {
         //  movie.imageURL = this.uploadTask.snapshot.downloadURL;
           //console.log("file url", movie.file)
           //console.log("StorageReference", storageRef);
-        })
-        this.uploadTask.snapshot.ref.getDownloadURL().then(downloadURL => {
+        }) */
+        
+          //Upload file
+    /*     this.uploadTask.snapshot.ref.getDownloadURL().then(downloadURL => {
           const imageUrl = downloadURL;
+          console.log("This is the URL", imageUrl);
           sonyTitleForm.value.imageURL = imageUrl;
-        });
+          
+        }); */
 
         const a = this.model2.toLocaleString();
-
         sonyTitleForm.value.releaseDate = a;
-        this.dataApi.addSonyTitle(sonyTitleForm.value);
+        console.log("Before to go the function upload", sonyTitleForm.value);
+        this.sonyTitleSaveData(sonyTitleForm);
+
 
     } else {
       // Update
       this.dataApi.updateSonyTitle(sonyTitleForm.value);
+      console.log(sonyTitleForm.value);
     }
     sonyTitleForm.resetForm();
     this.btnClose.nativeElement.click();
@@ -92,7 +133,14 @@ export class AddSonyTitleComponent implements OnInit {
     }
   }
 
+   public sonyTitleSaveData (sonyTitleForm){
+     console.log("Final information to upload", sonyTitleForm.value);
+    this.dataApi.addSonyTitle(sonyTitleForm.value);
+   }
+
  }
+
+ 
 
 /*
   onSubmit(formValue) {

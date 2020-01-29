@@ -32,10 +32,74 @@ private uploadTask: firebase.storage.UploadTask;
 onSaveDisneyTitle(disneyTitleForm: NgForm): void {
  if (disneyTitleForm.value.key == null) {
    // New
-
+   disneyTitleForm.value.studio = 'Walt Disney Studios'
    let storageRef = firebase.storage().ref('WaltDisneyTitles/' + this.selectedImage.name);
    this.uploadTask = storageRef.put(this.selectedImage);
-   this.uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
+
+   // Firebase doc Test
+
+
+   var uploadTask = storageRef.child('SonyTitles/' + this.selectedImage.name).put(this.selectedImage);
+   
+   // Register three observers:
+   // 1. 'state_changed' observer, called any time the state changes
+   // 2. Error observer, called on failure
+   // 3. Completion observer, called on successful completion
+   uploadTask.on('state_changed', function(snapshot){
+     // Observe state change events such as progress, pause, and resume
+     // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+     var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+     console.log('Upload is ' + progress + '% done');
+     switch (snapshot.state) {
+       case firebase.storage.TaskState.PAUSED: // or 'paused'
+         console.log('Upload is paused');
+         break;
+       case firebase.storage.TaskState.RUNNING: // or 'running'
+         console.log('Upload is running');
+         break;
+     }
+   }, function(error) {
+     // Handle unsuccessful uploads
+   }, function() {
+     // Handle successful uploads on complete
+     // For instance, get the download URL: https://firebasestorage.googleapis.com/...
+     uploadTask.snapshot.ref.getDownloadURL().then(function(downloadURL) {
+       console.log('File available at', downloadURL);
+       const imageUrl = downloadURL;
+       console.log("This is the URL", imageUrl);
+       disneyTitleForm.value.imageURL = imageUrl;
+     });
+   });
+
+/*   this.uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
+ (snapshot) => {
+ //  movie.progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+ },
+ (error) => {
+   console.log(error)
+ },
+ () => {
+ //  movie.imageURL = this.uploadTask.snapshot.downloadURL;
+   //console.log("file url", movie.file)
+   //console.log("StorageReference", storageRef);
+ }) */
+ 
+   //Upload file
+/*     this.uploadTask.snapshot.ref.getDownloadURL().then(downloadURL => {
+   const imageUrl = downloadURL;
+   console.log("This is the URL", imageUrl);
+   sonyTitleForm.value.imageURL = imageUrl;
+   
+ }); */
+
+ const a = this.model2.toLocaleString();
+ disneyTitleForm.value.releaseDate = a;
+ console.log("Before to go the function upload", disneyTitleForm.value);
+ this.disneyTitlesSaveData(disneyTitleForm);
+
+
+
+   /* this.uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
      (snapshot) => {
      //  movie.progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
      },
@@ -55,7 +119,7 @@ onSaveDisneyTitle(disneyTitleForm: NgForm): void {
      const a = this.model2.toLocaleString();
      disneyTitleForm.value.releaseDate = a;
 
-     this.dataApi.addDisneyTitle(disneyTitleForm.value);
+     this.dataApi.addDisneyTitle(disneyTitleForm.value); */
 
  } else {
    // Update
@@ -83,6 +147,11 @@ showPreview(event: any) {
  }
 }
 
+
+public disneyTitlesSaveData (disneyTitleForm){
+  console.log("Final information to upload", disneyTitleForm.value);
+ this.dataApi.addDisneyTitle(disneyTitleForm.value);
+}
 }
 
 /*

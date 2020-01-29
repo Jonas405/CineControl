@@ -29,14 +29,21 @@
                     <div class="text-center">
                       <img [src]="imgSrc" width="350px" height="250px" (click)="fileUploader.click()">
                     </div>
-
+                    <hr/>
                     <div class="field">
                       <label>Seleccionar Portada</label>
-                      <input name="file" type="file" #fileUploader (change)="showPreview($event)" observeFiles [(ngModel)]="this.dataApi.selectedSonyTitle.file">
+                      
+                      <input  class="form-control" name="file" type="file" #fileUploader (change)="showPreview($event)" observeFiles [(ngModel)]="this.dataApi.selectedSonyTitle.file">
                     </div>
+          
+                   
+          
+                    <div class="progress" *ngIf="progress$ | async as progress">
+                      <div class="progress-bar progress-bar-animated" [ngStyle]="{ 'width': progress + '%' }"></div>
+                   </div>
 
                     <div class="field">
-                        <label for="releaseDate">Fecha Premier</label>
+                        <label for="releaseDate">Fecha Estreno</label>
                     </div>
                
               <div class="col-6">
@@ -52,19 +59,16 @@
                   </div>
                 </form>
 
-            <hr/>
-            <button class="btn btn-sm btn-outline-primary" (click)="model2 = today">Select Today</button>
+            
+            <!-- <button class="btn btn-sm btn-outline-primary" (click)="model2 = today">Select Today</button> -->
             <hr/>
             <input type="hidden" name="releaseDate"[(ngModel)]="this.dataApi.selectedSonyTitle.releaseDate">
           </div>
+          <button class="btn btn-sm btn-outline-primary" (click)="onSaveSonyTitle"> 
+           Cargar Datos
+           </button>
                   
-
-                    <div class="form-group col-md-6">
-                        <label for="studio">Estudio</label>
-                        <input name="studio"[(ngModel)]="this.dataApi.selectedSonyTitle.studio">
-                    </div>
-
-              
+                      <input type="hidden" name="studio"[(ngModel)]="this.dataApi.selectedSonyTitle.studio">
                       <input type="hidden" name="imageURL"[(ngModel)]="this.dataApi.selectedSonyTitle.imageURL">
                
 
