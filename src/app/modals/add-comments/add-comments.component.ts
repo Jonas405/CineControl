@@ -31,6 +31,8 @@ export class AddCommentsComponent implements OnInit {
   fecha: any;
   url: any;
   data: any;
+  uploaded = false;
+  loading = false;
 
   get today() {
     return new Date();
@@ -63,6 +65,7 @@ export class AddCommentsComponent implements OnInit {
   }
 
   startUpload(event: FileList) {
+    this.loading = true;
     // The File object
     const file = event.item(0);
 
@@ -70,22 +73,24 @@ export class AddCommentsComponent implements OnInit {
     // The storage path
     const path = `logistica/${new Date().getTime()}_${file.name}`;
     const ref = this.storage.ref(path);
-    const task = this.storage.upload(path, file).then(() => { // Promise just if is upload the file take a ref
-    const ref = this.storage.ref(path);
-    const downloadURL = ref.getDownloadURL().subscribe(url => { 
-    const Url = url; // for ts
-    this.url = url // with this you can use it in the html
-    console.log("this is the url q tal", this.url);
-  })})
-  
+    const task = this.storage.upload(path, file).then(() => {
+      // Promise just if is upload the file take a ref
+      const ref = this.storage.ref(path);
+      const downloadURL = ref.getDownloadURL().subscribe(url => {
+        const Url = url; // for ts
+        this.url = url; // with this you can use it in the html
+        console.log("this is the url q tal", this.url);
+        this.uploaded = true;
+        this.loading = false;
+      });
+    });
 
-  // Progress monitoring
-  // this.percentage = this.task.percentageChanges();
-  // this.snapshot = this.task.snapshotChanges();
+    // Progress monitoring
+    // this.percentage = this.task.percentageChanges();
+    // this.snapshot = this.task.snapshotChanges();
 
-
-     // The file's download URL
-/*     this.snapshot = this.task.snapshotChanges().pipe(
+    // The file's download URL
+    /*     this.snapshot = this.task.snapshotChanges().pipe(
       tap(console.log),
       // The file's download URL
       finalize(async () => {
@@ -99,10 +104,8 @@ export class AddCommentsComponent implements OnInit {
           .add({ downloadURL: this.downloadURL, path });
       })
 
-     
-    );  */
 
-  
+    );  */
   }
 
   isActive(snapshot) {
@@ -129,7 +132,7 @@ export class AddCommentsComponent implements OnInit {
     this.btnClose.nativeElement.click();
   }
 
-  ngOnInit(){}
+  ngOnInit() {}
 }
 
 //   //Upload a file

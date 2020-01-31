@@ -115,6 +115,7 @@
               </label>
             </div>
           </div>
+          <h3 *ngIf="loading">cargando...</h3>
           <div *ngIf="percentage | async as pct">
             <progress class="progress is-info" [value]="pct" max="100">
             </progress>
@@ -142,7 +143,11 @@
             >
               Cerrar
             </button>
-            <button (click)="onSaveComment()" class="btn btn-primary">
+            <button
+              (click)="onSaveComment()"
+              [ngClass]="{ disabledA: !uploaded }"
+              class="btn btn-primary"
+            >
               Crear Logistica
             </button>
           </div>

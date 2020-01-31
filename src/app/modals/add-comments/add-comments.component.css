@@ -1,0 +1,19 @@
+.disabledA {
+  cursor: default !important;
+  pointer-events: none !important;
+  background-color: gray !important;
+}
+
+progress::-webkit-progress-value {
+  transition: width 0.1s ease;
+}
+
+.dropzone {
+  width: 78%;
+  padding: 20px;
+  margin: 20px;
+}
+
+.file {
+  display: table-caption;
+}
