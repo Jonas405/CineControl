@@ -43,73 +43,109 @@
             <label for="typeMovie">Clasificación</label>
             <input name="typeMovie" [(ngModel)]="clasificacion" />
           </div>
+          <div 
+          dropZone
+          (hovered)="toggleHover($event)"
+          (dropped)="startUpload($event)"
+          [class.hovering]="isHovering"
+        >
+          <h3>Agregar Portada</h3>
 
-          <div
-            class="dropzone"
-            dropZone
-            (hovered)="toggleHover($event)"
-            (dropped)="startUpload($event)"
-            [class.hovering]="isHovering"
-          >
-            <h3>Elige Portada</h3>
+          <div class="file">
+            <label class="file-label">
+             <!--  <input
+                class="file-input"
+                type="file"
+                (change)="startUpload($event.target.files)"
+              /> -->
 
-            <div class="file">
-              <label class="file-label">
-                <input
-                  class="file-input"
-                  type="file"
-                  (change)="startUpload($event.target.files)"
-                />
-
-                <span class="file-cta">
-                  <span class="file-icon">
-                    <i class="fa fa-upload"></i>
-                  </span>
-                  <span class="file-label">
-                    o elige una imagen...
-                  </span>
-                </span>
-              </label>
-            </div>
-          </div>
-          <div *ngIf="percentage | async as pct">
-            <progress class="progress is-info" [value]="pct" max="100">
-            </progress>
-
-            {{ pct | number }}%
-          </div>
-
-          <div *ngIf="snapshot | async as snap">
-            <!-- {{ snap.bytesTransferred | fileSize }} of
-            {{ snap.totalBytes | fileSize }} -->
-          </div>
-
-          <!-- <div class="text-center">
-            <img
+              <img
               [src]="imgSrc"
               width="350px"
               height="250px"
-              (click)="fileUploader.click()"
             />
+            <hr />
+            <div class="field">
+              <label>Seleccionar Portada</label>
+  
+              <input
+                class="form-control"
+                name="file"
+                type="file"
+                #fileUploader
+                (change)="showPreview($event)"
+                observeFiles
+                (change)="startUpload($event.target.files)"
+              />
+            </div>
+             
+            </label>
           </div>
-          <hr />
-          <div class="field">
-            <label>Seleccionar Portada</label>
+        </div>
+        
+        <div class="text-center">
+         <!--  <img
+            [src]="imgSrc"
+            width="350px"
+            height="250px"
+            (click)="fileUploader.click()"
+          /> -->
+        </div>
+     <!--    <hr />
+        <div class="field">
+          <label>Seleccionar Portada</label>
 
-            <input
-              class="form-control"
-              name="file"
-              type="file"
-              #fileUploader
-              (change)="showPreview($event)"
-              observeFiles
-              [(ngModel)]="this.dataApi.selectedDisneyTitle.file"
-            />
-          </div> -->
+          <input
+            class="form-control"
+            name="file"
+            type="file"
+            #fileUploader
+            (change)="showPreview($event)"
+            observeFiles
+            [(ngModel)]="this.dataApi.selectedDisneyTitle.file"
+          />
+        </div>
+-->
 
-          <div class="field">
-            <label for="releaseDate">Fecha Estreno</label>
-          </div>
+        
+        <div *ngIf="percentage | async as pct">
+          <progress class="progress is-info" [value]="pct" max="100">
+          </progress>
+
+          {{ pct | number }}%
+        </div>
+
+        <div *ngIf="snapshot | async as snap">
+          <!-- {{ snap.bytesTransferred | fileSize }} of
+          {{ snap.totalBytes | fileSize }} -->
+        </div>
+
+        <!-- <div class="text-center">
+          <img
+            [src]="imgSrc"
+            width="350px"
+            height="250px"
+            (click)="fileUploader.click()"
+          />
+        </div>
+        <hr />
+        <div class="field">
+          <label>Seleccionar Portada</label>
+
+          <input
+            class="form-control"
+            name="file"
+            type="file"
+            #fileUploader
+            (change)="showPreview($event)"
+            observeFiles
+            [(ngModel)]="this.dataApi.selectedDisneyTitle.file"
+          />
+        </div> -->
+
+        <div class="field">
+          <label for="releaseDate">Fecha Estreno</label>
+        </div>
 
           <div class="col-6">
             <form class="form-inline">
