@@ -14,24 +14,26 @@ import { ManagedTheaterInterface } from 'src/app/models/managedTheaters';
   styles: []
 })
 export class CheckersDetailComponent implements OnInit {
+  constructor(private dataApi: DataApiService, private route: ActivatedRoute,
+              private db: AngularFireDatabase, private router: Router) {}
 
   title = 'Checker Location';
   lat = 19.3581748;
   lng = -99.3861982;
   idChecker;
 
-    //Asignar cine a checker
+    // Asignar cine a checker
 
-    manager : ManagedTheaterInterface;
+    manager: ManagedTheaterInterface;
 
     assigTheaterCheckerRef: AngularFireList<ManagedTheaterInterface> = null;
 
 
   pageActual = 1;
-  constructor(private dataApi: DataApiService, private route: ActivatedRoute,
-              private db: AngularFireDatabase, private router: Router) {}
 
   checker: CheckerInterface;
+
+  private dbPathAssigTheaterChecker = '/USER/' + this.idChecker + '/asignedTheaters';
 
   ngOnInit() {
 
@@ -39,7 +41,7 @@ export class CheckersDetailComponent implements OnInit {
      this.route.params.subscribe(params => {
       const id = params.id;
       this.idChecker = id;
-      this.dbPathAssigTheaterChecker = '/USER/'+ this.idChecker +'/asignedTheaters';
+      this.dbPathAssigTheaterChecker = '/USER/' + this.idChecker + '/asignedTheaters';
       if (id) {
         this.dataApi.getCheckerById(id).snapshotChanges()
           .subscribe(res => {
@@ -52,25 +54,23 @@ export class CheckersDetailComponent implements OnInit {
               this.router.navigate(['/cinema']);
             }
           }, err => {
-            //this.notificationService.dispatchErrorMessage(err.toString());
-            //debugger;
+            // this.notificationService.dispatchErrorMessage(err.toString());
+            // debugger;
           });
       }
     });
   }
 
-  private dbPathAssigTheaterChecker = '/USER/'+ this.idChecker +'/asignedTheaters';
-
   deleteAssigTheater(key: string): Promise<void> {
     const confirmacion = confirm('Are you sure?');
-    if (confirmacion){
+    if (confirmacion) {
     this.assigTheaterCheckerRef = this.db.list(this.dbPathAssigTheaterChecker);
     return this.assigTheaterCheckerRef.remove(key);
 
     }
   }
 
-  onPreUpdateAssigTheater(theater: ManagedTheaterInterface){
+  onPreUpdateAssigTheater(theater: ManagedTheaterInterface) {
     this.dataApi.selectedAssigTheaterChecker = Object.assign({}, theater);
   }
 
@@ -79,7 +79,7 @@ export class CheckersDetailComponent implements OnInit {
       key,
       ...asignedTheaters[key]
 
-    }))
+    }));
   }
  }
 

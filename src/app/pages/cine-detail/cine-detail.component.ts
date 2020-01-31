@@ -7,7 +7,7 @@ import { TheaterInterface } from 'src/app/models/theaters';
 @Component({
   selector: 'app-cine-detail',
   templateUrl: './cine-detail.component.html',
-  styleUrls:['./cine-detail.component.css']
+  styleUrls: ['./cine-detail.component.css']
 })
 export class CineDetailComponent implements OnInit {
 
@@ -18,7 +18,7 @@ export class CineDetailComponent implements OnInit {
   pageActual = 1;
 
   constructor(private dataApi: DataApiService, private route: ActivatedRoute,
-    private db: AngularFireDatabase, private router: Router) { }
+              private db: AngularFireDatabase, private router: Router) { }
 
   theater: TheaterInterface;
 
@@ -37,8 +37,8 @@ export class CineDetailComponent implements OnInit {
               this.router.navigate(['/cinema']);
             }
           }, err => {
-            //this.notificationService.dispatchErrorMessage(err.toString());
-            //debugger;
+            // this.notificationService.dispatchErrorMessage(err.toString());
+            // debugger;
           });
       }
     });
@@ -49,7 +49,7 @@ export class CineDetailComponent implements OnInit {
       key,
       ...asignedTheaters[key]
 
-    }))
+    }));
 
   }
 

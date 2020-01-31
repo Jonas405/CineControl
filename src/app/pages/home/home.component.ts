@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { UserInterface } from '../../models/users';
-import { DataApiService } from "src/app/services/data-api.service";
-import { CheckersInterface, CheckerInterface } from "../../models/checkers";
+import { DataApiService } from 'src/app/services/data-api.service';
+import { CheckersInterface, CheckerInterface } from '../../models/checkers';
 import { ActivatedRoute } from '@angular/router';
 import { map } from 'rxjs/operators';
 import { ManagedTheatersInterface } from 'src/app/models/managedTheaters';
@@ -20,7 +20,7 @@ export class HomeComponent implements OnInit {
   constructor( public dataApi: DataApiService, private authService: AuthService ) { }
 
   public checkers: CheckersInterface[];
-  public managedTheaters : ManagedTheatersInterface[];
+  public managedTheaters: ManagedTheatersInterface[];
   public isAdmin: any = null;
   public userUid: string = null;
   private user: UserInterface;
@@ -42,15 +42,15 @@ export class HomeComponent implements OnInit {
         this.user.email = user.email;
         this.user.photoUrl = user.photoURL;
       }
-    })
+    });
   }
 
 
-  //------- Get First elements -------
+  // ------- Get First elements -------
 
 
 
-  //---------- Using RealTime database -------------------
+  // ---------- Using RealTime database -------------------
 
   getAllCheckers() {
     this.dataApi.getAllCheckersList().snapshotChanges().pipe(
@@ -65,15 +65,15 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  deleteChecker(checkerKey: string){
+  deleteChecker(checkerKey: string) {
     const confirmacion = confirm('Are you sure?');
-    if (confirmacion){
+    if (confirmacion) {
       this.dataApi.deleteChecker(checkerKey).catch(err => console.log(err));
     }
 
   }
 
-  onPreUpdateChecker(checker: CheckerInterface){
+  onPreUpdateChecker(checker: CheckerInterface) {
     this.dataApi.selectedChecker = Object.assign({}, checker);
   }
 
@@ -95,7 +95,7 @@ export class HomeComponent implements OnInit {
       key,
       ...asignedTheaters[key]
 
-    }))
+    }));
 
   }
 

@@ -5,13 +5,13 @@ import { MovieInterface } from 'src/app/models/movies';
     name: 'titleSonyFilter'
 })
 
-export class TitleSonyFilterPipe implements PipeTransform{
+export class TitleSonyFilterPipe implements PipeTransform {
 
-    transform(managed: MovieInterface[] , searchTerm: string):  MovieInterface[] {
-        if(!managed || !searchTerm){
+    transform(managed: MovieInterface[] , searchTerm: string): MovieInterface[] {
+        if (!managed || !searchTerm) {
             return managed;
         }
-        return managed.filter(managed => 
+        return managed.filter(managed =>
             managed.movieName.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1);
 
     }

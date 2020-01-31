@@ -1,20 +1,20 @@
-import { Component, OnInit } from "@angular/core";
-import { DataApiService } from "../../../services/data-api.service";
-import { NgForm } from "@angular/forms";
-import { AuthService } from "../../../services/auth.service";
-import { AngularFireAuth } from "@angular/fire/auth";
-import { UserInterface } from "../../../models/users";
-import { map } from "rxjs/operators";
+import { Component, OnInit } from '@angular/core';
+import { DataApiService } from '../../../services/data-api.service';
+import { NgForm } from '@angular/forms';
+import { AuthService } from '../../../services/auth.service';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { UserInterface } from '../../../models/users';
+import { map } from 'rxjs/operators';
 import {
   MaterialDisneyInterface,
   MaterialesDisneyInterface
-} from "src/app/models/materialesDisney";
-import { ExportToCsv } from "export-to-csv";
+} from 'src/app/models/materialesDisney';
+import { ExportToCsv } from 'export-to-csv';
 
 @Component({
-  selector: "app-disney-materiales",
-  templateUrl: "./disney-materiales.component.html",
-  styleUrls: ["./disney-materiales.component.css"]
+  selector: 'app-disney-materiales',
+  templateUrl: './disney-materiales.component.html',
+  styleUrls: ['./disney-materiales.component.css']
 })
 export class DisneyMaterialesComponent implements OnInit {
   constructor(
@@ -34,11 +34,11 @@ export class DisneyMaterialesComponent implements OnInit {
   weeks: Array<any>;
   movies: Array<any>;
   circuitos: Array<any>;
-  materialsFilter = "Materiales";
-  cinesFilter = "Cines";
-  weeksFilter = "Semana";
-  movieFilter = "Pelicula";
-  circuitosFilter = "Circuitos";
+  materialsFilter = 'Materiales';
+  cinesFilter = 'Cines';
+  weeksFilter = 'Semana';
+  movieFilter = 'Pelicula';
+  circuitosFilter = 'Circuitos';
 
   ngOnInit() {
     this.getAllMaterialesDisney();
@@ -58,12 +58,12 @@ export class DisneyMaterialesComponent implements OnInit {
 
   exportCsv() {
     const options = {
-      fieldSeparator: ",",
+      fieldSeparator: ',',
       quoteStrings: '"',
-      decimalSeparator: ".",
+      decimalSeparator: '.',
       showLabels: true,
       showTitle: true,
-      title: "Reporte CineControl",
+      title: 'Reporte CineControl',
       useTextFile: false,
       useBom: true,
       useKeysAsHeaders: true
@@ -83,11 +83,11 @@ export class DisneyMaterialesComponent implements OnInit {
   }
 
   filterByMaterial(material) {
-    this.movieFilter = "Peliculas";
+    this.movieFilter = 'Peliculas';
     this.materialsFilter = material;
-    this.cinesFilter = "Cines";
-    this.weeksFilter = "Semana";
-    this.circuitosFilter = "Circuitos";
+    this.cinesFilter = 'Cines';
+    this.weeksFilter = 'Semana';
+    this.circuitosFilter = 'Circuitos';
 
     const materialesCopy = [...this.materialesState];
     const filtered = [];
@@ -101,11 +101,11 @@ export class DisneyMaterialesComponent implements OnInit {
     this.materialesDisney = filtered;
   }
   filterByCine(cine) {
-    this.movieFilter = "Peliculas";
+    this.movieFilter = 'Peliculas';
     this.cinesFilter = cine;
-    this.materialsFilter = "Materiales";
-    this.weeksFilter = "Semana";
-    this.circuitosFilter = "Circuitos";
+    this.materialsFilter = 'Materiales';
+    this.weeksFilter = 'Semana';
+    this.circuitosFilter = 'Circuitos';
 
     const materialesCopy = [...this.materialesState];
     const filtered = [];
@@ -119,11 +119,11 @@ export class DisneyMaterialesComponent implements OnInit {
     this.materialesDisney = filtered;
   }
   filterByMovie(movie) {
-    this.cinesFilter = "Cines";
-    this.materialsFilter = "Materiales";
-    this.weeksFilter = "Semana";
+    this.cinesFilter = 'Cines';
+    this.materialsFilter = 'Materiales';
+    this.weeksFilter = 'Semana';
     this.movieFilter = movie;
-    this.circuitosFilter = "Circuitos";
+    this.circuitosFilter = 'Circuitos';
 
     const materialesCopy = [...this.materialesState];
     const filtered = [];
@@ -138,11 +138,11 @@ export class DisneyMaterialesComponent implements OnInit {
   }
 
   filterByWeek(week) {
-    this.movieFilter = "Peliculas";
-    this.cinesFilter = "Cines";
-    this.materialsFilter = "Materiales";
-    this.weeksFilter = "Semana: " + week;
-    this.circuitosFilter = "Circuitos";
+    this.movieFilter = 'Peliculas';
+    this.cinesFilter = 'Cines';
+    this.materialsFilter = 'Materiales';
+    this.weeksFilter = 'Semana: ' + week;
+    this.circuitosFilter = 'Circuitos';
 
     const materialesCopy = [...this.materialesState];
     const filtered = [];
@@ -157,10 +157,10 @@ export class DisneyMaterialesComponent implements OnInit {
   }
 
   filterByCircuito(cto) {
-    this.movieFilter = "Peliculas";
-    this.cinesFilter = "Cines";
-    this.materialsFilter = "Materiales";
-    this.weeksFilter = "Semana";
+    this.movieFilter = 'Peliculas';
+    this.cinesFilter = 'Cines';
+    this.materialsFilter = 'Materiales';
+    this.weeksFilter = 'Semana';
     this.circuitosFilter = cto;
 
     const materialesCopy = [...this.materialesState];
@@ -176,11 +176,11 @@ export class DisneyMaterialesComponent implements OnInit {
   }
 
   resetFilter() {
-    this.movieFilter = "Peliculas";
-    this.weeksFilter = "Semana";
-    this.cinesFilter = "Cines";
-    this.materialsFilter = "Materiales";
-    this.circuitosFilter = "Circuitos";
+    this.movieFilter = 'Peliculas';
+    this.weeksFilter = 'Semana';
+    this.cinesFilter = 'Cines';
+    this.materialsFilter = 'Materiales';
+    this.circuitosFilter = 'Circuitos';
     this.materialesDisney = this.materialesState;
   }
 
@@ -233,7 +233,7 @@ export class DisneyMaterialesComponent implements OnInit {
   }
 
   deleteMaterialDisney(materialDisneyKey: string) {
-    const confirmacion = confirm("Estas seguro?");
+    const confirmacion = confirm('Estas seguro?');
     if (confirmacion) {
       this.dataApi
         .deleteMaterialDisney(materialDisneyKey)

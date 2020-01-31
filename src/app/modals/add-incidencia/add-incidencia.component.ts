@@ -23,7 +23,7 @@ export class AddIncidenciaComponent implements OnInit {
       this.dataApi.addIncidencia(incidenciaForm.value);
     } else {
       // Update
-      incidenciaForm.value.Aprovacion = "true";
+      incidenciaForm.value.Aprovacion = 'true';
       this.dataApi.updateIncidenciaPorAprobar(incidenciaForm.value);
       this.dataApi.addIncidenciaAprobada(incidenciaForm.value);
       this.dataApi.deleteIncidenciaPorAprobar(incidenciaForm.value.incidenciaKey).catch(err => console.log(err));

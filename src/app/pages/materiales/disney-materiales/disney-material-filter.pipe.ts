@@ -5,13 +5,13 @@ import { MaterialDisneyInterface } from 'src/app/models/materialesDisney';
     name: 'materialDisneyFilter'
 })
 
-export class MaterialDisneyFilterPipe implements PipeTransform{
+export class MaterialDisneyFilterPipe implements PipeTransform {
 
-    transform(managed: MaterialDisneyInterface[] , searchTerm: string):  MaterialDisneyInterface[] {
-        if(!managed || !searchTerm){
+    transform(managed: MaterialDisneyInterface[] , searchTerm: string): MaterialDisneyInterface[] {
+        if (!managed || !searchTerm) {
             return managed;
         }
-        return managed.filter(managed => 
+        return managed.filter(managed =>
             managed.Title.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1);
 
     }

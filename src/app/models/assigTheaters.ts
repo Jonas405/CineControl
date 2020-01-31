@@ -6,5 +6,5 @@ export interface AssigTheatersInterface {
     direccion?: string;
     estado?: string;
     key?: string;
-    Rtk?: string
+    Rtk?: string;
   }

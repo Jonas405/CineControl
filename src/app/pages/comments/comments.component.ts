@@ -24,7 +24,7 @@ export class CommentsComponent implements OnInit {
 
 
   constructor( private dataApi: DataApiService, private authService: AuthService,
-    private storage: AngularFireStorage, private router: Router) { }
+               private storage: AngularFireStorage, private router: Router) { }
 
   public comments: CommentsInterface[];
   public isAdmin: any = null;
@@ -44,7 +44,7 @@ export class CommentsComponent implements OnInit {
         this.user.email = user.email;
         this.user.photoUrl = user.photoURL;
       }
-    })
+    });
   }
 
   getCommentsList() {
@@ -60,19 +60,19 @@ export class CommentsComponent implements OnInit {
   }
 
 
-  deleteComment(commentKey: string){
+  deleteComment(commentKey: string) {
     const confirmacion = confirm('Are you sure?');
-    if (confirmacion){
+    if (confirmacion) {
       this.dataApi.deleteComment(commentKey).catch(err => console.log(err));
     }
 
   }
 
-  onPreUpdateComment(comment: CommentsInterface){
+  onPreUpdateComment(comment: CommentsInterface) {
     this.dataApi.selectedComments = Object.assign({}, comment);
   }
 
-  openFile(url: string){
-    window.open(url)
+  openFile(url: string) {
+    window.open(url);
     }
 }

@@ -5,13 +5,13 @@ import { CheckerInterface } from 'src/app/models/checkers';
     name: 'checkerFilter'
 })
 
-export class CheckerFilterPipe implements PipeTransform{
+export class CheckerFilterPipe implements PipeTransform {
 
-    transform(managed: CheckerInterface[] , searchTerm: string):  CheckerInterface[] {
-        if(!managed || !searchTerm){
+    transform(managed: CheckerInterface[] , searchTerm: string): CheckerInterface[] {
+        if (!managed || !searchTerm) {
             return managed;
         }
-        return managed.filter(managed => 
+        return managed.filter(managed =>
             managed.checkerName.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1);
 
     }

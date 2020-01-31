@@ -16,30 +16,30 @@ import * as jsPDF from 'jspdf';
 export class IncidentComponent implements OnInit {
   constructor( private dataApi: DataApiService, private authService: AuthService ) { }
 
-  //PDF
+  // PDF
   @ViewChild('content', {static: false}) content: ElementRef;
-  public downloadPDF(){
-    let doc = new jsPDF();
-    let specialElementHandlers = {
-      '#editor': function(element,renderer){
-        return true;
-      }
-    };
-
-    let content = this.content.nativeElement;
-    doc.fromHTML(content.innerHTML, 15, 15, {
-      'width': 190,
-      'elementHandlers': specialElementHandlers
-    });
-
-    doc.save('test.pdf')
-  }
 
   public incidencias: IncidenciasInterface[];
   public isAdmin: any = null;
   public userUid: string = null;
   private user: UserInterface;
   pageActual = 1;
+  public downloadPDF() {
+    const doc = new jsPDF();
+    const specialElementHandlers = {
+      '#editor'(element, renderer) {
+        return true;
+      }
+    };
+
+    const content = this.content.nativeElement;
+    doc.fromHTML(content.innerHTML, 15, 15, {
+      width: 190,
+      elementHandlers: specialElementHandlers
+    });
+
+    doc.save('test.pdf');
+  }
 
   ngOnInit() {
     this.getAllIncidenciasPorAprobar();
@@ -54,10 +54,10 @@ export class IncidentComponent implements OnInit {
         this.user.email = user.email;
         this.user.photoUrl = user.photoURL;
       }
-    })
+    });
   }
 
-  //---------- Using RealTime database -------------------
+  // ---------- Using RealTime database -------------------
 
   getAllIncidenciasPorAprobar() {
     this.dataApi.getAllIncidenciasPorAprobarList().snapshotChanges().pipe(
@@ -71,15 +71,15 @@ export class IncidentComponent implements OnInit {
     });
   }
 
-  deleteIncidenciaPorAprobar(incidenciaKey: string){
+  deleteIncidenciaPorAprobar(incidenciaKey: string) {
     const confirmacion = confirm('Are you sure?');
-    if (confirmacion){
+    if (confirmacion) {
       this.dataApi.deleteIncidenciaPorAprobar(incidenciaKey).catch(err => console.log(err));
     }
 
   }
 
-  onPreUpdateIncidencia(incidencia: IncidenciaInterface){
+  onPreUpdateIncidencia(incidencia: IncidenciaInterface) {
     this.dataApi.selectedIncidenciaPorAprobar = Object.assign({}, incidencia);
   }
 }

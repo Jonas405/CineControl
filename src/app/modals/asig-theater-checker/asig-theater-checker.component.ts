@@ -14,27 +14,29 @@ import { map } from 'rxjs/operators';
 })
 export class AsigTheaterCheckerComponent implements OnInit {
 
-
-  //Asignar cine a checker
-  idChecker;
-  manager : ManagedTheaterInterface;
-
-
-  assigTheaterCheckerRef: AngularFireList<ManagedTheaterInterface> = null;
-
   constructor(public dataApi: DataApiService, private db: AngularFireDatabase,
               private route: ActivatedRoute, private router: Router) {
 
    }
+
+
+  // Asignar cine a checker
+  idChecker;
+  manager: ManagedTheaterInterface;
+
+
+  assigTheaterCheckerRef: AngularFireList<ManagedTheaterInterface> = null;
   @ViewChild('btnClose', {static: false} ) btnClose: ElementRef;
-  //@Input() userUid: string;
+
+  private dbPathAssigTheaterChecker = '/USER/' + this.idChecker + '/asignedTheaters';
+  // @Input() userUid: string;
 
   ngOnInit() {
 
     this.route.params.subscribe(params => {
       const id = params.id;
       this.idChecker = id;
-      this.dbPathAssigTheaterChecker = '/USER/'+ this.idChecker +'/asignedTheaters';
+      this.dbPathAssigTheaterChecker = '/USER/' + this.idChecker + '/asignedTheaters';
       if (id) {
         this.dataApi.getAssigTheaterChecker(id).snapshotChanges()
           .subscribe(res => {
@@ -47,14 +49,12 @@ export class AsigTheaterCheckerComponent implements OnInit {
               this.router.navigate(['/cinema']);
             }
           }, err => {
-            //this.notificationService.dispatchErrorMessage(err.toString());
-            //debugger;
+            // this.notificationService.dispatchErrorMessage(err.toString());
+            // debugger;
           });
       }
     });
   }
-
-  private dbPathAssigTheaterChecker = '/USER/'+ this.idChecker +'/asignedTheaters';
 
   onSaveNewTheater(asingTheaterForm: NgForm): void {
     if (asingTheaterForm.value.key == null) {
@@ -64,10 +64,10 @@ export class AsigTheaterCheckerComponent implements OnInit {
       this.assigTheaterCheckerRef.push(asingTheaterForm.value);
     } else {
       // Update
-      let keyAssig = this.manager.key;
+      const keyAssig = this.manager.key;
 
     //  this.assigTheaterCheckerRef = this.db.list(this.dbPathAssigTheaterChecker);
-      this.assigTheaterCheckerRef.update(keyAssig, asingTheaterForm.value)
+      this.assigTheaterCheckerRef.update(keyAssig, asingTheaterForm.value);
     }
     asingTheaterForm.resetForm();
     this.btnClose.nativeElement.click();

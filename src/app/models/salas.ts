@@ -3,4 +3,4 @@ export interface SalaInterface {
     RoomCapacity?: string;
     key?: string;
   }
-  
+

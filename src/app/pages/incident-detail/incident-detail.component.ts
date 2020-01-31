@@ -13,9 +13,9 @@ export class IncidentDetailComponent implements OnInit {
 
 
   constructor(private dataApi: DataApiService, private route: ActivatedRoute,
-    private db: AngularFireDatabase, private router: Router) { }
+              private db: AngularFireDatabase, private router: Router) { }
 
-    incidence : IncidenciaInterface;
+    incidence: IncidenciaInterface;
 
     ngOnInit() {
 
@@ -32,8 +32,8 @@ export class IncidentDetailComponent implements OnInit {
                 this.router.navigate(['/cinema']);
               }
             }, err => {
-              //this.notificationService.dispatchErrorMessage(err.toString());
-              //debugger;
+              // this.notificationService.dispatchErrorMessage(err.toString());
+              // debugger;
             });
         }
       });

@@ -3,7 +3,7 @@ import { SidebarService } from '../../services/sidebar.service';
 import { AuthService } from '../../services/auth.service';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { UserInterface } from '../../models/users';
-import { DataApiService } from "src/app/services/data-api.service";
+import { DataApiService } from 'src/app/services/data-api.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -12,10 +12,10 @@ import { DataApiService } from "src/app/services/data-api.service";
 })
 export class SidebarComponent implements OnInit {
 
-  constructor( private authService: AuthService, 
+  constructor( private authService: AuthService,
                private dataApi: DataApiService,
                private afsAuth: AngularFireAuth,
-               public _sidebar: SidebarService){ }
+               public _sidebar: SidebarService) { }
 
   public checkers = [];
   public checker = '';
@@ -27,9 +27,9 @@ export class SidebarComponent implements OnInit {
     roles: {}
   };
 
-  public providerId: string = 'null';
-  ngOnInit() { 
-  
+  public providerId = 'null';
+  ngOnInit() {
+
     this.authService.isAuth().subscribe(user => {
       if (user) {
         this.user.name = user.displayName;
@@ -37,7 +37,7 @@ export class SidebarComponent implements OnInit {
         this.user.photoUrl = user.photoURL;
         this.providerId = user.providerData[0].providerId;
       }
-    })
+    });
 
   }
 

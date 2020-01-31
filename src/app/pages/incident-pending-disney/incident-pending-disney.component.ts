@@ -35,10 +35,10 @@ export class IncidentPendingDisneyComponent implements OnInit {
         this.user.email = user.email;
         this.user.photoUrl = user.photoURL;
       }
-    })
+    });
   }
 
-   //---------- Using RealTime database -------------------
+   // ---------- Using RealTime database -------------------
 
    getAllIncidenciasPorAprobarDisney() {
     this.dataApi.getAllIncidenciasPorAprobarListDisney().snapshotChanges().pipe(
@@ -52,15 +52,15 @@ export class IncidentPendingDisneyComponent implements OnInit {
     });
   }
 
-  deleteIncidenciaPorAprobarDisney(incidenciaKey: string){
+  deleteIncidenciaPorAprobarDisney(incidenciaKey: string) {
     const confirmacion = confirm('Are you sure?');
-    if (confirmacion){
+    if (confirmacion) {
       this.dataApi.deleteIncidenciaPorAprobarDisney(incidenciaKey).catch(err => console.log(err));
     }
 
   }
 
-  onPreUpdateIncidencia(incidencia: IncidenciaInterface){
+  onPreUpdateIncidencia(incidencia: IncidenciaInterface) {
     this.dataApi.selectedIncidenciaPorAprobarDisney = Object.assign({}, incidencia);
   }
 }

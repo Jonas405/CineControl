@@ -18,7 +18,7 @@ export class ProfileComponent implements OnInit {
     roles: {}
   };
 
-  public providerId: string = 'null';
+  public providerId = 'null';
 
 
   ngOnInit() {
@@ -29,7 +29,7 @@ export class ProfileComponent implements OnInit {
         this.user.photoUrl = user.photoURL;
         this.providerId = user.providerData[0].providerId;
       }
-    })
+    });
   }
 
 }

@@ -12,9 +12,9 @@ import { AngularFireDatabase } from '@angular/fire/database';
 export class SonyPicturesReleasingDetailComponent implements OnInit {
 
   constructor(private dataApi: DataApiService, private route: ActivatedRoute,
-    private db: AngularFireDatabase, private router: Router) { }
+              private db: AngularFireDatabase, private router: Router) { }
 
-  movie : MovieInterface;
+  movie: MovieInterface;
 
   ngOnInit() {
 
@@ -31,8 +31,8 @@ export class SonyPicturesReleasingDetailComponent implements OnInit {
               this.router.navigate(['/cinema']);
             }
           }, err => {
-            //this.notificationService.dispatchErrorMessage(err.toString());
-            //debugger;
+            // this.notificationService.dispatchErrorMessage(err.toString());
+            // debugger;
           });
       }
     });

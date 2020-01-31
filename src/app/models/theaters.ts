@@ -13,7 +13,7 @@ export interface TheatersInterface {
     estado?: string;
     Estado?: string;
     gerente?: string;
-    Salas?:object;
+    Salas?: object;
     email?: string;
     rtkXref?: number;
     telefono?: number;
@@ -21,7 +21,7 @@ export interface TheatersInterface {
     key: string;
   }
 
-  export interface TheaterInterface {
+export interface TheaterInterface {
     cine?: string;
     Cine?: string;
     circuito?: string;
@@ -31,7 +31,7 @@ export interface TheatersInterface {
     estado?: string;
     Estado?: string;
     gerente?: string;
-    Salas?:object;
+    Salas?: object;
     email?: string;
     rtkXref?: number;
     telefono?: number;
@@ -41,4 +41,4 @@ export interface TheatersInterface {
 
 
 
-  
+

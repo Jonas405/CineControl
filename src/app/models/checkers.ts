@@ -9,10 +9,10 @@ export interface CheckersInterface {
     imageURL?: string;
     asignedTheaters?: object;
     key?: string;
-    userID?:string;
+    userID?: string;
   }
-  
-  
+
+
 export interface CheckerInterface {
   checkerMail?: string;
   checkerName?: string;

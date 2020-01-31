@@ -1,50 +1,23 @@
-import { Component, OnInit, ViewChild } from "@angular/core";
-import { DataApiService } from "../../../services/data-api.service";
-import { NgForm } from "@angular/forms";
-import { AuthService } from "../../../services/auth.service";
-import { AngularFireAuth } from "@angular/fire/auth";
-import { UserInterface } from "../../../models/users";
-import { map } from "rxjs/operators";
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { DataApiService } from '../../../services/data-api.service';
+import { NgForm } from '@angular/forms';
+import { AuthService } from '../../../services/auth.service';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { UserInterface } from '../../../models/users';
+import { map } from 'rxjs/operators';
 import {
   MaterialesSonyInterface,
   MaterialSonyInterface
-} from "src/app/models/materialesSony";
-import { NgbCarousel, NgbCarouselConfig } from "@ng-bootstrap/ng-bootstrap";
-import { ExportToCsv } from "export-to-csv";
+} from 'src/app/models/materialesSony';
+import { NgbCarousel, NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
+import { ExportToCsv } from 'export-to-csv';
 
 @Component({
-  selector: "app-sony-materiales",
-  templateUrl: "./sony-materiales.component.html",
-  styleUrls: ["./sony-materiales.component.css"]
+  selector: 'app-sony-materiales',
+  templateUrl: './sony-materiales.component.html',
+  styleUrls: ['./sony-materiales.component.css']
 })
 export class SonyMaterialesComponent implements OnInit {
-  materialesState: Array<any>;
-  public materialesSony: MaterialesSonyInterface[];
-  public isAdmin: any = null;
-  public userUid: string = null;
-  private user: UserInterface;
-  materiales: Array<any>;
-  cines: Array<any>;
-  weeks: Array<any>;
-  movies: Array<any>;
-  circuitos: Array<any>;
-  cinesFilter = "Cines";
-  materialsFilter = "Materiales";
-  weeksFilter = "Semana";
-  movieFilter = "Pelicula";
-  circuitosFilter = "Circuitos";
-
-  slides: any = [[]];
-  chunk(arr, chunkSize) {
-    let R = [];
-    for (let i = 0, len = arr.length; i < len; i += chunkSize) {
-      R.push(arr.slice(i, i + chunkSize));
-    }
-    return R;
-  }
-
-  pageActual = 1;
-  searchTerm: string;
 
   constructor(
     private dataApi: DataApiService,
@@ -58,6 +31,33 @@ export class SonyMaterialesComponent implements OnInit {
     config.showNavigationArrows = true;
     config.showNavigationIndicators = true;
   }
+  materialesState: Array<any>;
+  public materialesSony: MaterialesSonyInterface[];
+  public isAdmin: any = null;
+  public userUid: string = null;
+  private user: UserInterface;
+  materiales: Array<any>;
+  cines: Array<any>;
+  weeks: Array<any>;
+  movies: Array<any>;
+  circuitos: Array<any>;
+  cinesFilter = 'Cines';
+  materialsFilter = 'Materiales';
+  weeksFilter = 'Semana';
+  movieFilter = 'Pelicula';
+  circuitosFilter = 'Circuitos';
+
+  slides: any = [[]];
+
+  pageActual = 1;
+  searchTerm: string;
+  chunk(arr, chunkSize) {
+    const R = [];
+    for (let i = 0, len = arr.length; i < len; i += chunkSize) {
+      R.push(arr.slice(i, i + chunkSize));
+    }
+    return R;
+  }
 
   ngOnInit() {
     this.materialesSony = this.dataApi.materialesSony;
@@ -66,17 +66,17 @@ export class SonyMaterialesComponent implements OnInit {
       this.getFilters();
     }
     // this.getCurrentUser();
-    //this.slides = this.chunk(this.getAllMaterialesSony, 3);
+    // this.slides = this.chunk(this.getAllMaterialesSony, 3);
   }
 
   exportCsv() {
     const options = {
-      fieldSeparator: ",",
+      fieldSeparator: ',',
       quoteStrings: '"',
-      decimalSeparator: ".",
+      decimalSeparator: '.',
       showLabels: true,
       showTitle: true,
-      title: "Reporte CineControl",
+      title: 'Reporte CineControl',
       useTextFile: false,
       useBom: true,
       useKeysAsHeaders: true
@@ -97,8 +97,8 @@ export class SonyMaterialesComponent implements OnInit {
 
   filterByMaterial(material) {
     this.materialsFilter = material;
-    this.cinesFilter = "Cines";
-    this.weeksFilter = "Semana";
+    this.cinesFilter = 'Cines';
+    this.weeksFilter = 'Semana';
     const materialesCopy = [...this.materialesState];
     const filtered = [];
 
@@ -112,9 +112,9 @@ export class SonyMaterialesComponent implements OnInit {
   }
 
   filterByMovie(movie) {
-    this.cinesFilter = "Cines";
-    this.materialsFilter = "Materiales";
-    this.weeksFilter = "Semana";
+    this.cinesFilter = 'Cines';
+    this.materialsFilter = 'Materiales';
+    this.weeksFilter = 'Semana';
     this.movieFilter = movie;
     const materialesCopy = [...this.materialesState];
     const filtered = [];
@@ -129,8 +129,8 @@ export class SonyMaterialesComponent implements OnInit {
   }
   filterByCine(cine) {
     this.cinesFilter = cine;
-    this.materialsFilter = "Materiales";
-    this.weeksFilter = "Semana";
+    this.materialsFilter = 'Materiales';
+    this.weeksFilter = 'Semana';
     const materialesCopy = [...this.materialesState];
     const filtered = [];
 
@@ -143,9 +143,9 @@ export class SonyMaterialesComponent implements OnInit {
     this.materialesSony = filtered;
   }
   filterByWeek(week) {
-    this.cinesFilter = "Cines";
-    this.materialsFilter = "Materiales";
-    this.weeksFilter = "Semana: " + week;
+    this.cinesFilter = 'Cines';
+    this.materialsFilter = 'Materiales';
+    this.weeksFilter = 'Semana: ' + week;
     const materialesCopy = [...this.materialesState];
     const filtered = [];
 
@@ -159,10 +159,10 @@ export class SonyMaterialesComponent implements OnInit {
   }
 
   filterByCircuito(cto) {
-    this.movieFilter = "Peliculas";
-    this.cinesFilter = "Cines";
-    this.materialsFilter = "Materiales";
-    this.weeksFilter = "Semana";
+    this.movieFilter = 'Peliculas';
+    this.cinesFilter = 'Cines';
+    this.materialsFilter = 'Materiales';
+    this.weeksFilter = 'Semana';
     this.circuitosFilter = cto;
 
     const materialesCopy = [...this.materialesState];
@@ -178,9 +178,9 @@ export class SonyMaterialesComponent implements OnInit {
   }
 
   resetFilter() {
-    this.weeksFilter = "Semana";
-    this.cinesFilter = "Cines";
-    this.materialsFilter = "Materiales";
+    this.weeksFilter = 'Semana';
+    this.cinesFilter = 'Cines';
+    this.materialsFilter = 'Materiales';
     this.materialesSony = this.materialesState;
   }
 
@@ -194,7 +194,7 @@ export class SonyMaterialesComponent implements OnInit {
     });
   }
 
-  //---------- Using RealTime database -------------------
+  // ---------- Using RealTime database -------------------
 
   getFilters() {
     // get an array with all the movies
@@ -205,19 +205,19 @@ export class SonyMaterialesComponent implements OnInit {
 
     // get an array with all the materials
     this.materiales = this.materialesSony.map(function(item) {
-      return item["MaterialType"];
+      return item.MaterialType;
     });
     this.materiales = [...new Set(this.materiales)];
 
     // get an array with all the theathers
     this.cines = this.materialesSony.map(function(item) {
-      return item["Theater"];
+      return item.Theater;
     });
     this.cines = [...new Set(this.cines)];
 
     // get an array with all the weeks
     this.weeks = this.materialesSony.map(function(item) {
-      return item["Week"];
+      return item.Week;
     });
     this.weeks = [...new Set(this.weeks)];
 
@@ -229,7 +229,7 @@ export class SonyMaterialesComponent implements OnInit {
   }
 
   deleteMaterialSony(materialSonyKey: string) {
-    const confirmacion = confirm("Are you sure?");
+    const confirmacion = confirm('Are you sure?');
     if (confirmacion) {
       this.dataApi
         .deleteMaterialSony(materialSonyKey)

@@ -5,13 +5,13 @@ import { ManagedTheaterInterface } from 'src/app/models/managedTheaters';
     name: 'managedFilter'
 })
 
-export class ManagedFilterPipe implements PipeTransform{
+export class ManagedFilterPipe implements PipeTransform {
 
-    transform(managed: ManagedTheaterInterface[] , searchTerm: string):  ManagedTheaterInterface[] {
-        if(!managed || !searchTerm){
+    transform(managed: ManagedTheaterInterface[] , searchTerm: string): ManagedTheaterInterface[] {
+        if (!managed || !searchTerm) {
             return managed;
         }
-        return managed.filter(managed => 
+        return managed.filter(managed =>
             managed.Cine.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1);
 
     }

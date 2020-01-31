@@ -1,102 +1,44 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 import {
   AngularFirestore,
   AngularFirestoreCollection,
   AngularFirestoreDocument
-} from "@angular/fire/firestore";
-import { CheckersInterface, CheckerInterface } from "../models/checkers";
-import { TheatersInterface, TheaterInterface } from "../models/theaters";
+} from '@angular/fire/firestore';
+import { CheckersInterface, CheckerInterface } from '../models/checkers';
+import { TheatersInterface, TheaterInterface } from '../models/theaters';
 import {
   ManagedTheatersInterface,
   ManagedTheaterInterface
-} from "../models/managedTheaters";
-import { MovieInterface, MoviesInterface } from "../models/movies";
-import { CommentsInterface } from "../models/comments";
-import { Observable } from "rxjs/internal/Observable";
-import { map, retryWhen } from "rxjs/operators";
+} from '../models/managedTheaters';
+import { MovieInterface, MoviesInterface } from '../models/movies';
+import { CommentsInterface } from '../models/comments';
+import { Observable } from 'rxjs/internal/Observable';
+import { map, retryWhen } from 'rxjs/operators';
 import {
   AngularFireList,
   AngularFireObject,
   AngularFireDatabase,
   snapshotChanges
-} from "@angular/fire/database";
-import { database } from "firebase";
+} from '@angular/fire/database';
+import { database } from 'firebase';
 import {
   IncidenciasInterface,
   IncidenciaInterface
-} from "../models/incidencias";
+} from '../models/incidencias';
 import {
   MaterialesSonyInterface,
   MaterialSonyInterface
-} from "../models/materialesSony";
+} from '../models/materialesSony';
 import {
   MaterialesDisneyInterface,
   MaterialDisneyInterface
-} from "../models/materialesDisney";
-import * as firebase from "firebase";
+} from '../models/materialesDisney';
+import * as firebase from 'firebase';
 
 @Injectable({
-  providedIn: "root"
+  providedIn: 'root'
 })
 export class DataApiService {
-  materialesSony: Array<any>;
-  public MovieKey: any;
-
-  private dbPathManagedTheaters = "/managedTheaters";
-  managedTheatersRef: AngularFireList<ManagedTheatersInterface> = null;
-
-  private dbPathCheckers = "/USER";
-  checkersRef: AngularFireList<CheckersInterface> = null;
-
-  private dbPathMoviesSony = "/TITLES/Sony Pictures Releasing";
-  titlesSonyRef: AngularFireList<MoviesInterface> = null;
-
-  private dbPathMoviesDisney = "/TITLES/Walt Disney Studios";
-  titlesDisneyRef: AngularFireList<MoviesInterface> = null;
-
-  private dbPathComments = "/Logistica";
-  commentsRef: AngularFireList<CommentsInterface> = null;
-
-  private dbPathIncidenciasPorAprobar =
-    "WebRef/Incidences/incidenceForApprovalWeb/General";
-  //'incidences/incForApproval/WeekNumber'
-  incidenciasPorAprobarRef: AngularFireList<IncidenciasInterface> = null;
-
-  private dbPathIncidenciasAprobadas =
-    "WebRef/Incidences/incidenceApproved/General";
-  //'incidences/incApproved/WeekNumber'
-  incidenciasAprobadasRef: AngularFireList<IncidenciasInterface> = null;
-
-  // Incidencias agregadas a la fecha por separado disney y sony ----------------------------------
-
-  private dbPathIncidenciasAprobadasDisney =
-    "WebRef/Incidences/incidenceApproved/Walt Disney Studios";
-  //'incidences/incApproved/WeekNumber'
-  incidenciasAprobadasDisneyRef: AngularFireList<IncidenciasInterface> = null;
-
-  private dbPathIncidenciasAprobadasSony =
-    "WebRef/Incidences/incidenceApproved/Sony Pictures Releasing";
-  //'incidences/incApproved/WeekNumber'
-  incidenciasAprobadasSonyRef: AngularFireList<IncidenciasInterface> = null;
-
-  private dbPathIncidenciasPorAprobarDisney =
-    "WebRef/Incidences/incidenceForApprovalWeb/Walt Disney Studios";
-  //'incidences/incApproved/WeekNumber'
-  incidenciasPorAprobarDisneyRef: AngularFireList<IncidenciasInterface> = null;
-
-  private dbPathIncidenciasPorAprobarSony =
-    "WebRef/Incidences/incidenceForApprovalWeb/Sony Pictures Releasing";
-  //'incidences/incApproved/WeekNumber'
-  incidenciasPorAprobarSonyRef: AngularFireList<IncidenciasInterface> = null;
-
-  // ----------------------------------------------------------------------------------------
-
-  // -------------------------------------------
-  private dbPathSonyMateriales = "WebRef/MaterialsSony Pictures Releasing";
-  materialesSonyRef: AngularFireList<MaterialesSonyInterface> = null;
-
-  private dbPathDisneyMateriales = "WebRef/MaterialsWalt Disney Studios";
-  materialesDisneyRef: AngularFireList<MaterialesDisneyInterface> = null;
 
   constructor(private afs: AngularFirestore, private db: AngularFireDatabase) {
     this.managedTheatersRef = db.list(this.dbPathManagedTheaters);
@@ -123,12 +65,181 @@ export class DataApiService {
 
     this.getAllMaterialesSonyList();
   }
+  materialesSony: Array<any>;
+  public MovieKey: any;
 
-  //---------- Services Using Database RealTime  ------------------------
+  private dbPathManagedTheaters = '/managedTheaters';
+  managedTheatersRef: AngularFireList<ManagedTheatersInterface> = null;
+
+  private dbPathCheckers = '/USER';
+  checkersRef: AngularFireList<CheckersInterface> = null;
+
+  private dbPathMoviesSony = '/TITLES/Sony Pictures Releasing';
+  titlesSonyRef: AngularFireList<MoviesInterface> = null;
+
+  private dbPathMoviesDisney = '/TITLES/Walt Disney Studios';
+  titlesDisneyRef: AngularFireList<MoviesInterface> = null;
+
+  private dbPathComments = '/Logistica';
+  commentsRef: AngularFireList<CommentsInterface> = null;
+
+  private dbPathIncidenciasPorAprobar =
+    'WebRef/Incidences/incidenceForApprovalWeb/General';
+  // 'incidences/incForApproval/WeekNumber'
+  incidenciasPorAprobarRef: AngularFireList<IncidenciasInterface> = null;
+
+  private dbPathIncidenciasAprobadas =
+    'WebRef/Incidences/incidenceApproved/General';
+  // 'incidences/incApproved/WeekNumber'
+  incidenciasAprobadasRef: AngularFireList<IncidenciasInterface> = null;
+
+  // Incidencias agregadas a la fecha por separado disney y sony ----------------------------------
+
+  private dbPathIncidenciasAprobadasDisney =
+    'WebRef/Incidences/incidenceApproved/Walt Disney Studios';
+  // 'incidences/incApproved/WeekNumber'
+  incidenciasAprobadasDisneyRef: AngularFireList<IncidenciasInterface> = null;
+
+  private dbPathIncidenciasAprobadasSony =
+    'WebRef/Incidences/incidenceApproved/Sony Pictures Releasing';
+  // 'incidences/incApproved/WeekNumber'
+  incidenciasAprobadasSonyRef: AngularFireList<IncidenciasInterface> = null;
+
+  private dbPathIncidenciasPorAprobarDisney =
+    'WebRef/Incidences/incidenceForApprovalWeb/Walt Disney Studios';
+  // 'incidences/incApproved/WeekNumber'
+  incidenciasPorAprobarDisneyRef: AngularFireList<IncidenciasInterface> = null;
+
+  private dbPathIncidenciasPorAprobarSony =
+    'WebRef/Incidences/incidenceForApprovalWeb/Sony Pictures Releasing';
+  // 'incidences/incApproved/WeekNumber'
+  incidenciasPorAprobarSonyRef: AngularFireList<IncidenciasInterface> = null;
+
+  // ----------------------------------------------------------------------------------------
+
+  // -------------------------------------------
+  private dbPathSonyMateriales = 'WebRef/MaterialsSony Pictures Releasing';
+  materialesSonyRef: AngularFireList<MaterialesSonyInterface> = null;
+
+  private dbPathDisneyMateriales = 'WebRef/MaterialsWalt Disney Studios';
+  materialesDisneyRef: AngularFireList<MaterialesDisneyInterface> = null;
+
+  // ---------- Services Using Database RealTime  ------------------------
 
   public selectedManagedTheater: ManagedTheaterInterface = {
     key: null
   };
+
+  theatery: AngularFireObject<TheaterInterface>;
+
+  // ========================== Checkers Service ==========================
+
+  public selectedChecker: CheckerInterface = {
+    key: null
+  };
+
+  checky: AngularFireObject<CheckerInterface>;
+
+  // Asignar cine a checker
+  public selectedAssigTheaterChecker: ManagedTheaterInterface = {
+    key: null
+  };
+
+  managedy: AngularFireObject<ManagedTheaterInterface>;
+
+  // ========================== Titles Sony Service ==========================
+
+  public selectedSonyTitle: MovieInterface = {
+    key: null
+  };
+
+  sonyTi: AngularFireObject<MovieInterface>;
+
+  // ========================== Titles Disney Service ==========================
+
+  public selectedDisneyTitle: MovieInterface = {
+    key: null
+  };
+
+  disneyTi: AngularFireObject<MovieInterface>;
+
+  /// ======================= Comments Service =============================///
+
+  public selectedComments: CommentsInterface = {
+    key: null
+  };
+
+  // ========================== Sony Materiales Service ==========================
+
+  public selectedSonyMaterial: MaterialSonyInterface = {
+    key: null
+  };
+
+  /*   updateMaterialSony(sonyMaterial: MaterialSonyInterface): void {
+          let keyChecker = sonyMaterial.key;
+          console.log("UPDATE", sonyMaterial);
+        this.titlesSonyRef.update(keyChecker, sonyMaterial)
+        }
+ */
+  // ========================== Disney Materiales Service ==========================
+
+  public selectedDisneyMaterial: MaterialDisneyInterface = {
+    key: null
+  };
+
+  /*   updateMaterialDisney(disneyMaterial: MaterialDisneyInterface): void {
+        let keyChecker = disneyMaterial.key;
+        console.log("UPDATE", disneyMaterial);
+      this.titlesSonyRef.update(keyChecker, disneyMaterial)
+      } */
+
+  // ========================== IncidenciasPorAprobar Service ==========================
+
+  public selectedIncidenciaPorAprobar: IncidenciaInterface = {
+    key: null
+  };
+
+  incidencesTi: AngularFireObject<IncidenciaInterface>;
+
+  // ========================== IncidenciasPorAprobar Service Disney ==========================
+
+  public selectedIncidenciaPorAprobarDisney: IncidenciaInterface = {
+    key: null
+  };
+
+  incidencesTiDisney: AngularFireObject<IncidenciaInterface>;
+
+  // ========================== IncidenciasPorAprobar Service Sony ==========================
+
+  public selectedIncidenciaPorAprobarSony: IncidenciaInterface = {
+    key: null
+  };
+
+  incidencesTiSony: AngularFireObject<IncidenciaInterface>;
+
+  // ========================== Incidencias Aprobadas Service ==========================
+
+  public selectedIncidenciaAprobadas: IncidenciaInterface = {
+    key: null
+  };
+
+  incidencesTiApproved: AngularFireObject<IncidenciaInterface>;
+
+  // ========================== Incidencias Aprobadas Service Disney ==========================
+
+  public selectedIncidenciaAprobadasDisney: IncidenciaInterface = {
+    key: null
+  };
+
+  incidencesTiApprovedDisney: AngularFireObject<IncidenciaInterface>;
+
+  // ========================== Incidencias Aprobadas Service Sony ==========================
+
+  public selectedIncidenciaAprobadasSony: IncidenciaInterface = {
+    key: null
+  };
+
+  incidencesTiApprovedSony: AngularFireObject<IncidenciaInterface>;
 
   // ==========================  ManagedTheaters Service ==========================
 
@@ -145,23 +256,15 @@ export class DataApiService {
   }
 
   updateManagedTheater(managedTheaters: ManagedTheaterInterface): void {
-    let keyTheater = managedTheaters.key;
+    const keyTheater = managedTheaters.key;
     this.managedTheatersRef.update(keyTheater, managedTheaters);
   }
-
-  theatery: AngularFireObject<TheaterInterface>;
   getTheaterById(key: string): AngularFireObject<TheaterInterface> {
     this.theatery = this.db.object(
-      "/managedTheaters/" + key
+      '/managedTheaters/' + key
     ) as AngularFireObject<TheaterInterface>;
     return this.theatery;
   }
-
-  // ========================== Checkers Service ==========================
-
-  public selectedChecker: CheckerInterface = {
-    key: null
-  };
 
   getAllCheckersList(): AngularFireList<CheckersInterface> {
     return this.checkersRef;
@@ -176,41 +279,26 @@ export class DataApiService {
   }
 
   updateChecker(checker: CheckerInterface): void {
-    let keyChecker = checker.key;
+    const keyChecker = checker.key;
     this.checkersRef.update(keyChecker, checker);
   }
-
-  checky: AngularFireObject<CheckerInterface>;
   getCheckerById(key: string): AngularFireObject<CheckerInterface> {
-    this.checky = this.db.object("/USER/" + key) as AngularFireObject<
+    this.checky = this.db.object('/USER/' + key) as AngularFireObject<
       CheckerInterface
     >;
     return this.checky;
   }
-
-  //Asignar cine a checker
-  public selectedAssigTheaterChecker: ManagedTheaterInterface = {
-    key: null
-  };
-
-  managedy: AngularFireObject<ManagedTheaterInterface>;
   getAssigTheaterChecker(
     key: string
   ): AngularFireObject<ManagedTheaterInterface> {
     this.managedy = this.db.object(
-      "/USER/" + key + "/asignedTheaters"
+      '/USER/' + key + '/asignedTheaters'
     ) as AngularFireObject<ManagedTheaterInterface>;
     return this.managedy;
   }
 
-  // ========================== Titles Sony Service ==========================
-
-  public selectedSonyTitle: MovieInterface = {
-    key: null
-  };
-
   getAllSonyTitlesList(): AngularFireList<MoviesInterface> {
-    console.log("SONY", this.titlesSonyRef);
+    console.log('SONY', this.titlesSonyRef);
     return this.titlesSonyRef;
   }
 
@@ -223,23 +311,15 @@ export class DataApiService {
   }
 
   updateSonyTitle(title: MovieInterface): void {
-    let keyChecker = title.key;
+    const keyChecker = title.key;
     this.titlesSonyRef.update(keyChecker, title);
   }
-
-  sonyTi: AngularFireObject<MovieInterface>;
   getSonyTitleByID(key: string): AngularFireObject<MovieInterface> {
     this.sonyTi = this.db.object(
-      "/TITLES/Sony Pictures Releasing/" + key
+      '/TITLES/Sony Pictures Releasing/' + key
     ) as AngularFireObject<MovieInterface>;
     return this.sonyTi;
   }
-
-  // ========================== Titles Disney Service ==========================
-
-  public selectedDisneyTitle: MovieInterface = {
-    key: null
-  };
 
   getAllDisneyTitlesList(): AngularFireList<MoviesInterface> {
     return this.titlesDisneyRef;
@@ -254,23 +334,15 @@ export class DataApiService {
   }
 
   updateDisneyTitle(title: MovieInterface): void {
-    let keyChecker = title.key;
+    const keyChecker = title.key;
     this.titlesDisneyRef.update(keyChecker, title);
   }
-
-  disneyTi: AngularFireObject<MovieInterface>;
   getDisneyTitleByID(key: string): AngularFireObject<MovieInterface> {
     this.disneyTi = this.db.object(
-      "/TITLES/Walt Disney Studios/" + key
+      '/TITLES/Walt Disney Studios/' + key
     ) as AngularFireObject<MovieInterface>;
     return this.disneyTi;
   }
-
-  ///======================= Comments Service =============================///
-
-  public selectedComments: CommentsInterface = {
-    key: null
-  };
 
   getAllCommentsList(): AngularFireList<CommentsInterface> {
     return this.commentsRef;
@@ -285,15 +357,9 @@ export class DataApiService {
   }
 
   updateComment(comment: CommentsInterface): void {
-    let keyComment = comment.key;
+    const keyComment = comment.key;
     this.commentsRef.update(keyComment, comment);
   }
-
-  // ========================== Sony Materiales Service ==========================
-
-  public selectedSonyMaterial: MaterialSonyInterface = {
-    key: null
-  };
 
   getAllMaterialesSonyList() {
     this.materialesSonyRef
@@ -316,18 +382,6 @@ export class DataApiService {
     return this.materialesSonyRef.remove(key);
   }
 
-  /*   updateMaterialSony(sonyMaterial: MaterialSonyInterface): void {
-          let keyChecker = sonyMaterial.key;
-          console.log("UPDATE", sonyMaterial);
-        this.titlesSonyRef.update(keyChecker, sonyMaterial)
-        }
- */
-  // ========================== Disney Materiales Service ==========================
-
-  public selectedDisneyMaterial: MaterialDisneyInterface = {
-    key: null
-  };
-
   getAllMaterialesDisneyList(): AngularFireList<MaterialesDisneyInterface> {
     return this.materialesDisneyRef;
   }
@@ -339,18 +393,6 @@ export class DataApiService {
   deleteMaterialDisney(key: string): Promise<void> {
     return this.materialesDisneyRef.remove(key);
   }
-
-  /*   updateMaterialDisney(disneyMaterial: MaterialDisneyInterface): void {
-        let keyChecker = disneyMaterial.key;
-        console.log("UPDATE", disneyMaterial);
-      this.titlesSonyRef.update(keyChecker, disneyMaterial)
-      } */
-
-  // ========================== IncidenciasPorAprobar Service ==========================
-
-  public selectedIncidenciaPorAprobar: IncidenciaInterface = {
-    key: null
-  };
 
   getAllIncidenciasPorAprobarList(): AngularFireList<IncidenciasInterface> {
     return this.incidenciasPorAprobarRef;
@@ -365,23 +407,15 @@ export class DataApiService {
   }
 
   updateIncidenciaPorAprobar(incidencia: IncidenciaInterface): void {
-    let keyIncidencia = incidencia.key;
+    const keyIncidencia = incidencia.key;
     this.incidenciasPorAprobarRef.update(keyIncidencia, incidencia);
   }
-
-  incidencesTi: AngularFireObject<IncidenciaInterface>;
   getIncidenceById(key: string): AngularFireObject<IncidenciaInterface> {
     this.incidencesTi = this.db.object(
-      "WebRef/Incidences/incidenceForApproval/" + key
+      'WebRef/Incidences/incidenceForApproval/' + key
     ) as AngularFireObject<IncidenciaInterface>;
     return this.incidencesTi;
   }
-
-  // ========================== IncidenciasPorAprobar Service Disney ==========================
-
-  public selectedIncidenciaPorAprobarDisney: IncidenciaInterface = {
-    key: null
-  };
 
   getAllIncidenciasPorAprobarListDisney(): AngularFireList<
     IncidenciasInterface
@@ -398,23 +432,15 @@ export class DataApiService {
   }
 
   updateIncidenciaPorAprobarDisney(incidencia: IncidenciaInterface): void {
-    let keyIncidencia = incidencia.key;
+    const keyIncidencia = incidencia.key;
     this.incidenciasPorAprobarDisneyRef.update(keyIncidencia, incidencia);
   }
-
-  incidencesTiDisney: AngularFireObject<IncidenciaInterface>;
   getIncidenceByIdDisney(key: string): AngularFireObject<IncidenciaInterface> {
     this.incidencesTi = this.db.object(
-      "WebRef/Incidences/incidenceForApprovalWeb/Walt Disney Studios" + key
+      'WebRef/Incidences/incidenceForApprovalWeb/Walt Disney Studios' + key
     ) as AngularFireObject<IncidenciaInterface>;
     return this.incidencesTi;
   }
-
-  // ========================== IncidenciasPorAprobar Service Sony ==========================
-
-  public selectedIncidenciaPorAprobarSony: IncidenciaInterface = {
-    key: null
-  };
 
   getAllIncidenciasPorAprobarListSony(): AngularFireList<IncidenciasInterface> {
     return this.incidenciasPorAprobarSonyRef;
@@ -429,23 +455,15 @@ export class DataApiService {
   }
 
   updateIncidenciaPorAprobarSony(incidencia: IncidenciaInterface): void {
-    let keyIncidencia = incidencia.key;
+    const keyIncidencia = incidencia.key;
     this.incidenciasPorAprobarSonyRef.update(keyIncidencia, incidencia);
   }
-
-  incidencesTiSony: AngularFireObject<IncidenciaInterface>;
   getIncidenceByIdSony(key: string): AngularFireObject<IncidenciaInterface> {
     this.incidencesTi = this.db.object(
-      "WebRef/Incidences/incidenceForApprovalWeb/Sony Pictures Releasing" + key
+      'WebRef/Incidences/incidenceForApprovalWeb/Sony Pictures Releasing' + key
     ) as AngularFireObject<IncidenciaInterface>;
     return this.incidencesTi;
   }
-
-  // ========================== Incidencias Aprobadas Service ==========================
-
-  public selectedIncidenciaAprobadas: IncidenciaInterface = {
-    key: null
-  };
 
   getAllIncidenciasAprobadasList(): AngularFireList<IncidenciasInterface> {
     return this.incidenciasAprobadasRef;
@@ -460,25 +478,17 @@ export class DataApiService {
   }
 
   updateIncidenciaAprobada(incidencia: IncidenciaInterface): void {
-    let keyIncidencia = incidencia.key;
+    const keyIncidencia = incidencia.key;
     this.incidenciasAprobadasRef.update(keyIncidencia, incidencia);
   }
-
-  incidencesTiApproved: AngularFireObject<IncidenciaInterface>;
   getIncidenceByIdApproved(
     key: string
   ): AngularFireObject<IncidenciaInterface> {
     this.incidencesTi = this.db.object(
-      "WebRef/Incidences/incidenceApproved/" + key
+      'WebRef/Incidences/incidenceApproved/' + key
     ) as AngularFireObject<IncidenciaInterface>;
     return this.incidencesTi;
   }
-
-  // ========================== Incidencias Aprobadas Service Disney ==========================
-
-  public selectedIncidenciaAprobadasDisney: IncidenciaInterface = {
-    key: null
-  };
 
   getAllIncidenciasAprobadasListDisney(): AngularFireList<
     IncidenciasInterface
@@ -495,29 +505,21 @@ export class DataApiService {
   }
 
   updateIncidenciaAprobadaDisney(incidencia: IncidenciaInterface): void {
-    let keyIncidencia = incidencia.key;
-    console.log("UPDATE", incidencia);
+    const keyIncidencia = incidencia.key;
+    console.log('UPDATE', incidencia);
     this.incidenciasAprobadasDisneyRef.update(keyIncidencia, incidencia);
   }
-
-  incidencesTiApprovedDisney: AngularFireObject<IncidenciaInterface>;
   getIncidenceByIdApprovedDisney(
     key: string
   ): AngularFireObject<IncidenciaInterface> {
     this.incidencesTi = this.db.object(
-      "WebRef/Incidences/incidenceApproved/Walt Disney Studios" + key
+      'WebRef/Incidences/incidenceApproved/Walt Disney Studios' + key
     ) as AngularFireObject<IncidenciaInterface>;
     return this.incidencesTi;
   }
 
-  // ========================== Incidencias Aprobadas Service Sony ==========================
-
-  public selectedIncidenciaAprobadasSony: IncidenciaInterface = {
-    key: null
-  };
-
   getAllIncidenciasAprobadasListSony(): AngularFireList<IncidenciasInterface> {
-    console.log("Incidencias", this.incidenciasAprobadasSonyRef);
+    console.log('Incidencias', this.incidenciasAprobadasSonyRef);
     return this.incidenciasAprobadasSonyRef;
   }
 
@@ -530,22 +532,20 @@ export class DataApiService {
   }
 
   updateIncidenciaAprobadaSony(incidencia: IncidenciaInterface): void {
-    let keyIncidencia = incidencia.key;
-    console.log("UPDATE", incidencia);
+    const keyIncidencia = incidencia.key;
+    console.log('UPDATE', incidencia);
     this.incidenciasAprobadasSonyRef.update(keyIncidencia, incidencia);
   }
-
-  incidencesTiApprovedSony: AngularFireObject<IncidenciaInterface>;
   getIncidenceByIdApprovedSony(
     key: string
   ): AngularFireObject<IncidenciaInterface> {
     this.incidencesTi = this.db.object(
-      "WebRef/Incidences/incidenceApproved/Sony Pictures Releasing" + key
+      'WebRef/Incidences/incidenceApproved/Sony Pictures Releasing' + key
     ) as AngularFireObject<IncidenciaInterface>;
     return this.incidencesTi;
   }
 
-  //---------- Services Using Database CloudFireStore ------------------------
+  // ---------- Services Using Database CloudFireStore ------------------------
 
   /*
   Also for this requerimients I was used id for idetification and then for the other

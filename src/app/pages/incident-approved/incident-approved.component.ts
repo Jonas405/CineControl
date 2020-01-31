@@ -1,20 +1,20 @@
-import { Component, OnInit } from "@angular/core";
-import { DataApiService } from "../../services/data-api.service";
+import { Component, OnInit } from '@angular/core';
+import { DataApiService } from '../../services/data-api.service';
 import {
   IncidenciaInterface,
   IncidenciasInterface
-} from "../../models/incidencias";
-import { NgForm } from "@angular/forms";
-import { AuthService } from "../../services/auth.service";
-import { AngularFireAuth } from "@angular/fire/auth";
-import { UserInterface } from "../../models/users";
-import { map } from "rxjs/operators";
-import { ExportToCsv } from "export-to-csv";
+} from '../../models/incidencias';
+import { NgForm } from '@angular/forms';
+import { AuthService } from '../../services/auth.service';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { UserInterface } from '../../models/users';
+import { map } from 'rxjs/operators';
+import { ExportToCsv } from 'export-to-csv';
 
 @Component({
-  selector: "app-incident-approved",
-  templateUrl: "./incident-approved.component.html",
-  styleUrls: ["./incident-approved.component.css"]
+  selector: 'app-incident-approved',
+  templateUrl: './incident-approved.component.html',
+  styleUrls: ['./incident-approved.component.css']
 })
 export class IncidentApprovedComponent implements OnInit {
   constructor(
@@ -45,12 +45,12 @@ export class IncidentApprovedComponent implements OnInit {
 
   exportCsv() {
     const options = {
-      fieldSeparator: ",",
+      fieldSeparator: ',',
       quoteStrings: '"',
-      decimalSeparator: ".",
+      decimalSeparator: '.',
       showLabels: true,
       showTitle: true,
-      title: "Reporte CineControl",
+      title: 'Reporte CineControl',
       useTextFile: false,
       useBom: true,
       useKeysAsHeaders: true
@@ -70,7 +70,7 @@ export class IncidentApprovedComponent implements OnInit {
     csvExporter.generateCsv(incidenciasCopy);
   }
 
-  //---------- Using RealTime database -------------------
+  // ---------- Using RealTime database -------------------
 
   getAllIncidenciasAprobadas() {
     this.dataApi

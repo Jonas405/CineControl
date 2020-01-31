@@ -1,14 +1,14 @@
-import { Component, OnInit } from "@angular/core";
-import { SidebarService } from "../../services/sidebar.service";
-import { AuthService } from "../../services/auth.service";
-import { AngularFireAuth } from "@angular/fire/auth";
-import { UserInterface } from "../../models/users";
-import { DataApiService } from "src/app/services/data-api.service";
-import { ActivatedRoute, Router } from "@angular/router";
+import { Component, OnInit } from '@angular/core';
+import { SidebarService } from '../../services/sidebar.service';
+import { AuthService } from '../../services/auth.service';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { UserInterface } from '../../models/users';
+import { DataApiService } from 'src/app/services/data-api.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
-  selector: "app-header",
-  templateUrl: "./header.component.html",
+  selector: 'app-header',
+  templateUrl: './header.component.html',
   styles: []
 })
 export class HeaderComponent implements OnInit {
@@ -22,16 +22,16 @@ export class HeaderComponent implements OnInit {
   ) {}
 
   public checkers = [];
-  public checker = "";
+  public checker = '';
 
   user: UserInterface = {
-    name: "",
-    email: "",
-    photoUrl: "",
+    name: '',
+    email: '',
+    photoUrl: '',
     roles: {}
   };
 
-  public providerId: string = "null";
+  public providerId = 'null';
   ngOnInit() {
     this.authService.isAuth().subscribe(user => {
       if (user) {

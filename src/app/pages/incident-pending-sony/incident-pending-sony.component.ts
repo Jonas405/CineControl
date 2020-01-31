@@ -34,10 +34,10 @@ export class IncidentPendingSonyComponent implements OnInit {
         this.user.email = user.email;
         this.user.photoUrl = user.photoURL;
       }
-    })
+    });
   }
 
-   //---------- Using RealTime database -------------------
+   // ---------- Using RealTime database -------------------
 
    getAllIncidenciasPorAprobarSony() {
     this.dataApi.getAllIncidenciasPorAprobarListSony().snapshotChanges().pipe(
@@ -51,15 +51,15 @@ export class IncidentPendingSonyComponent implements OnInit {
     });
   }
 
-  deleteIncidenciaPorAprobarSony(incidenciaKey: string){
+  deleteIncidenciaPorAprobarSony(incidenciaKey: string) {
     const confirmacion = confirm('Are you sure?');
-    if (confirmacion){
+    if (confirmacion) {
       this.dataApi.deleteIncidenciaPorAprobarSony(incidenciaKey).catch(err => console.log(err));
     }
 
   }
 
-  onPreUpdateIncidencia(incidencia: IncidenciaInterface){
+  onPreUpdateIncidencia(incidencia: IncidenciaInterface) {
     this.dataApi.selectedIncidenciaPorAprobarSony = Object.assign({}, incidencia);
   }
 }

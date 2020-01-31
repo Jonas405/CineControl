@@ -1,25 +1,25 @@
-import { Component, OnInit, ViewChild, ElementRef, Input } from "@angular/core";
-import { DataApiService } from "../../services/data-api.service";
-import { MovieInterface } from "../../models/movies";
-import { NgForm } from "@angular/forms";
-import * as firebase from "firebase";
-import { Observable } from "rxjs";
-import { finalize, tap } from "rxjs/operators";
+import { Component, OnInit, ViewChild, ElementRef, Input } from '@angular/core';
+import { DataApiService } from '../../services/data-api.service';
+import { MovieInterface } from '../../models/movies';
+import { NgForm } from '@angular/forms';
+import * as firebase from 'firebase';
+import { Observable } from 'rxjs';
+import { finalize, tap } from 'rxjs/operators';
 import {
   AngularFireUploadTask,
   AngularFireStorage
-} from "@angular/fire/storage";
-import { NgbDateStruct, NgbCalendar } from "@ng-bootstrap/ng-bootstrap";
+} from '@angular/fire/storage';
+import { NgbDateStruct, NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
 import {
   NgbDateAdapter,
   NgbDateNativeAdapter
-} from "@ng-bootstrap/ng-bootstrap";
-import { AngularFirestore } from "@angular/fire/firestore";
+} from '@ng-bootstrap/ng-bootstrap';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @Component({
-  selector: "app-add-sony-title",
-  templateUrl: "./add-sony-title.component.html",
-  styleUrls: ["./add-sony-title.component.css"],
+  selector: 'app-add-sony-title',
+  templateUrl: './add-sony-title.component.html',
+  styleUrls: ['./add-sony-title.component.css'],
   providers: [{ provide: NgbDateAdapter, useClass: NgbDateNativeAdapter }]
 })
 export class AddSonyTitleComponent implements OnInit {
@@ -34,7 +34,7 @@ export class AddSonyTitleComponent implements OnInit {
     private storage: AngularFireStorage,
     private db: AngularFirestore
   ) {}
-  @ViewChild("btnClose", { static: false }) btnClose: ElementRef;
+  @ViewChild('btnClose', { static: false }) btnClose: ElementRef;
   @Input() userUid: string;
   imgSrc: string;
   selectedImage: File = null;
@@ -67,8 +67,8 @@ export class AddSonyTitleComponent implements OnInit {
     const file = event.item(0);
 
     // Client-side validation example
-    if (file.type.split("/")[0] !== "image") {
-      console.error("unsupported file type :( ");
+    if (file.type.split('/')[0] !== 'image') {
+      console.error('unsupported file type :( ');
       return;
     }
 
@@ -93,7 +93,7 @@ export class AddSonyTitleComponent implements OnInit {
         this.downloadURL = await ref.getDownloadURL().toPromise();
 
         this.db
-          .collection("files")
+          .collection('files')
           .add({ downloadURL: this.downloadURL, path });
 
         console.log(this.downloadURL);
@@ -104,7 +104,7 @@ export class AddSonyTitleComponent implements OnInit {
   // Determines if the upload task is active
   isActive(snapshot) {
     return (
-      snapshot.state === "running" &&
+      snapshot.state === 'running' &&
       snapshot.bytesTransferred < snapshot.totalBytes
     );
   }
@@ -117,7 +117,7 @@ export class AddSonyTitleComponent implements OnInit {
       this.data = {
         movieName: this.movieTitle,
         releaseDate: a,
-        studio: "Sony Studios",
+        studio: 'Sony Studios',
         imageURL: this.downloadURL,
         typeMovie: this.clasificacion
       };
@@ -139,8 +139,7 @@ export class AddSonyTitleComponent implements OnInit {
       reader.onload = (e: any) => this.imgSrc = e.target.result;
       reader.readAsDataURL(event.target.files[0]);
       this.selectedImage = event.target.files[0];
-    }
-    else {
+    } else {
       this.imgSrc = '/assets/img/image_placeholder.jpg';
       this.selectedImage = null;
     }

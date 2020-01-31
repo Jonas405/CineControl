@@ -5,12 +5,12 @@ export class Upload {
     logisticID: string;
     timeStamp: Date;
     file: File;
-    name:string;
+    name: string;
     url: string;
-    progress:number;
+    progress: number;
     createdAt: Date = new Date();
 
-    constructor(file:File){
+    constructor(file: File) {
         this.file = file;
         this.name = name;
        // this.url = URL;

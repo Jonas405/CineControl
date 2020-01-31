@@ -5,13 +5,13 @@ import { MaterialSonyInterface } from 'src/app/models/materialesSony';
     name: 'materialSonyFilter'
 })
 
-export class MaterialSonyFilterPipe implements PipeTransform{
+export class MaterialSonyFilterPipe implements PipeTransform {
 
-    transform(managed: MaterialSonyInterface[] , searchTerm: string):  MaterialSonyInterface[] {
-        if(!managed || !searchTerm){
+    transform(managed: MaterialSonyInterface[] , searchTerm: string): MaterialSonyInterface[] {
+        if (!managed || !searchTerm) {
             return managed;
         }
-        return managed.filter(managed => 
+        return managed.filter(managed =>
             managed.Title.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1);
 
     }

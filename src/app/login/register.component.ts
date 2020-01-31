@@ -1,14 +1,14 @@
-import { Component, OnInit, ElementRef, ViewChild } from "@angular/core";
-import { AuthService } from "../services/auth.service";
-import { Router } from "@angular/router";
-import { finalize } from "rxjs/operators";
-import { Observable } from "rxjs/internal/Observable";
-import { AngularFireStorage } from "@angular/fire/storage";
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+import { AuthService } from '../services/auth.service';
+import { Router } from '@angular/router';
+import { finalize } from 'rxjs/operators';
+import { Observable } from 'rxjs/internal/Observable';
+import { AngularFireStorage } from '@angular/fire/storage';
 
 @Component({
-  selector: "app-register",
-  templateUrl: "./register.component.html",
-  styleUrls: ["./login.component.css"]
+  selector: 'app-register',
+  templateUrl: './register.component.html',
+  styleUrls: ['./login.component.css']
 })
 export class RegisterComponent implements OnInit {
   constructor(
@@ -16,12 +16,12 @@ export class RegisterComponent implements OnInit {
     private authService: AuthService,
     private storage: AngularFireStorage
   ) {}
-  @ViewChild("imageUser", { static: false }) inputImageUser: ElementRef;
+  @ViewChild('imageUser', { static: false }) inputImageUser: ElementRef;
 
-  public email: string = "";
-  public password: string = "";
+  public email = '';
+  public password = '';
   public passwordConfirm: string;
-  passState = "3";
+  passState = '3';
 
   uploadPercent: Observable<number>;
   urlImage: Observable<String>;
@@ -46,9 +46,9 @@ export class RegisterComponent implements OnInit {
 
   onTypeConfirmPass($event) {
     if (this.password == this.passwordConfirm) {
-      this.passState = "1";
+      this.passState = '1';
     } else {
-      this.passState = "0";
+      this.passState = '0';
     }
   }
 
@@ -61,17 +61,17 @@ export class RegisterComponent implements OnInit {
             if (user) {
               user
                 .updateProfile({
-                  displayName: "",
+                  displayName: '',
                   photoURL: this.inputImageUser.nativeElement.value
                 })
                 .then(() => {
-                  this.router.navigate(["/cinema"]);
+                  this.router.navigate(['/cinema']);
                 })
-                .catch(error => console.log("error", error));
+                .catch(error => console.log('error', error));
             }
           });
         })
-        .catch(err => console.log("err", err.message));
+        .catch(err => console.log('err', err.message));
     } else {
       return;
     }

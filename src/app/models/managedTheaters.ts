@@ -1,20 +1,20 @@
 export interface ManagedTheatersInterface {
-    Cine?: string; 
+    Cine?: string;
     Circuito?: string;
     Ciudad?: string;
-    Direccion?: string; 
+    Direccion?: string;
     Estado?: string;
-    RtkXrefNo?: string; 
+    RtkXrefNo?: string;
     key?: string;
-    //Agregar Checker
+    // Agregar Checker
   }
 
 export interface ManagedTheaterInterface {
-    Cine?: string; 
+    Cine?: string;
     Circuito?: string;
     Ciudad?: string;
-    Direccion?: string; 
+    Direccion?: string;
     Estado?: string;
-    RtkXrefNo?: string; 
+    RtkXrefNo?: string;
     key?: string;
   }

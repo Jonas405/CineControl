@@ -1,20 +1,20 @@
-import { Component, OnInit } from "@angular/core";
-import { DataApiService } from "../../services/data-api.service";
+import { Component, OnInit } from '@angular/core';
+import { DataApiService } from '../../services/data-api.service';
 import {
   IncidenciaInterface,
   IncidenciasInterface
-} from "../../models/incidencias";
-import { NgForm } from "@angular/forms";
-import { AuthService } from "../../services/auth.service";
-import { AngularFireAuth } from "@angular/fire/auth";
-import { UserInterface } from "../../models/users";
-import { map } from "rxjs/operators";
-import { ExportToCsv } from "export-to-csv";
+} from '../../models/incidencias';
+import { NgForm } from '@angular/forms';
+import { AuthService } from '../../services/auth.service';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { UserInterface } from '../../models/users';
+import { map } from 'rxjs/operators';
+import { ExportToCsv } from 'export-to-csv';
 
 @Component({
-  selector: "app-incident-approved-sony",
-  templateUrl: "./incident-approved-sony.component.html",
-  styleUrls: ["./incident-approved-sony.component.css"]
+  selector: 'app-incident-approved-sony',
+  templateUrl: './incident-approved-sony.component.html',
+  styleUrls: ['./incident-approved-sony.component.css']
 })
 export class IncidentApprovedSonyComponent implements OnInit {
   constructor(
@@ -45,12 +45,12 @@ export class IncidentApprovedSonyComponent implements OnInit {
 
   exportCsv() {
     const options = {
-      fieldSeparator: ",",
+      fieldSeparator: ',',
       quoteStrings: '"',
-      decimalSeparator: ".",
+      decimalSeparator: '.',
       showLabels: true,
       showTitle: true,
-      title: "Reporte CineControl",
+      title: 'Reporte CineControl',
       useTextFile: false,
       useBom: true,
       useKeysAsHeaders: true
@@ -69,7 +69,7 @@ export class IncidentApprovedSonyComponent implements OnInit {
     console.log(incidenciasCopy);
     csvExporter.generateCsv(incidenciasCopy);
   }
-  //---------- Using RealTime database -------------------
+  // ---------- Using RealTime database -------------------
 
   getAllIncidenciasAprobadasSony() {
     this.dataApi

@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { AuthService } from '../../../services/auth.service';
 import { UserInterface } from '../../../models/users';
-import { DataApiService } from "src/app/services/data-api.service";
+import { DataApiService } from 'src/app/services/data-api.service';
 import { MovieInterface, MoviesInterface} from '../../../models/movies';
 
 import { map } from 'rxjs/operators';
@@ -24,16 +24,16 @@ export class SonyPicturesReleasingComponent implements OnInit {
     roles: {}
   };
 
-  //private theaters: TheatersInterface[];
-  public sonyTitles : MoviesInterface[];
+  // private theaters: TheatersInterface[];
+  public sonyTitles: MoviesInterface[];
   public isAdmin: any = null;
   public userUid: string = null;
-  searchTerm : string;
+  searchTerm: string;
 
   ngOnInit() {
    // this.getListTheaters();
     // this.getCurrentUser();
-    this.getSonyTitlesList()
+    this.getSonyTitlesList();
 
   }
 
@@ -45,10 +45,10 @@ export class SonyPicturesReleasingComponent implements OnInit {
         this.user.email = user.email;
         this.user.photoUrl = user.photoURL;
       }
-    })
+    });
   }
 
-  //------------------ Using RealTime database ------------
+  // ------------------ Using RealTime database ------------
 
   getSonyTitlesList() {
     this.dataApi.getAllSonyTitlesList().snapshotChanges().pipe(
@@ -62,15 +62,15 @@ export class SonyPicturesReleasingComponent implements OnInit {
     });
   }
 
-  deleteSonyTitle(sonyTitleKey: string){
+  deleteSonyTitle(sonyTitleKey: string) {
     const confirmacion = confirm('Are you sure?');
-    if (confirmacion){
+    if (confirmacion) {
       this.dataApi.deleteSonyTitle(sonyTitleKey).catch(err => console.log(err));
     }
 
   }
 
-  onPreUpdateSonyTitle(sonyTitle: MovieInterface){
+  onPreUpdateSonyTitle(sonyTitle: MovieInterface) {
     this.dataApi.selectedSonyTitle = Object.assign({}, sonyTitle);
   }
 

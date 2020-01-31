@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { UserInterface } from '../../models/users';
-import { DataApiService } from "src/app/services/data-api.service";
+import { DataApiService } from 'src/app/services/data-api.service';
 import { ManagedTheatersInterface, ManagedTheaterInterface } from '../../models/managedTheaters';
 import { map } from 'rxjs/operators';
 import {database} from 'firebase';
@@ -13,9 +13,9 @@ import {database} from 'firebase';
 })
 export class CinemaComponent implements OnInit {
 
-  @Input() theater: ManagedTheaterInterface;
-
   constructor(private authService: AuthService, private dataApi: DataApiService) {}
+
+  @Input() theater: ManagedTheaterInterface;
 
   user: UserInterface = {
     name: '',
@@ -26,16 +26,20 @@ export class CinemaComponent implements OnInit {
 
 
 
-  //private theaters: TheatersInterface[];
-  public managedTheaters : ManagedTheatersInterface[];
+  // private theaters: TheatersInterface[];
+  public managedTheaters: ManagedTheatersInterface[];
   public isAdmin: any = null;
   public userUid: string = null;
   pageActual = 1;
 
+  // ---------------------------- Search -------------------------
+
+  searchTerm: string;
+
   ngOnInit() {
    // this.getListTheaters();
     // this.getCurrentUser()
-    this.getManagedTheatersList()
+    this.getManagedTheatersList();
 
   }
 
@@ -47,10 +51,10 @@ export class CinemaComponent implements OnInit {
         this.user.email = user.email;
         this.user.photoUrl = user.photoURL;
       }
-    })
+    });
   }
 
-  //------------------ Using RealTime database ------------
+  // ------------------ Using RealTime database ------------
 
   getManagedTheatersList() {
     this.dataApi.getManagedTheatersList().snapshotChanges().pipe(
@@ -65,26 +69,22 @@ export class CinemaComponent implements OnInit {
     });
   }
 
-  deleteManagedTheater(managedTheatersKey: string){
+  deleteManagedTheater(managedTheatersKey: string) {
     const confirmacion = confirm('Are you sure?');
-    if (confirmacion){
+    if (confirmacion) {
       this.dataApi.deleteManagedTheater(managedTheatersKey).catch(err => console.log(err));
     }
 
   }
 
-  onPreUpdateTheater(theater: ManagedTheaterInterface){
+  onPreUpdateTheater(theater: ManagedTheaterInterface) {
     this.dataApi.selectedManagedTheater = Object.assign({}, theater);
   }
 
-  //---------------------------- Search -------------------------
-
-  searchTerm : string;
 
 
 
-
-  //------------------------ Search Value -----------------------
+  // ------------------------ Search Value -----------------------
   /// unwrapped arrays from firebase
   /* cinema: any;
   filteredCinema: any;
@@ -121,7 +121,7 @@ export class CinemaComponent implements OnInit {
     this[property] = null
     this.applyFilters()
   } */
-  //------------------ Using CloudFireStore database ------------
+  // ------------------ Using CloudFireStore database ------------
   /*
 
   getListTheaters() {

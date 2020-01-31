@@ -1,27 +1,27 @@
-import { Component, OnInit, ViewChild, ElementRef, Input } from "@angular/core";
-import { DataApiService } from "../../services/data-api.service";
-import { CommentsInterface } from "../../models/comments";
-import { NgForm } from "@angular/forms";
-import { Upload } from "src/app/models/Upload";
-import { v4 as uuid } from "uuid";
-import * as firebase from "firebase";
+import { Component, OnInit, ViewChild, ElementRef, Input } from '@angular/core';
+import { DataApiService } from '../../services/data-api.service';
+import { CommentsInterface } from '../../models/comments';
+import { NgForm } from '@angular/forms';
+import { Upload } from 'src/app/models/Upload';
+import { v4 as uuid } from 'uuid';
+import * as firebase from 'firebase';
 import {
   AngularFireUploadTask,
   AngularFireStorage
-} from "@angular/fire/storage";
-import { NgbDateStruct, NgbCalendar } from "@ng-bootstrap/ng-bootstrap";
+} from '@angular/fire/storage';
+import { NgbDateStruct, NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
 import {
   NgbDateAdapter,
   NgbDateNativeAdapter
-} from "@ng-bootstrap/ng-bootstrap";
-import { Observable } from "rxjs";
-import { tap, finalize } from "rxjs/operators";
-import { AngularFirestore } from "@angular/fire/firestore";
+} from '@ng-bootstrap/ng-bootstrap';
+import { Observable } from 'rxjs';
+import { tap, finalize } from 'rxjs/operators';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @Component({
-  selector: "app-add-comments",
-  templateUrl: "./add-comments.component.html",
-  styleUrls: ["./add-comments.component.css"],
+  selector: 'app-add-comments',
+  templateUrl: './add-comments.component.html',
+  styleUrls: ['./add-comments.component.css'],
   providers: [{ provide: NgbDateAdapter, useClass: NgbDateNativeAdapter }]
 })
 export class AddCommentsComponent implements OnInit {
@@ -44,7 +44,7 @@ export class AddCommentsComponent implements OnInit {
     private storage: AngularFireStorage,
     private db: AngularFirestore
   ) {}
-  @ViewChild("btnClose", { static: false }) btnClose: ElementRef;
+  @ViewChild('btnClose', { static: false }) btnClose: ElementRef;
   @Input() userUid: string;
 
   task: AngularFireUploadTask;
@@ -79,7 +79,7 @@ export class AddCommentsComponent implements OnInit {
       const downloadURL = ref.getDownloadURL().subscribe(url => {
         const Url = url; // for ts
         this.url = url; // with this you can use it in the html
-        console.log("this is the url q tal", this.url);
+        console.log('this is the url q tal', this.url);
         this.uploaded = true;
         this.loading = false;
       });
@@ -110,7 +110,7 @@ export class AddCommentsComponent implements OnInit {
 
   isActive(snapshot) {
     return (
-      snapshot.state === "running" &&
+      snapshot.state === 'running' &&
       snapshot.bytesTransferred < snapshot.totalBytes
     );
   }
@@ -118,17 +118,17 @@ export class AddCommentsComponent implements OnInit {
   onSaveComment() {
     console.log(this.downloadURL);
     const a = this.model3.toDateString();
-    console.log("Esta es la variable a", a);
+    console.log('Esta es la variable a', a);
     this.data = {
       cuerpo: this.message,
       encabezado: this.titulo,
       timeStamp: a,
       url: this.url
     };
-    console.log("esta es cuerpo", this.data);
-    console.log("Antes de lboton", this.data.value);
+    console.log('esta es cuerpo', this.data);
+    console.log('Antes de lboton', this.data.value);
     this.dataApi.addComments(this.data);
-    console.log("Despues del boton", this.data.value);
+    console.log('Despues del boton', this.data.value);
     this.btnClose.nativeElement.click();
   }
 

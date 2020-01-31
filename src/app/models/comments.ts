@@ -4,16 +4,16 @@ export interface Roles {
   }
 
 export interface CommentsInterface {
-  
+
   cuerpo?: string;
   encabezado?: string;
   timeStamp?: string;
-  url?:string;
-  progress?:number;
+  url?: string;
+  progress?: number;
   logisticID?: any;
   key?: string;
-  
+
   }
-  
+
 
 

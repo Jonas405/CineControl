@@ -1,14 +1,14 @@
-import { Component, OnInit, Input } from "@angular/core";
-import { AuthService } from "../../../services/auth.service";
-import { UserInterface } from "../../../models/users";
-import { DataApiService } from "src/app/services/data-api.service";
-import { MovieInterface, MoviesInterface } from "../../../models/movies";
-import { map } from "rxjs/operators";
+import { Component, OnInit, Input } from '@angular/core';
+import { AuthService } from '../../../services/auth.service';
+import { UserInterface } from '../../../models/users';
+import { DataApiService } from 'src/app/services/data-api.service';
+import { MovieInterface, MoviesInterface } from '../../../models/movies';
+import { map } from 'rxjs/operators';
 
 @Component({
-  selector: "app-walt-disney-studios",
-  templateUrl: "./walt-disney-studios.component.html",
-  styleUrls: ["./walt-disney-studios.component.css"]
+  selector: 'app-walt-disney-studios',
+  templateUrl: './walt-disney-studios.component.html',
+  styleUrls: ['./walt-disney-studios.component.css']
 })
 export class WaltDisneyStudiosComponent implements OnInit {
   @Input() title: MovieInterface;
@@ -19,15 +19,15 @@ export class WaltDisneyStudiosComponent implements OnInit {
   ) {}
 
   user: UserInterface = {
-    name: "",
-    email: "",
-    photoUrl: "",
+    name: '',
+    email: '',
+    photoUrl: '',
     roles: {}
   };
   pageActual = 1;
   searchTerm: string;
 
-  //private theaters: TheatersInterface[];
+  // private theaters: TheatersInterface[];
   public disneyTitles: MoviesInterface[];
   public isAdmin: any = null;
   public userUid: string = null;
@@ -48,7 +48,7 @@ export class WaltDisneyStudiosComponent implements OnInit {
     });
   }
 
-  //------------------ Using RealTime database ------------
+  // ------------------ Using RealTime database ------------
 
   getDisneyTitlesList() {
     this.dataApi
@@ -65,7 +65,7 @@ export class WaltDisneyStudiosComponent implements OnInit {
   }
 
   deleteDisneyTitle(disneyTitleKey: string) {
-    const confirmacion = confirm("Are you sure?");
+    const confirmacion = confirm('Are you sure?');
     if (confirmacion) {
       this.dataApi
         .deleteDisneyTitle(disneyTitleKey)

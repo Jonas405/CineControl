@@ -18,7 +18,7 @@ export class AddTheatersComponent implements OnInit {
 
   onSaveTheater(theaterForm: NgForm): void {
     if (theaterForm.value.key == null) {
-      // New 
+      // New
       this.dataApi.addManagedTheaters(theaterForm.value);
     } else {
       // Update

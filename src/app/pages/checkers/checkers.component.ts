@@ -21,6 +21,8 @@ export class CheckersComponent implements OnInit {
   public userUid: string = null;
   private user: UserInterface;
 
+  searchTerm: string;
+
   ngOnInit() {
     this.getAllCheckers();
     // this.getCurrentUser();
@@ -34,10 +36,10 @@ export class CheckersComponent implements OnInit {
         this.user.email = user.email;
         this.user.photoUrl = user.photoURL;
       }
-    })
+    });
   }
 
-  //---------- Using RealTime database -------------------
+  // ---------- Using RealTime database -------------------
 
   getAllCheckers() {
     this.dataApi.getAllCheckersList().snapshotChanges().pipe(
@@ -51,23 +53,21 @@ export class CheckersComponent implements OnInit {
     });
   }
 
-  deleteChecker(checkerKey: string){
+  deleteChecker(checkerKey: string) {
     const confirmacion = confirm('Are you sure?');
-    if (confirmacion){
+    if (confirmacion) {
       this.dataApi.deleteChecker(checkerKey).catch(err => console.log(err));
     }
 
   }
 
-  onPreUpdateChecker(checker: CheckerInterface){
+  onPreUpdateChecker(checker: CheckerInterface) {
     this.dataApi.selectedChecker = Object.assign({}, checker);
   }
 
-  searchTerm : string;
 
 
-
- //------------------ Using CloudFireStore database ------------
+ // ------------------ Using CloudFireStore database ------------
 /*
   getListChecker() {
     this.dataApi.getAllCheckers()
