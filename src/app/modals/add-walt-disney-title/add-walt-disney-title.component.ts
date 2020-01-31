@@ -112,17 +112,25 @@ export class AddWaltDisneyTitleComponent implements OnInit {
   // AÑADE AQUI LA LOGICA PARA SUBIR LOS DATOS
   // LA DATA ES -> this.data
   onSaveDisneyTitle() {
-    const a = this.model2.toDateString();
-    this.data = {
-      movieName: this.movieTitle,
-      releaseDate: a,
-      studio: "Walt Disney Studios",
-      imageURL: this.downloadURL,
-      typeMovie: this.clasificacion
-    };
-    console.log(this.data);
-    this.dataApi.addDisneyTitle(this.data);
-    this.btnClose.nativeElement.click();
+    if (this.dataApi.selectedDisneyTitle.key == null) {
+      const a = this.model2.toDateString();
+      this.data = {
+        movieName: this.movieTitle,
+        releaseDate: a,
+        studio: "Walt Disney Studios",
+        imageURL: this.downloadURL,
+        typeMovie: this.clasificacion
+      };
+      console.log(this.data);
+      this.dataApi.addDisneyTitle(this.data);
+      this.btnClose.nativeElement.click();
+    } else {
+      this.data.key = this.dataApi.MovieKey.key;
+      console.log(this.data);
+      this.dataApi.updateDisneyTitle(this.data);
+      this.btnClose.nativeElement.click();
+      this.dataApi.MovieKey = null;
+    }
   }
 
   ngOnInit(): void {}

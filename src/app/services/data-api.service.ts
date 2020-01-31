@@ -40,6 +40,7 @@ import * as firebase from "firebase";
 })
 export class DataApiService {
   materialesSony: Array<any>;
+  public MovieKey: any;
 
   private dbPathManagedTheaters = "/managedTheaters";
   managedTheatersRef: AngularFireList<ManagedTheatersInterface> = null;

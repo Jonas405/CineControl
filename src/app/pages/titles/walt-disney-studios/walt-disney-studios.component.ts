@@ -1,42 +1,42 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { AuthService } from '../../../services/auth.service';
-import { UserInterface } from '../../../models/users';
+import { Component, OnInit, Input } from "@angular/core";
+import { AuthService } from "../../../services/auth.service";
+import { UserInterface } from "../../../models/users";
 import { DataApiService } from "src/app/services/data-api.service";
-import { MovieInterface, MoviesInterface} from '../../../models/movies';
-import { map } from 'rxjs/operators';
+import { MovieInterface, MoviesInterface } from "../../../models/movies";
+import { map } from "rxjs/operators";
 
 @Component({
-  selector: 'app-walt-disney-studios',
-  templateUrl: './walt-disney-studios.component.html',
-  styleUrls: ['./walt-disney-studios.component.css']
+  selector: "app-walt-disney-studios",
+  templateUrl: "./walt-disney-studios.component.html",
+  styleUrls: ["./walt-disney-studios.component.css"]
 })
 export class WaltDisneyStudiosComponent implements OnInit {
   @Input() title: MovieInterface;
 
-  constructor(private authService: AuthService, private dataApi: DataApiService) {}
+  constructor(
+    private authService: AuthService,
+    private dataApi: DataApiService
+  ) {}
 
   user: UserInterface = {
-    name: '',
-    email: '',
-    photoUrl: '',
+    name: "",
+    email: "",
+    photoUrl: "",
     roles: {}
   };
   pageActual = 1;
-  searchTerm : string;
+  searchTerm: string;
 
   //private theaters: TheatersInterface[];
-  public disneyTitles : MoviesInterface[];
+  public disneyTitles: MoviesInterface[];
   public isAdmin: any = null;
   public userUid: string = null;
 
-
   ngOnInit() {
-   // this.getListTheaters();
+    // this.getListTheaters();
     // this.getCurrentUser();
-    this.getDisneyTitlesList()
-
+    this.getDisneyTitlesList();
   }
-
 
   getCurrentUser() {
     this.authService.isAuth().subscribe(user => {
@@ -45,36 +45,36 @@ export class WaltDisneyStudiosComponent implements OnInit {
         this.user.email = user.email;
         this.user.photoUrl = user.photoURL;
       }
-    })
+    });
   }
 
   //------------------ Using RealTime database ------------
 
   getDisneyTitlesList() {
-    this.dataApi.getAllDisneyTitlesList().snapshotChanges().pipe(
-      map(changes =>
-        changes.map(c =>
-          ({ key: c.payload.key, ...c.payload.val() })
+    this.dataApi
+      .getAllDisneyTitlesList()
+      .snapshotChanges()
+      .pipe(
+        map(changes =>
+          changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
         )
       )
-    ).subscribe(disneyTitles => {
-      this.disneyTitles = disneyTitles;
-    });
+      .subscribe(disneyTitles => {
+        this.disneyTitles = disneyTitles;
+      });
   }
 
-  deleteDisneyTitle(disneyTitleKey: string){
-    const confirmacion = confirm('Are you sure?');
-    if (confirmacion){
-      this.dataApi.deleteDisneyTitle(disneyTitleKey).catch(err => console.log(err));
+  deleteDisneyTitle(disneyTitleKey: string) {
+    const confirmacion = confirm("Are you sure?");
+    if (confirmacion) {
+      this.dataApi
+        .deleteDisneyTitle(disneyTitleKey)
+        .catch(err => console.log(err));
     }
-
   }
 
-  onPreUpdateDisneyTitle(disneyTitle: MovieInterface){
+  onPreUpdateDisneyTitle(disneyTitle) {
     this.dataApi.selectedDisneyTitle = Object.assign({}, disneyTitle);
+    this.dataApi.MovieKey = disneyTitle;
   }
-
-
 }
-
-

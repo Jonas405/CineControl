@@ -1,83 +1,158 @@
-<div class="modal fade" id="modalAddSonyTitle" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">
-                {{ !this.dataApi.selectedSonyTitle.key ? 'Nuevo Titulo' : 'Actualizar Titulo'}}
-              </h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-           
-                <form #sonyTitleForm="ngForm" (ngSubmit)="onSaveSonyTitle(sonyTitleForm)" novalidate>
-
-                    <input type="hidden" name="key" [(ngModel)]="this.dataApi.selectedSonyTitle.key">
-                    <input type="hidden" name="userUid" [value]="userUid">
-
-                    <div class="form-group col-md-6">
-                        <label for="movieName">Titulo</label>
-                        <input name="movieName" [(ngModel)]="this.dataApi.selectedSonyTitle.movieName">
-                    </div>
-
-                    <div class="form-group col-md-6">
-                      <label for="typeMovie">Clasificación</label>
-                      <input name="typeMovie" [(ngModel)]="this.dataApi.selectedSonyTitle.typeMovie" >
-                  </div>
-
-                    <div class="text-center">
-                      <img [src]="imgSrc" width="350px" height="250px" (click)="fileUploader.click()">
-                    </div>
-                    <hr/>
-                    <div class="field">
-                      <label>Seleccionar Portada</label>
-                      
-                      <input  class="form-control" name="file" type="file" #fileUploader (change)="showPreview($event)" observeFiles [(ngModel)]="this.dataApi.selectedSonyTitle.file">
-                    </div>
-          
-                   
-          
-                    <div class="progress" *ngIf="progress$ | async as progress">
-                      <div class="progress-bar progress-bar-animated" [ngStyle]="{ 'width': progress + '%' }"></div>
-                   </div>
-
-                    <div class="field">
-                        <label for="releaseDate">Fecha Estreno</label>
-                    </div>
-               
-              <div class="col-6">
-                <form class="form-inline">
-                  <div class="form-group">
-                    <div class="input-group">
-                      <input class="form-control" placeholder="yyyy-mm-dd"
-                            name="d2" #c2="ngModel" [(ngModel)]="model2" ngbDatepicker #d2="ngbDatepicker">
-                      <div class="input-group-append">
-                        <button class="btn btn-outline-secondary fa fa-calendar" (click)="d2.toggle()" type="button"></button>
-                      </div>
-                    </div>
-                  </div>
-                </form>
-
-            
-            <!-- <button class="btn btn-sm btn-outline-primary" (click)="model2 = today">Select Today</button> -->
-            <hr/>
-            <input type="hidden" name="releaseDate"[(ngModel)]="this.dataApi.selectedSonyTitle.releaseDate">
+<div
+  class="modal fade"
+  id="modalAddSonyTitle"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">
+          {{
+            !this.dataApi.selectedSonyTitle.key
+              ? "Nuevo Titulo"
+              : "Actualizar Titulo"
+          }}
+        </h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Cerrar"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form novalidate>
+          <input
+            type="hidden"
+            name="key"
+            [(ngModel)]="this.dataApi.selectedSonyTitle.key"
+          />
+          <input type="hidden" name="userUid" [value]="userUid" />
+          <!-- <input type="hidden" name="userUid" [value]="userUid"> -->
+          <div class="form-group col-md-6">
+            <label for="movieName">Titulo</label>
+            <input name="movieName" [(ngModel)]="movieTitle" />
           </div>
-          <button class="btn btn-sm btn-outline-primary" (click)="onSaveSonyTitle"> 
-           Cargar Datos
-           </button>
-                  
-                      <input type="hidden" name="studio"[(ngModel)]="this.dataApi.selectedSonyTitle.studio">
-                      <input type="hidden" name="imageURL"[(ngModel)]="this.dataApi.selectedSonyTitle.imageURL">
-               
 
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" #btnClose data-dismiss="modal">Cerrar</button>
-                        <button type="submit" class="btn btn-primary">Guardar Titulo</button>
-                      </div>
-                </form>
-        </div>
+          <div class="form-group col-md-6">
+            <label for="typeMovie">Clasificación</label>
+            <input name="typeMovie" [(ngModel)]="clasificacion" />
+          </div>
+
+          <div
+            class="dropzone"
+            dropZone
+            (hovered)="toggleHover($event)"
+            (dropped)="startUpload($event)"
+            [class.hovering]="isHovering"
+          >
+            <h3>Arrastra una imagen</h3>
+
+            <div class="file">
+              <label class="file-label">
+                <input
+                  class="file-input"
+                  type="file"
+                  (change)="startUpload($event.target.files)"
+                />
+
+                <span class="file-cta">
+                  <span class="file-icon">
+                    <i class="fa fa-upload"></i>
+                  </span>
+                  <span class="file-label">
+                    o elige una imagen...
+                  </span>
+                </span>
+              </label>
+            </div>
+          </div>
+          <div *ngIf="percentage | async as pct">
+            <progress class="progress is-info" [value]="pct" max="100">
+            </progress>
+
+            {{ pct | number }}%
+          </div>
+
+          <div *ngIf="snapshot | async as snap">
+            <!-- {{ snap.bytesTransferred | fileSize }} of
+            {{ snap.totalBytes | fileSize }} -->
+          </div>
+
+          <!-- <div class="text-center">
+            <img
+              [src]="imgSrc"
+              width="350px"
+              height="250px"
+              (click)="fileUploader.click()"
+            />
+          </div>
+          <hr />
+          <div class="field">
+            <label>Seleccionar Portada</label>
+
+            <input
+              class="form-control"
+              name="file"
+              type="file"
+              #fileUploader
+              (change)="showPreview($event)"
+              observeFiles
+              [(ngModel)]="this.dataApi.selectedDisneyTitle.file"
+            />
+          </div> -->
+
+          <div class="field">
+            <label for="releaseDate">Fecha Estreno</label>
+          </div>
+
+          <div class="col-6">
+            <form class="form-inline">
+              <div class="form-group">
+                <div class="input-group">
+                  <input
+                    class="form-control"
+                    placeholder="yyyy-mm-dd"
+                    name="d2"
+                    #c2="ngModel"
+                    [(ngModel)]="model2"
+                    ngbDatepicker
+                    #d2="ngbDatepicker"
+                  />
+                  <div class="input-group-append">
+                    <button
+                      class="btn btn-outline-secondary fa fa-calendar"
+                      (click)="d2.toggle()"
+                      type="button"
+                    ></button>
+                  </div>
+                </div>
+              </div>
+            </form>
+
+            <!-- <button class="btn btn-sm btn-outline-primary" (click)="model2 = today">Select Today</button> -->
+            <hr />
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              #btnClose
+              data-dismiss="modal"
+            >
+              Cerrar
+            </button>
+            <button (click)="onSaveSonyTitle()" class="btn btn-primary">
+              Guardar Titulo
+            </button>
+          </div>
+        </form>
       </div>
     </div>
   </div>
+</div>

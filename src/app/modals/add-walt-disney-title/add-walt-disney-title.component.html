@@ -27,6 +27,12 @@
       </div>
       <div class="modal-body">
         <form novalidate>
+          <input
+            type="hidden"
+            name="key"
+            [(ngModel)]="this.dataApi.selectedDisneyTitle.key"
+          />
+          <input type="hidden" name="userUid" [value]="userUid" />
           <!-- <input type="hidden" name="userUid" [value]="userUid"> -->
           <div class="form-group col-md-6">
             <label for="movieName">Titulo</label>
