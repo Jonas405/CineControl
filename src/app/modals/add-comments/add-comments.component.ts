@@ -70,30 +70,39 @@ export class AddCommentsComponent implements OnInit {
     // The storage path
     const path = `logistica/${new Date().getTime()}_${file.name}`;
     const ref = this.storage.ref(path);
+    const task = this.storage.upload(path, file).then(() => { // Promise just if is upload the file take a ref
+    const ref = this.storage.ref(path);
+    const downloadURL = ref.getDownloadURL().subscribe(url => { 
+    const Url = url; // for ts
+    this.url = url // with this you can use it in the html
+    console.log("this is the url q tal", this.url);
+  })})
+  
 
-    // Totally optional metadata
-    // The main task
-    this.task = this.storage.upload(path, file);
+  // Progress monitoring
+  // this.percentage = this.task.percentageChanges();
+  // this.snapshot = this.task.snapshotChanges();
 
-    // Progress monitoring
-    this.percentage = this.task.percentageChanges();
-    this.snapshot = this.task.snapshotChanges();
 
-    // The file's download URL
-    this.snapshot = this.task.snapshotChanges().pipe(
+     // The file's download URL
+/*     this.snapshot = this.task.snapshotChanges().pipe(
       tap(console.log),
       // The file's download URL
       finalize(async () => {
         this.downloadURL = await ref.getDownloadURL().toPromise();
         this.url = await ref.getDownloadURL().toPromise();
-        console.log(this.url);
-        console.log(this.downloadURL);
+        console.log("donde estas url",this.url);
+        console.log("estas aqui maldita",this.downloadURL);
 
         this.db
           .collection("files")
           .add({ downloadURL: this.downloadURL, path });
       })
-    );
+
+     
+    );  */
+
+  
   }
 
   isActive(snapshot) {
@@ -106,15 +115,21 @@ export class AddCommentsComponent implements OnInit {
   onSaveComment() {
     console.log(this.downloadURL);
     const a = this.model3.toDateString();
+    console.log("Esta es la variable a", a);
     this.data = {
       cuerpo: this.message,
       encabezado: this.titulo,
       timeStamp: a,
       url: this.url
     };
+    console.log("esta es cuerpo", this.data);
+    console.log("Antes de lboton", this.data.value);
     this.dataApi.addComments(this.data);
+    console.log("Despues del boton", this.data.value);
     this.btnClose.nativeElement.click();
   }
+
+  ngOnInit(){}
 }
 
 //   //Upload a file
