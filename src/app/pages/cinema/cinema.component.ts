@@ -7,7 +7,7 @@ import { ManagedTheatersInterface, ManagedTheaterInterface } from '../../models/
 import { map } from 'rxjs/operators';
 import {database} from 'firebase';
 import * as _ from 'lodash';
-import Fuse from 'fuse.js'
+import * as Fuse from 'fuse.js'
 
 const options = {
   shouldSort: true,
