@@ -32,107 +32,90 @@ const pagesRoutes: Routes = [
       {
         path: 'checkers',
         component: CheckersComponent,
-        data: { tittle: 'Checkers' },
-        canActivate: [AuthGuard]
+        data: { tittle: 'Checkers' }
       },
       {
         path: 'checkersdetail/:id',
         component: CheckersDetailComponent,
-        data: { tittle: 'CheckersDetail' },
-        canActivate: [AuthGuard]
+        data: { tittle: 'CheckersDetail' }
       },
       {
         path: 'cinedetail/:id',
         component: CineDetailComponent,
-        data: { tittle: 'CineDetail' },
-        canActivate: [AuthGuard]
+        data: { tittle: 'CineDetail' }
       },
       {
         path: 'cinema',
         component: CinemaComponent,
-        data: { tittle: 'Cinema' },
-        canActivate: [AuthGuard]
+        data: { tittle: 'Cinema' }
       },
       {
         path: 'sonyTitle/:id',
         component: SonyPicturesReleasingDetailComponent,
-        data: { tittle: 'SonyTitleDetail' },
-        canActivate: [AuthGuard]
+        data: { tittle: 'SonyTitleDetail' }
       },
       {
         path: 'sonyTitles',
         component: SonyPicturesReleasingComponent,
-        data: { tittle: 'SonyTitles' },
-        canActivate: [AuthGuard]
+        data: { tittle: 'SonyTitles' }
       },
       {
         path: 'waltDisneyTitle/:id',
         component: WaltDisneyStudiosDetailComponent,
-        data: { tittle: 'WaltDisneyTitleDetail' },
-        canActivate: [AuthGuard]
+        data: { tittle: 'WaltDisneyTitleDetail' }
       },
       {
         path: 'waltDisneyTitles',
         component: WaltDisneyStudiosComponent,
-        data: { tittle: 'WaltDisneyTitles' },
-        canActivate: [AuthGuard]
+        data: { tittle: 'WaltDisneyTitles' }
       },
       {
         path: 'incidencedetail/:id',
         component: IncidentDetailComponent,
-        data: { tittle: 'IncidentDetail' },
-        canActivate: [AuthGuard]
+        data: { tittle: 'IncidentDetail' }
       },
       {
         path: 'incident',
         component: IncidentComponent,
-        data: { tittle: 'Incident' },
-        canActivate: [AuthGuard]
+        data: { tittle: 'Incident' }
       },
       {
         path: 'incidentApproved',
         component: IncidentApprovedComponent,
-        data: { tittle: 'IncidentApproved' },
-        canActivate: [AuthGuard]
+        data: { tittle: 'IncidentApproved' }
       },
 
       {
         path: 'pendingIncidentDisney',
         component: IncidentPendingDisneyComponent,
-        data: { tittle: 'PendingIncidentDisney' },
-        canActivate: [AuthGuard]
+        data: { tittle: 'PendingIncidentDisney' }
       },
       {
         path: 'pendingIncidentSony',
         component: IncidentPendingSonyComponent,
-        data: { tittle: 'PendingIncidentSony' },
-        canActivate: [AuthGuard]
+        data: { tittle: 'PendingIncidentSony' }
       },
 
       {
         path: 'incidentApprovedDisney',
         component: IncidentApprovedDisneyComponent,
-        data: { tittle: 'IncidentApprovedDisney' },
-        canActivate: [AuthGuard]
+        data: { tittle: 'IncidentApprovedDisney' }
       },
       {
         path: 'incidentApprovedSony',
         component: IncidentApprovedSonyComponent,
-        data: { tittle: 'IncidentApprovedSony' },
-        canActivate: [AuthGuard]
+        data: { tittle: 'IncidentApprovedSony' }
       },
 
       {
         path: 'incidentApprovedDetail/:id',
         component: IncidentApprovedDetailComponent,
-        data: { tittle: 'IncidentApprovedDetailComponent' },
-        canActivate: [AuthGuard]
+        data: { tittle: 'IncidentApprovedDetailComponent' }
       },
       {
         path: 'materialesDisney',
         component: DisneyMaterialesComponent,
-        data: { tittle: 'materialesDisney' },
-        canActivate: [AuthGuard]
+        data: { tittle: 'materialesDisney' }
       },
       {
         path: 'materialesSony',
@@ -142,21 +125,18 @@ const pagesRoutes: Routes = [
       {
         path: 'comments',
         component: CommentsComponent,
-        data: { tittle: 'Comments' },
-        canActivate: [AuthGuard]
+        data: { tittle: 'Comments' }
       },
       {
         path: 'home',
         component: HomeComponent,
-        data: { tittle: 'Home' },
-        canActivate: [AuthGuard]
+        data: { tittle: 'Home' }
       },
       // { path: 'assignTheaters', component: AssignComponent, data: { tittle: 'AssignTheaters' }},
       {
         path: 'profile',
         component: ProfileComponent,
-        data: { tittle: 'ProfileComponent' },
-        canActivate: [AuthGuard]
+        data: { tittle: 'ProfileComponent' }
       },
       { path: '', redirectTo: '/cinema', pathMatch: 'full' }
     ]

@@ -2,6 +2,14 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { auth } from 'firebase/app';
 import { map } from 'rxjs/operators';
+
+
+import * as firebase from 'firebase/app';
+// You don't need to import firebase/app either since it's being imported above
+import 'firebase/auth';
+import 'firebase/firestore';
+
+
 import {
   AngularFirestore,
   AngularFirestoreDocument

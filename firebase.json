@@ -1,11 +1,12 @@
 {
   "hosting": {
     "public": "dist/CineControl",
-    "site": "cinecontroladminmx",
+    "site": "cinecontrolwaltdisneymx",
     "headers": [ {
       "source": "**/*.@(eot|otf|ttf|ttc|woff|font.css)",
       "headers": [ {
         "key": "Access-Control-Allow-Origin",
+        
         "value": "*"
       } ]}],
     "origin": ["*"],

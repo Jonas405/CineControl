@@ -40,7 +40,6 @@ export class CinemaComponent implements OnInit {
    // this.getListTheaters();
     // this.getCurrentUser()
     this.getManagedTheatersList();
-
   }
 
 
@@ -65,6 +64,7 @@ export class CinemaComponent implements OnInit {
       )
     ).subscribe(managedTheaters => {
       this.managedTheaters = managedTheaters;
+      console.log("lists de cines Dentro del subscriber",managedTheaters );
      // this.applyFilters();
     });
   }

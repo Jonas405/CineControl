@@ -3,6 +3,10 @@ import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from
 import { Observable } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { take, map, tap } from 'rxjs/operators';
+import * as firebase from 'firebase/app';
+// You don't need to import firebase/app either since it's being imported above
+import 'firebase/auth';
+import 'firebase/firestore';
 
 @Injectable({
   providedIn: 'root'

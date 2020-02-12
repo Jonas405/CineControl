@@ -4,7 +4,8 @@ export interface ManagedTheatersInterface {
     Ciudad?: string;
     Direccion?: string;
     Estado?: string;
-    RtkXrefNo?: string;
+    RtkXrefNo?: number;
+    Salas?: object;
     key?: string;
     // Agregar Checker
   }
@@ -15,6 +16,7 @@ export interface ManagedTheaterInterface {
     Ciudad?: string;
     Direccion?: string;
     Estado?: string;
-    RtkXrefNo?: string;
+    RtkXrefNo?: number;
+    Salas?: object;
     key?: string;
   }

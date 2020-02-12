@@ -71,23 +71,24 @@
       </button>
     </div>
     <input
-      type="search"
-      placeholder="Buscar por Cine"
-      [(ngModel)]="searchTerm"
-      aria-describedby="button-addon1"
-      class="form-control border-0 bg-light"
+    type="text"
+    placeholder="Buscar"
+    aria-label="Search"
+    [(ngModel)]="searchTerm"
+    class="form-control border-0 bg-light"
+    mdbInput
     />
   </div>
 </div>
 
 <div class="container-fluid center row py-0 my-2   w-100">
-  <button
+<!--   <button
     class="btn btn-primary mx-auto"
     data-toggle="modal"
     data-target="#modalAddTheater"
   >
     Agregar Cine
-  </button>
+  </button> -->
 </div>
 
 <style>
@@ -174,7 +175,7 @@
                 (click)="deleteManagedTheater(theater.key)"
               >
                 Eliminar
-              </button>
+              </button> 
             </li>
           </ul>
         </div>

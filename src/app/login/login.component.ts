@@ -4,6 +4,10 @@ import { auth } from 'firebase/app';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
+import * as firebase from 'firebase/app';
+// You don't need to import firebase/app either since it's being imported above
+import 'firebase/auth';
+import 'firebase/firestore';
 
 @Component({
   selector: 'app-login',
