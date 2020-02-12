@@ -1,3 +1,4 @@
+
 import { Component, OnInit, Input } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { UserInterface } from '../../models/users';
@@ -5,6 +6,23 @@ import { DataApiService } from 'src/app/services/data-api.service';
 import { ManagedTheatersInterface, ManagedTheaterInterface } from '../../models/managedTheaters';
 import { map } from 'rxjs/operators';
 import {database} from 'firebase';
+import * as _ from 'lodash';
+import Fuse from 'fuse.js'
+
+const options = {
+  shouldSort: true,
+  threshold: 0.6,
+  location: 0,
+  distance: 100,
+  maxPatternLength: 32,
+  minMatchCharLength: 1,
+  keys: [
+    "Cine",
+    "Estado",
+    "Ciudad"
+  ]
+};
+
 
 @Component({
   selector: 'app-cinema',
@@ -12,6 +30,8 @@ import {database} from 'firebase';
   styles: []
 })
 export class CinemaComponent implements OnInit {
+  TheatersCopy: { Cine?: string; Circuito?: string; Ciudad?: string; Direccion?: string; Estado?: string; RtkXrefNo?: number; Salas?: object; key: string; }[];
+  cines: any;
 
   constructor(private authService: AuthService, private dataApi: DataApiService) {}
 
@@ -35,11 +55,31 @@ export class CinemaComponent implements OnInit {
   // ---------------------------- Search -------------------------
 
   searchTerm: string;
+  termino: string;
 
   ngOnInit() {
    // this.getListTheaters();
     // this.getCurrentUser()
     this.getManagedTheatersList();
+  }
+
+  search(){
+    const options = {
+      shouldSort: true,
+      threshold: 0.6,
+      location: 0,
+      distance: 100,
+      maxPatternLength: 32,
+      minMatchCharLength: 1,
+      keys: [
+        "Cine",
+        "Estado",
+        "Ciudad"
+      ]
+    };
+    let fuse = new Fuse(this.TheatersCopy, options); // "list" is the item array
+    let result = fuse.search(this.termino);
+    this.managedTheaters = result;
   }
 
 
@@ -64,6 +104,7 @@ export class CinemaComponent implements OnInit {
       )
     ).subscribe(managedTheaters => {
       this.managedTheaters = managedTheaters;
+      this.TheatersCopy = [...managedTheaters]
       console.log("lists de cines Dentro del subscriber",managedTheaters );
      // this.applyFilters();
     });
@@ -120,7 +161,7 @@ export class CinemaComponent implements OnInit {
     delete this.filters[property]
     this[property] = null
     this.applyFilters()
-  } */
+  }
   // ------------------ Using CloudFireStore database ------------
   /*
 

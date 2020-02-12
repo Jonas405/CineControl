@@ -72,11 +72,12 @@
     </div>
     <input
     type="text"
+    (ngModelChange)="search()"
     placeholder="Buscar"
     aria-label="Search"
-    [(ngModel)]="searchTerm"
+    [(ngModel)]="termino"
     class="form-control border-0 bg-light"
-    mdbInput
+
     />
   </div>
 </div>
@@ -175,7 +176,7 @@
                 (click)="deleteManagedTheater(theater.key)"
               >
                 Eliminar
-              </button> 
+              </button>
             </li>
           </ul>
         </div>
