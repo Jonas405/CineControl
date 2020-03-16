@@ -18,6 +18,7 @@ import { ExportToCsv } from 'export-to-csv';
   styleUrls: ['./sony-materiales.component.css']
 })
 export class SonyMaterialesComponent implements OnInit {
+  selectedImage: any;
 
   constructor(
     private dataApi: DataApiService,
@@ -67,6 +68,10 @@ export class SonyMaterialesComponent implements OnInit {
     }
     // this.getCurrentUser();
     // this.slides = this.chunk(this.getAllMaterialesSony, 3);
+  }
+
+  openImage(URL) {
+    this.selectedImage = URL
   }
 
   exportCsv() {

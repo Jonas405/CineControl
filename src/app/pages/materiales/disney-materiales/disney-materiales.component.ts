@@ -39,6 +39,7 @@ export class DisneyMaterialesComponent implements OnInit {
   weeksFilter = 'Semana';
   movieFilter = 'Pelicula';
   circuitosFilter = 'Circuitos';
+  selectedImage: string;
 
   ngOnInit() {
     this.getAllMaterialesDisney();
@@ -54,6 +55,10 @@ export class DisneyMaterialesComponent implements OnInit {
         this.user.photoUrl = user.photoURL;
       }
     });
+  }
+
+  openImage(URL) {
+    this.selectedImage = URL
   }
 
   exportCsv() {

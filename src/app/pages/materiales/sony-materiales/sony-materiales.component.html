@@ -174,13 +174,16 @@
         <div class="card_book">
           <div class="card">
             <div class="card-body text-center">
-              <p>
+              <div
+              data-toggle="modal"
+              data-target="#modalOpenImage">
                 <img
+                  (click)="openImage(materialSony.imageURL)"
                   class="img-fluid cardImage"
                   src="{{ materialSony.imageURL }}"
                   alt="{{ materialSony.Encabezado }}"
                 />
-              </p>
+              </div>
               <h5 class="card-text; font-weight:bold">
                 {{ materialSony.Theater }}
               </h5>
@@ -223,6 +226,24 @@
   class="d-flex justify-content-center center"
   (pageChange)="pageActual = $event"
 ></pagination-controls>
+
+
+<div
+  style="height: 50vh;
+  margin: auto;"
+  class="modal fade"
+  id="modalOpenImage"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <img  class="img-fluid" src="{{ selectedImage }}"/>
+    </div>
+  </div>
+</div>
 
 <!--
 <section class="row mt-5">
