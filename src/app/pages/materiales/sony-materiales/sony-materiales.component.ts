@@ -70,6 +70,10 @@ export class SonyMaterialesComponent implements OnInit {
     // this.slides = this.chunk(this.getAllMaterialesSony, 3);
   }
 
+  DescargarImagenes() {
+    this.dataApi.getAllImages()
+  }
+
   openImage(URL) {
     this.selectedImage = URL
   }

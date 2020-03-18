@@ -243,6 +243,38 @@ export class DataApiService {
 
   // ==========================  ManagedTheaters Service ==========================
 
+  getAllImages() {
+    // Since you mentioned your images are in a folder,
+    // we'll create a Reference to that folder:
+    var storageRef = firebase.storage().ref("WebAdminDownloadTest")
+
+
+    // Now we get the references of these images
+    storageRef.listAll().then(function(result) {
+      result.items.forEach(function(imageRef) {
+        // And finally display them
+        displayImage(imageRef);
+      });
+    }).catch(function(error) {
+      console.log(error)
+    });
+
+    function displayImage(imageRef) {
+      imageRef.getDownloadURL().then(function(url) {
+        var xhr = new XMLHttpRequest();
+        xhr.responseType = 'blob';
+        xhr.onload = function(event) {
+          var blob = xhr.response;
+        };
+        xhr.open('GET', url);
+        xhr.send();
+      }).catch(function(error) {
+        // Handle any errors
+      });
+    }
+  }
+
+
   getManagedTheatersList(): AngularFireList<ManagedTheatersInterface> {
     return this.managedTheatersRef;
   }
